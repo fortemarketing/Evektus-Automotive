@@ -637,245 +637,6 @@ FLBuilder::register_module(
 				),
 			),
 		),
-		'style'      => array(
-			'title'    => __('Style', 'fl-builder'),
-			'sections' => array(
-				'circle_bar_style' => array(
-					'title'  => __('Circle Bar Styles', 'fl-builder'),
-					'fields' => array(
-						'circle_width'      => array(
-							'type'        => 'unit',
-							'label'       => __('Circle Size', 'fl-builder'),
-							'placeholder' => '300',
-							'units'       => array('px'),
-							'slider'      => array(
-								'min'  => 50,
-								'max'  => 1000,
-								'step' => 10,
-							),
-						),
-						'circle_dash_width' => array(
-							'type'        => 'unit',
-							'label'       => __('Circle Stroke Size', 'fl-builder'),
-							'placeholder' => '10',
-							'units'       => array('px'),
-							'slider'      => array(
-								'min'  => 1,
-								'max'  => 100,
-								'step' => 1,
-							),
-						),
-						'circle_color'      => array(
-							'type'        => 'color',
-							'label'       => __('Circle Foreground Color', 'fl-builder'),
-							'help'        => __('Leave empty to use the theme primary color.', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-counter-fill',
-								'property' => 'stroke',
-							),
-						),
-						'circle_bg_color'   => array(
-							'type'        => 'color',
-							'label'       => __('Circle Background Color', 'fl-builder'),
-							'default'     => 'fafafa',
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-counter-track',
-								'property' => 'stroke',
-							),
-						),
-					),
-				),
-				'bar_style'        => array(
-					'title'  => __('Bar Styles', 'fl-builder'),
-					'fields' => array(
-						'bar_color'    => array(
-							'type'        => 'color',
-							'label'       => __('Bar Foreground Color', 'fl-builder'),
-							'help'        => __('Leave empty to use the theme primary color.', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-counter-bar',
-								'property' => 'background-color',
-							),
-						),
-						'bar_bg_color' => array(
-							'type'        => 'color',
-							'label'       => __('Bar Background Color', 'fl-builder'),
-							'default'     => 'fafafa',
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-counter-bar-track',
-								'property' => 'background-color',
-							),
-						),
-					),
-				),
-				'structure'        => array(
-					'title'  => __('Structure', 'fl-builder'),
-					'fields' => array(
-						'align' => array(
-							'type'    => 'align',
-							'label'   => __('Overall Alignment', 'fl-builder'),
-							'default' => 'center',
-							'help'    => __('Ignored when the image / icon sits left or right of the number, which aligns the counter to that side.', 'fl-builder'),
-						),
-					),
-				),
-				'margin_style'     => array(
-					'title'  => __('Number Margins', 'fl-builder'),
-					'fields' => array(
-						'number_top_margin'    => array(
-							'type'   => 'unit',
-							'label'  => __('Number Top Margin', 'fl-builder'),
-							'units'  => array('px'),
-							'slider' => true,
-						),
-						'number_bottom_margin' => array(
-							'type'   => 'unit',
-							'label'  => __('Number Bottom Margin', 'fl-builder'),
-							'units'  => array('px'),
-							'slider' => true,
-						),
-					),
-				),
-				'separator'        => array(
-					'title'     => __('Separator ( Below Number )', 'fl-builder'),
-					'collapsed' => true,
-					'fields'    => array(
-						'show_separator'          => array(
-							'type'    => 'select',
-							'label'   => __('Show separator', 'fl-builder'),
-							'default' => 'no',
-							'options' => array(
-								'yes' => __('Yes', 'fl-builder'),
-								'no'  => __('No', 'fl-builder'),
-							),
-							'toggle'  => array(
-								'yes' => array(
-									'fields' => array('separator_style', 'separator_color', 'separator_height', 'separator_width', 'separator_alignment', 'separator_top_margin', 'separator_bottom_margin'),
-								),
-							),
-						),
-						'separator_style'         => array(
-							'type'    => 'select',
-							'label'   => __('Style', 'fl-builder'),
-							'default' => 'solid',
-							'options' => array(
-								'solid'  => __('Solid', 'fl-builder'),
-								'dashed' => __('Dashed', 'fl-builder'),
-								'dotted' => __('Dotted', 'fl-builder'),
-								'double' => __('Double', 'fl-builder'),
-							),
-							'help'    => __('The type of border to use. Double borders must have a height of at least 3px to render properly.', 'fl-builder'),
-						),
-						'separator_color'         => array(
-							'type'        => 'color',
-							'label'       => __('Separator Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-counter-separator',
-								'property' => 'border-top-color',
-							),
-						),
-						'separator_height'        => array(
-							'type'        => 'unit',
-							'label'       => __('Thickness', 'fl-builder'),
-							'placeholder' => '1',
-							'units'       => array('px'),
-							'help'        => __('Adjust thickness of border.', 'fl-builder'),
-							'slider'      => array(
-								'min'  => 0,
-								'max'  => 20,
-								'step' => 1,
-							),
-						),
-						'separator_width'         => array(
-							'type'        => 'unit',
-							'label'       => __('Width', 'fl-builder'),
-							'placeholder' => '100',
-							'units'       => array('%'),
-							'slider'      => array(
-								'min'  => 0,
-								'max'  => 100,
-								'step' => 5,
-							),
-						),
-						'separator_alignment'     => array(
-							'type'       => 'align',
-							'label'      => __('Alignment', 'fl-builder'),
-							'responsive' => true,
-							'help'       => __('Leave unset to follow the overall alignment.', 'fl-builder'),
-						),
-						'separator_top_margin'    => array(
-							'type'   => 'unit',
-							'label'  => __('Separator Top Margin', 'fl-builder'),
-							'units'  => array('px'),
-							'slider' => true,
-						),
-						'separator_bottom_margin' => array(
-							'type'   => 'unit',
-							'label'  => __('Separator Bottom Margin', 'fl-builder'),
-							'units'  => array('px'),
-							'slider' => true,
-						),
-					),
-				),
-				'img_icon_margins' => array(
-					'title'     => __('Image / Icon Margins', 'fl-builder'),
-					'collapsed' => true,
-					'fields'    => array(
-						'img_icon_margin_top'    => array(
-							'type'   => 'unit',
-							'label'  => __('Top', 'fl-builder'),
-							'units'  => array('px'),
-							'slider' => true,
-						),
-						'img_icon_margin_bottom' => array(
-							'type'   => 'unit',
-							'label'  => __('Bottom', 'fl-builder'),
-							'units'  => array('px'),
-							'slider' => true,
-						),
-					),
-				),
-				'animation'        => array(
-					'title'  => __('Counter Animation', 'fl-builder'),
-					'fields' => array(
-						'animation_speed' => array(
-							'type'        => 'unit',
-							'label'       => __('Animation Speed', 'fl-builder'),
-							'placeholder' => '1',
-							'description' => __('second(s)', 'fl-builder'),
-							'help'        => __('Number of seconds to complete the animation.', 'fl-builder'),
-						),
-						'delay'           => array(
-							'type'        => 'unit',
-							'label'       => __('Animation Delay', 'fl-builder'),
-							'placeholder' => '1',
-							'description' => __('second(s)', 'fl-builder'),
-							'help'        => __('Number of seconds to wait after the counter scrolls into view.', 'fl-builder'),
-						),
-					),
-				),
-			),
-		),
 		'imageicon'  => array(
 			'title'    => __('Image / Icon', 'fl-builder'),
 			'sections' => array(
@@ -1184,6 +945,245 @@ FLBuilder::register_module(
 							'preview'     => array(
 								'type' => 'none',
 							),
+						),
+					),
+				),
+			),
+		),
+		'style'      => array(
+			'title'    => __('Style', 'fl-builder'),
+			'sections' => array(
+				'circle_bar_style' => array(
+					'title'  => __('Circle Bar Styles', 'fl-builder'),
+					'fields' => array(
+						'circle_width'      => array(
+							'type'        => 'unit',
+							'label'       => __('Circle Size', 'fl-builder'),
+							'placeholder' => '300',
+							'units'       => array('px'),
+							'slider'      => array(
+								'min'  => 50,
+								'max'  => 1000,
+								'step' => 10,
+							),
+						),
+						'circle_dash_width' => array(
+							'type'        => 'unit',
+							'label'       => __('Circle Stroke Size', 'fl-builder'),
+							'placeholder' => '10',
+							'units'       => array('px'),
+							'slider'      => array(
+								'min'  => 1,
+								'max'  => 100,
+								'step' => 1,
+							),
+						),
+						'circle_color'      => array(
+							'type'        => 'color',
+							'label'       => __('Circle Foreground Color', 'fl-builder'),
+							'help'        => __('Leave empty to use the theme primary color.', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-counter-fill',
+								'property' => 'stroke',
+							),
+						),
+						'circle_bg_color'   => array(
+							'type'        => 'color',
+							'label'       => __('Circle Background Color', 'fl-builder'),
+							'default'     => 'fafafa',
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-counter-track',
+								'property' => 'stroke',
+							),
+						),
+					),
+				),
+				'bar_style'        => array(
+					'title'  => __('Bar Styles', 'fl-builder'),
+					'fields' => array(
+						'bar_color'    => array(
+							'type'        => 'color',
+							'label'       => __('Bar Foreground Color', 'fl-builder'),
+							'help'        => __('Leave empty to use the theme primary color.', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-counter-bar',
+								'property' => 'background-color',
+							),
+						),
+						'bar_bg_color' => array(
+							'type'        => 'color',
+							'label'       => __('Bar Background Color', 'fl-builder'),
+							'default'     => 'fafafa',
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-counter-bar-track',
+								'property' => 'background-color',
+							),
+						),
+					),
+				),
+				'structure'        => array(
+					'title'  => __('Structure', 'fl-builder'),
+					'fields' => array(
+						'align' => array(
+							'type'    => 'align',
+							'label'   => __('Overall Alignment', 'fl-builder'),
+							'default' => 'center',
+							'help'    => __('Ignored when the image / icon sits left or right of the number, which aligns the counter to that side.', 'fl-builder'),
+						),
+					),
+				),
+				'margin_style'     => array(
+					'title'  => __('Number Margins', 'fl-builder'),
+					'fields' => array(
+						'number_top_margin'    => array(
+							'type'   => 'unit',
+							'label'  => __('Number Top Margin', 'fl-builder'),
+							'units'  => array('px'),
+							'slider' => true,
+						),
+						'number_bottom_margin' => array(
+							'type'   => 'unit',
+							'label'  => __('Number Bottom Margin', 'fl-builder'),
+							'units'  => array('px'),
+							'slider' => true,
+						),
+					),
+				),
+				'separator'        => array(
+					'title'     => __('Separator ( Below Number )', 'fl-builder'),
+					'collapsed' => true,
+					'fields'    => array(
+						'show_separator'          => array(
+							'type'    => 'select',
+							'label'   => __('Show separator', 'fl-builder'),
+							'default' => 'no',
+							'options' => array(
+								'yes' => __('Yes', 'fl-builder'),
+								'no'  => __('No', 'fl-builder'),
+							),
+							'toggle'  => array(
+								'yes' => array(
+									'fields' => array('separator_style', 'separator_color', 'separator_height', 'separator_width', 'separator_alignment', 'separator_top_margin', 'separator_bottom_margin'),
+								),
+							),
+						),
+						'separator_style'         => array(
+							'type'    => 'select',
+							'label'   => __('Style', 'fl-builder'),
+							'default' => 'solid',
+							'options' => array(
+								'solid'  => __('Solid', 'fl-builder'),
+								'dashed' => __('Dashed', 'fl-builder'),
+								'dotted' => __('Dotted', 'fl-builder'),
+								'double' => __('Double', 'fl-builder'),
+							),
+							'help'    => __('The type of border to use. Double borders must have a height of at least 3px to render properly.', 'fl-builder'),
+						),
+						'separator_color'         => array(
+							'type'        => 'color',
+							'label'       => __('Separator Color', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-counter-separator',
+								'property' => 'border-top-color',
+							),
+						),
+						'separator_height'        => array(
+							'type'        => 'unit',
+							'label'       => __('Thickness', 'fl-builder'),
+							'placeholder' => '1',
+							'units'       => array('px'),
+							'help'        => __('Adjust thickness of border.', 'fl-builder'),
+							'slider'      => array(
+								'min'  => 0,
+								'max'  => 20,
+								'step' => 1,
+							),
+						),
+						'separator_width'         => array(
+							'type'        => 'unit',
+							'label'       => __('Width', 'fl-builder'),
+							'placeholder' => '100',
+							'units'       => array('%'),
+							'slider'      => array(
+								'min'  => 0,
+								'max'  => 100,
+								'step' => 5,
+							),
+						),
+						'separator_alignment'     => array(
+							'type'       => 'align',
+							'label'      => __('Alignment', 'fl-builder'),
+							'responsive' => true,
+							'help'       => __('Leave unset to follow the overall alignment.', 'fl-builder'),
+						),
+						'separator_top_margin'    => array(
+							'type'   => 'unit',
+							'label'  => __('Separator Top Margin', 'fl-builder'),
+							'units'  => array('px'),
+							'slider' => true,
+						),
+						'separator_bottom_margin' => array(
+							'type'   => 'unit',
+							'label'  => __('Separator Bottom Margin', 'fl-builder'),
+							'units'  => array('px'),
+							'slider' => true,
+						),
+					),
+				),
+				'img_icon_margins' => array(
+					'title'     => __('Image / Icon Margins', 'fl-builder'),
+					'collapsed' => true,
+					'fields'    => array(
+						'img_icon_margin_top'    => array(
+							'type'   => 'unit',
+							'label'  => __('Top', 'fl-builder'),
+							'units'  => array('px'),
+							'slider' => true,
+						),
+						'img_icon_margin_bottom' => array(
+							'type'   => 'unit',
+							'label'  => __('Bottom', 'fl-builder'),
+							'units'  => array('px'),
+							'slider' => true,
+						),
+					),
+				),
+				'animation'        => array(
+					'title'  => __('Counter Animation', 'fl-builder'),
+					'fields' => array(
+						'animation_speed' => array(
+							'type'        => 'unit',
+							'label'       => __('Animation Speed', 'fl-builder'),
+							'placeholder' => '1',
+							'description' => __('second(s)', 'fl-builder'),
+							'help'        => __('Number of seconds to complete the animation.', 'fl-builder'),
+						),
+						'delay'           => array(
+							'type'        => 'unit',
+							'label'       => __('Animation Delay', 'fl-builder'),
+							'placeholder' => '1',
+							'description' => __('second(s)', 'fl-builder'),
+							'help'        => __('Number of seconds to wait after the counter scrolls into view.', 'fl-builder'),
 						),
 					),
 				),
