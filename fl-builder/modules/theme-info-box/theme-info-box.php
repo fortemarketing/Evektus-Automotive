@@ -335,7 +335,7 @@ class ThemeInfoBoxModule extends FLBuilderModule
 		echo '<div class="theme-info-box-title-wrap">';
 
 		if ($has_prefix) {
-			$prefix_tag = isset($settings->prefix_tag) ? $settings->prefix_tag : 'h5';
+			$prefix_tag = isset($settings->prefix_tag) ? $settings->prefix_tag : 'h3';
 			echo '<' . esc_attr($prefix_tag) . ' class="theme-info-box-prefix">' . wp_kses_post($settings->heading_prefix) . '</' . esc_attr($prefix_tag) . '>';
 		}
 
@@ -1213,7 +1213,7 @@ FLBuilder::register_module(
 						'prefix_tag'         => array(
 							'type'    => 'select',
 							'label'   => __('HTML Tag', 'fl-builder'),
-							'default' => 'h5',
+							'default' => 'h3',
 							'options' => array(
 								'h1'   => 'h1',
 								'h2'   => 'h2',

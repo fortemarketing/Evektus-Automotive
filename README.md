@@ -111,6 +111,14 @@ header and footer, since they are fragments rather than pages. Add post types
 to that list with the `evek_chromeless_post_types` filter, or decide per view
 with `evek_hides_site_chrome`.
 
+## Header
+
+The fallback header in `header.php` is a dark bar with the logo on the left,
+the primary menu centred and a "Chat with us" button on the right. The button
+links to `/contact-us/` by default; change its `label` or `url` with the
+`evek_header_cta` filter, or return an empty `url` to hide it. It is hidden
+below 480px, where the hamburger needs the room.
+
 ## Menus
 
 Two locations, `primary` and `footer`. The primary menu renders through the
