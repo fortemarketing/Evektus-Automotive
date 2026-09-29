@@ -12,3 +12,15 @@
   background: currentColor;
   transform: translateY(5px);
 }
+.fm-info-box-prefix:not(:last-child) {
+  margin-bottom: 35px;
+}
+.fm-info-box-title {
+  margin-bottom: 0;
+}
+.fm-info-box-title-wrap:not(:last-child) {
+  margin-bottom: 20px;
+}
+.fm-info-box-text:not(:last-child) {
+  margin-bottom: 50px;
+}
