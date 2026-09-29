@@ -27,6 +27,15 @@
   flex: none;
 }
 
+.site-header :is(a, button):focus-visible {
+  outline: 2px solid var(--light);
+  outline-offset: 3px;
+}
+
+.site-header .main-menu__top-link:focus-visible {
+  outline-offset: 0;
+}
+
 @media (min-width: 992px) {
   .site-header__inner {
     display: grid;

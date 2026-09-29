@@ -100,7 +100,7 @@ body {
 }
 
 .theme-button:is(a, button, span):hover,
-.theme-button:is(a, button, span):focus {
+.theme-button:is(a, button, span):focus-visible {
   background-color: var(--button-bg-hover);
   color: var(--button-fg-hover);
   border-color: var(--button-border-hover);
