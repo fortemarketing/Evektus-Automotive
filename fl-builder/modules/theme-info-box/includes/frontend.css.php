@@ -223,6 +223,10 @@ $fm_cta_node = '.fl-builder-content ' . $fm_node;
 // Responsive and compound field rules.
 if ( class_exists( 'FLBuilderCSS' ) ) {
 
+	// Spacing is hidden for now (see the commented-out Style > Spacing section
+	// in theme-info-box.php), so none of these rules run and custom.css sets
+	// every gap. That also keeps values saved on older boxes from applying.
+	/*
 	// Individual bottom margins replace container gaps so each text element's
 	// spacing can be controlled independently. Title spacing sits on the
 	// title wrap, the element assets/css/custom.css spaces the heading with.
@@ -247,6 +251,7 @@ if ( class_exists( 'FLBuilderCSS' ) ) {
 			)
 		);
 	}
+	*/
 
 	// Overall alignment drives the text and inline media.
 	FLBuilderCSS::responsive_rule(
