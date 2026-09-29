@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  color: var(--primary);
 }
 .theme-info-box-prefix::after {
   content: "";
