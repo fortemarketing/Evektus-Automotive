@@ -2,7 +2,7 @@
   --header-fg: var(--light);
 
   color: var(--header-fg);
-  background: color-mix(in srgb, var(--dark) 92%, var(--light));
+  background: var(--dark-accent);
   border-bottom: 1px solid color-mix(in srgb, var(--light) 30%, transparent);
 }
 
