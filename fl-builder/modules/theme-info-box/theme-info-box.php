@@ -467,7 +467,7 @@ FLBuilder::register_module(
 	'ThemeInfoBoxModule',
 	array(
 		'general'    => array(
-			'title'    => __('Content', 'fl-builder'),
+			'title'    => __('General', 'fl-builder'),
 			'sections' => array(
 				'title'     => array(
 					'title'  => __('Title', 'fl-builder'),
