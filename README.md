@@ -95,6 +95,13 @@ that class to the button. Each variant in `theme.css` only sets the
 `--button-*` colour variables; the bare `.theme-button` rule is the primary
 look, so a button with no style class still renders as primary.
 
+`theme-counter` is a copy of UABB Counter from Ultimate Addons for Beaver
+Builder, with the same four styles - number only, circle, semicircle and bar -
+and mostly the same setting names. It needs nothing from the plugin: the icon / photo
+and separator are rendered in the module rather than through UABB's Image Icon
+and Separator modules, and the count runs on its own `js/frontend.js` instead
+of jQuery Waypoints. An empty circle or bar colour falls back to `--primary`.
+
 ## Beaver Themer
 
 The theme declares support for Themer headers, footers and parts, and

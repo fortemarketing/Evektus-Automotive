@@ -1,0 +1,215 @@
+.theme-counter {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.theme-counter .theme-counter-number {
+  margin: 0;
+  line-height: 1;
+  word-wrap: normal;
+}
+
+.theme-counter-before-text,
+.theme-counter-after-text {
+  display: block;
+}
+
+.theme-counter-before-text {
+  margin-bottom: 10px;
+}
+
+.theme-counter-after-text {
+  margin-top: 10px;
+}
+
+/* Only numbers. Media beside the text or beside the number sits in a grid row,
+   so the gap between them is that row's own `gap`. */
+.theme-counter--left .theme-counter-inner,
+.theme-counter--right .theme-counter-inner,
+.theme-counter-title-row {
+  display: grid;
+  gap: 20px;
+  align-items: center;
+}
+
+.theme-counter--left .theme-counter-inner,
+.theme-counter--left-title .theme-counter-title-row {
+  grid-template-columns: auto minmax(0, 1fr);
+  text-align: left;
+}
+
+.theme-counter--right .theme-counter-inner,
+.theme-counter--right-title .theme-counter-title-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+  text-align: right;
+}
+
+.theme-counter-text {
+  position: relative;
+  min-width: 0;
+}
+
+.theme-counter--above-title .theme-counter-media {
+  margin-bottom: 15px;
+}
+
+.theme-counter--below-title .theme-counter-media {
+  margin-top: 15px;
+}
+
+/* Image / icon. */
+.theme-counter-media {
+  display: block;
+  line-height: 0;
+  max-width: 100%;
+}
+
+.theme-counter-icon {
+  display: inline-block;
+  box-sizing: border-box;
+  line-height: 1;
+  transition: all 0.2s linear;
+}
+
+.theme-counter-icon i {
+  width: 1em;
+  line-height: 1;
+  text-align: center;
+}
+
+.theme-counter-icon--circle,
+.theme-counter-icon--square {
+  padding: 0.5em;
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.theme-counter-photo-wrap {
+  display: inline-block;
+  box-sizing: border-box;
+  max-width: 100%;
+  transition: background-color 0.2s linear, border-color 0.2s linear;
+}
+
+.theme-counter-photo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.theme-counter-icon--circle,
+.theme-counter-photo-wrap--circle,
+.theme-counter-photo-wrap--circle .theme-counter-photo {
+  border-radius: 50%;
+}
+
+.theme-counter-photo-wrap--circle .theme-counter-photo,
+.theme-counter-photo-wrap--square .theme-counter-photo {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+/* Separator. */
+.theme-counter-separator-wrap {
+  line-height: 0;
+}
+
+.theme-counter-separator {
+  display: inline-block;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: currentColor;
+}
+
+/* Circle and semicircle. Both rings are drawn with pathLength="100", and the
+   fill starts empty - js/frontend.js animates its dash offset down. */
+.theme-counter-circle,
+.theme-counter-semi-circle {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.theme-counter-circle,
+.theme-counter-gauge {
+  position: relative;
+}
+
+.theme-counter-circle {
+  aspect-ratio: 1 / 1;
+}
+
+.theme-counter-gauge {
+  aspect-ratio: 2 / 1;
+}
+
+.theme-counter-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.theme-counter-track,
+.theme-counter-fill {
+  stroke-width: 10px;
+}
+
+.theme-counter-track {
+  stroke: #fafafa;
+}
+
+.theme-counter-fill {
+  stroke: var(--primary);
+}
+
+.theme-counter-circle .theme-counter-text,
+.theme-counter-gauge .theme-counter-text {
+  position: absolute;
+  left: 50%;
+  text-align: center;
+}
+
+.theme-counter-circle .theme-counter-text {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.theme-counter-gauge .theme-counter-text {
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.theme-counter-gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Bars. */
+.theme-counter--bars {
+  text-align: center;
+}
+
+.theme-counter-bar-track {
+  width: 100%;
+  background-color: #fafafa;
+}
+
+.theme-counter-bar {
+  box-sizing: border-box;
+  width: 0;
+  padding: 5px;
+  background-color: var(--primary);
+  white-space: nowrap;
+}
+
+.theme-counter-position-above .theme-counter-bar-track {
+  margin-top: 5px;
+}
+
+.theme-counter-position-below .theme-counter-bar-track {
+  margin-bottom: 5px;
+}
