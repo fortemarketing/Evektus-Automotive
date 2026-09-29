@@ -67,7 +67,18 @@ body {
   line-height: 1.6;
 }
 
-.fm-button:is(a, button, span) {
+.theme-button:is(a, button, span) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  box-sizing: border-box;
+  margin: 0;
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  text-decoration: none;
   background-color: var(--primary);
   transition: var(--transition);
   color: var(--light);
@@ -79,8 +90,8 @@ body {
   text-transform: uppercase;
 }
 
-.fm-button:is(a, button, span):hover,
-.fm-button:is(a, button, span):focus {
+.theme-button:is(a, button, span):hover,
+.theme-button:is(a, button, span):focus {
   background-color: var(--primary-dark);
   border-color: var(--primary-dark);
 }

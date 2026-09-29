@@ -154,15 +154,6 @@
   display: block;
 }
 
-.theme-info-box-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  box-sizing: border-box;
-  text-decoration: none;
-}
-
 .theme-info-box-button-width-full .theme-info-box-button {
   width: 100%;
 }

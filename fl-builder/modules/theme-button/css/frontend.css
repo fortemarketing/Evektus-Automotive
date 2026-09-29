@@ -1,0 +1,51 @@
+.theme-button-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.theme-button-width-full .theme-button:is(a, button) {
+  display: flex;
+  width: 100%;
+}
+
+.theme-button-width-custom .theme-button:is(a, button) {
+  max-width: 100%;
+}
+
+.theme-button:is(a, button, span).theme-button-icon-animation {
+  gap: 0;
+}
+
+.theme-button-icon-animation .theme-button-icon {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-width 0.2s linear,
+    opacity 0.2s linear,
+    margin 0.2s linear;
+}
+
+:where(body:not(.fl-builder-edit))
+  .theme-button-icon-animation:is(:hover, :focus)
+  .theme-button-icon {
+  max-width: 2em;
+  opacity: 1;
+}
+
+:where(body:not(.fl-builder-edit))
+  .theme-button-icon-animation:is(:hover, :focus)
+  .theme-button-icon-before {
+  margin-right: 1rem;
+}
+
+:where(body:not(.fl-builder-edit))
+  .theme-button-icon-animation:is(:hover, :focus)
+  .theme-button-icon-after {
+  margin-left: 1rem;
+}
+
+.theme-button:disabled,
+.theme-button.disabled {
+  cursor: default;
+}

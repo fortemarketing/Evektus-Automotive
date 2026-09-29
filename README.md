@@ -80,12 +80,15 @@ labelled box while the builder is open and an empty string everywhere else.
 
 Theme-owned modules live in `fl-builder/modules/<slug>/`, one folder per module
 with its class in `<slug>.php`. `evek_load_builder_modules()` requires every
-folder on `init`, so adding one is a matter of dropping it in. They appear in
-the builder under the **Theme Modules** category.
+folder on `init`, so adding one is a matter of dropping it in. Give each one
+`'group' => __('Theme', 'fl-builder')` so it appears in the builder's **Theme**
+group.
 
-`theme-info-box` is a copy of FM Info Box from Forte Marketing Modules, renamed
-so it can sit beside the plugin version. It needs nothing from the plugin: its
-button uses the theme's own `.fm-button` from `theme.css`.
+`theme-info-box` and `theme-button` are copies of FM Info Box and FM Button
+from Forte Marketing Modules, renamed so they can sit beside the plugin
+versions. They need nothing from the plugin. Both render their button with the
+theme's own `.theme-button` from `theme.css`, which holds its full look, layout
+included.
 
 ## Beaver Themer
 

@@ -8,7 +8,7 @@
  *
  *  A theme-owned copy of FM Info Box from Forte Marketing Modules, renamed so
  *  it can sit beside the plugin's module without clashing. It depends on
- *  nothing but Beaver Builder core: the button is the theme's own .fm-button
+ *  nothing but Beaver Builder core: the button is the theme's own .theme-button
  *  from assets/css/theme.css rather than the plugin's shared button component.
  *
  *  @package Evektus
@@ -36,6 +36,7 @@ class ThemeInfoBoxModule extends FLBuilderModule
 				'name'            => __('Theme Info Box', 'fl-builder'),
 				'description'     => __('A heading and snippet of text with an optional link, icon and image.', 'fl-builder'),
 				'category'        => __('Theme Modules', 'fl-builder'),
+				'group'           => __('Theme', 'fl-builder'),
 				'dir'             => EVEK_DIR . '/fl-builder/modules/theme-info-box/',
 				'url'             => EVEK_URI . '/fl-builder/modules/theme-info-box/',
 				'slug'            => 'theme-info-box',
@@ -437,7 +438,7 @@ class ThemeInfoBoxModule extends FLBuilderModule
 		$width    = isset($settings->btn_width) ? $settings->btn_width : 'auto';
 	?>
 		<div class="theme-info-box-button-wrap theme-info-box-button-width-<?php echo esc_attr($width); ?>">
-			<a class="fm-button theme-info-box-button" href="<?php echo esc_url($link); ?>" target="<?php echo esc_attr($target); ?>" <?php echo $this->get_rel($target, $nofollow); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in get_rel(). 
+			<a class="theme-button theme-info-box-button" href="<?php echo esc_url($link); ?>" target="<?php echo esc_attr($target); ?>" <?php echo $this->get_rel($target, $nofollow); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in get_rel(). 
 																																	?> aria-label="<?php echo esc_attr($button_text); ?>">
 				<?php if ('' !== $icon && 'before' === $icon_pos) : ?>
 					<span class="theme-info-box-button-icon <?php echo esc_attr($icon); ?>" aria-hidden="true"></span>
