@@ -1,0 +1,15 @@
+.entry + .entry {
+  margin-top: 4rem;
+}
+
+.entry-meta {
+  opacity: 0.75;
+}
+
+.entry-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.pagination {
+  margin-top: 3rem;
+}

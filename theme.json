@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "color": {
+      "palette": [
+        { "color": "#ff8400", "name": "Evektus Orange", "slug": "evek-orange" },
+        { "color": "#000000", "name": "Black", "slug": "black" },
+        { "color": "#ffffff", "name": "White", "slug": "white" }
+      ]
+    },
+    "layout": { "contentSize": "720px", "wideSize": "1440px" },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFace": [
+            {
+              "fontFamily": "Median",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "src": ["file:./assets/fonts/Median-Regular.woff2"]
+            }
+          ],
+          "fontFamily": "\"Median\", \"Arial Black\", sans-serif",
+          "name": "Median",
+          "slug": "median"
+        },
+        {
+          "fontFamily": "\"Inter\", system-ui, -apple-system, \"Segoe UI\", sans-serif",
+          "name": "Inter",
+          "slug": "inter"
+        }
+      ]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#ffffff",
+      "text": "#000000"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--median)",
+          "fontWeight": "400"
+        }
+      }
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--inter)"
+    }
+  }
+}

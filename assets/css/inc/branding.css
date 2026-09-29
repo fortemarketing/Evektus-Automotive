@@ -1,0 +1,19 @@
+.site-branding .custom-logo-link,
+.site-branding .site-title {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-branding .custom-logo {
+  flex: none;
+  width: auto;
+}
+
+.site-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}

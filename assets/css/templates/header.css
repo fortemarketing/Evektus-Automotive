@@ -1,0 +1,20 @@
+.site-header {
+  --header-fg: var(--dark);
+
+  color: var(--header-fg);
+  background: var(--light);
+  border-bottom: 1px solid color-mix(in srgb, var(--dark) 10%, transparent);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding-block: 1.25rem;
+}
+
+.site-header .custom-logo {
+  max-height: 3.25rem;
+}
