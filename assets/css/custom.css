@@ -1,0 +1,14 @@
+/* Module Overrides */
+.fm-info-box-prefix {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.fm-info-box-prefix::after {
+  content: "";
+  width: 40px;
+  height: 2px;
+  background: currentColor;
+  transform: translateY(5px);
+}
