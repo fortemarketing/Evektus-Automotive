@@ -90,6 +90,11 @@ versions. They need nothing from the plugin. Both render their button with the
 theme's own `.theme-button` from `theme.css`, which holds its full look, layout
 included.
 
+Both offer a **Style** dropdown - Primary, Secondary or Tertiary - which adds
+that class to the button. Each variant in `theme.css` only sets the
+`--button-*` colour variables; the bare `.theme-button` rule is the primary
+look, so a button with no style class still renders as primary.
+
 ## Beaver Themer
 
 The theme declares support for Themer headers, footers and parts, and

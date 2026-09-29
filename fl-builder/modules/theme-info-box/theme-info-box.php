@@ -436,9 +436,16 @@ class ThemeInfoBoxModule extends FLBuilderModule
 		$icon     = isset($settings->btn_icon) ? $settings->btn_icon : '';
 		$icon_pos = isset($settings->btn_icon_position) ? $settings->btn_icon_position : 'after';
 		$width    = isset($settings->btn_width) ? $settings->btn_width : 'auto';
+		$style    = isset($settings->btn_style) ? $settings->btn_style : '';
+
+		// One of the style variants theme.css defines; anything else falls back
+		// to primary.
+		if (! in_array($style, array('primary', 'secondary', 'tertiary'), true)) {
+			$style = 'primary';
+		}
 	?>
 		<div class="theme-info-box-button-wrap theme-info-box-button-width-<?php echo esc_attr($width); ?>">
-			<a class="theme-button theme-info-box-button" href="<?php echo esc_url($link); ?>" target="<?php echo esc_attr($target); ?>" <?php echo $this->get_rel($target, $nofollow); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in get_rel(). 
+			<a class="theme-button <?php echo esc_attr($style); ?> theme-info-box-button" href="<?php echo esc_url($link); ?>" target="<?php echo esc_attr($target); ?>" <?php echo $this->get_rel($target, $nofollow); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped in get_rel(). 
 																																	?> aria-label="<?php echo esc_attr($button_text); ?>">
 				<?php if ('' !== $icon && 'before' === $icon_pos) : ?>
 					<span class="theme-info-box-button-icon <?php echo esc_attr($icon); ?>" aria-hidden="true"></span>
@@ -1136,6 +1143,20 @@ FLBuilder::register_module(
 				'button_style' => array(
 					'title'  => __('Button', 'fl-builder'),
 					'fields' => array(
+						'btn_style'            => array(
+							'type'    => 'select',
+							'label'   => __('Style', 'fl-builder'),
+							'default' => 'primary',
+							'options' => array(
+								'primary'   => __('Primary', 'fl-builder'),
+								'secondary' => __('Secondary', 'fl-builder'),
+								'tertiary'  => __('Tertiary', 'fl-builder'),
+							),
+							'help'    => __('The button styles are set in the theme, in assets/css/theme.css.', 'fl-builder'),
+							'preview' => array(
+								'type' => 'refresh',
+							),
+						),
 						'btn_icon'             => array(
 							'type'        => 'icon',
 							'label'       => __('Icon', 'fl-builder'),

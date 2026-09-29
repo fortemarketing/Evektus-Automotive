@@ -24,9 +24,9 @@ $element_attributes = join(' ', array_filter(array(
 	$module->get_target(),
 )));
 
-// Modifier classes for the button element itself. `theme-button` is the theme's
-// own button style in assets/css/theme.css, shared with Theme Info Box.
-$button_classes = 'theme-button primary';
+// Modifier classes for the button element itself. `theme-button` and its style
+// variant are defined in assets/css/theme.css, shared with Theme Info Box.
+$button_classes = 'theme-button ' . $module->get_button_style();
 
 if ($is_lightbox) {
 	$button_classes .= ' ' . $button_node_id . ' theme-button-lightbox';

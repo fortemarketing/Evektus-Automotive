@@ -79,9 +79,16 @@ body {
   font-family: inherit;
   text-align: center;
   text-decoration: none;
-  background-color: var(--primary);
+  --button-bg: var(--primary);
+  --button-fg: var(--light);
+  --button-border: var(--primary);
+  --button-bg-hover: var(--primary-dark);
+  --button-fg-hover: var(--light);
+  --button-border-hover: var(--primary-dark);
+  background-color: var(--button-bg);
+  color: var(--button-fg);
+  border: 1px solid var(--button-border);
   transition: var(--transition);
-  color: var(--light);
   border-radius: 100px;
   padding: 1.25rem 2rem;
   line-height: 1;
@@ -92,6 +99,25 @@ body {
 
 .theme-button:is(a, button, span):hover,
 .theme-button:is(a, button, span):focus {
-  background-color: var(--primary-dark);
-  border-color: var(--primary-dark);
+  background-color: var(--button-bg-hover);
+  color: var(--button-fg-hover);
+  border-color: var(--button-border-hover);
+}
+
+.theme-button:is(a, button, span).secondary {
+  --button-bg: var(--dark);
+  --button-fg: var(--light);
+  --button-border: var(--dark);
+  --button-bg-hover: var(--primary);
+  --button-fg-hover: var(--light);
+  --button-border-hover: var(--primary);
+}
+
+.theme-button:is(a, button, span).tertiary {
+  --button-bg: transparent;
+  --button-fg: var(--dark);
+  --button-border: var(--dark);
+  --button-bg-hover: var(--dark);
+  --button-fg-hover: var(--light);
+  --button-border-hover: var(--dark);
 }

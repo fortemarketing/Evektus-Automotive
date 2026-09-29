@@ -57,6 +57,19 @@ class ThemeButtonModule extends FLBuilderModule
 	}
 
 	/**
+	 * The theme button style class, one of the variants theme.css defines.
+	 * Anything else falls back to primary.
+	 *
+	 * @return string
+	 */
+	public function get_button_style()
+	{
+		$style = isset($this->settings->button_style) ? $this->settings->button_style : '';
+
+		return in_array($style, array('primary', 'secondary', 'tertiary'), true) ? $style : 'primary';
+	}
+
+	/**
 	 * @method get_classname
 	 */
 	public function get_classname()
@@ -329,6 +342,20 @@ FLBuilder::register_module('ThemeButtonModule', array(
 			'style'  => array(
 				'title'  => '',
 				'fields' => array(
+					'button_style' => array(
+						'type'    => 'select',
+						'label'   => __('Style', 'fl-builder'),
+						'default' => 'primary',
+						'options' => array(
+							'primary'   => __('Primary', 'fl-builder'),
+							'secondary' => __('Secondary', 'fl-builder'),
+							'tertiary'  => __('Tertiary', 'fl-builder'),
+						),
+						'help'    => __('The button styles are set in the theme, in assets/css/theme.css.', 'fl-builder'),
+						'preview' => array(
+							'type' => 'refresh',
+						),
+					),
 					'width'        => array(
 						'type'    => 'select',
 						'label'   => __('Width', 'fl-builder'),
