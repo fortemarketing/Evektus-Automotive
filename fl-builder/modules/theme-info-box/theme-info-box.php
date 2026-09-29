@@ -466,11 +466,11 @@ class ThemeInfoBoxModule extends FLBuilderModule
 FLBuilder::register_module(
 	'ThemeInfoBoxModule',
 	array(
-		'general' => array(
-			'title'    => __('General', 'fl-builder'),
+		'general'    => array(
+			'title'    => __('Content', 'fl-builder'),
 			'sections' => array(
-				'content'     => array(
-					'title'  => '',
+				'title'     => array(
+					'title'  => __('Title', 'fl-builder'),
 					'fields' => array(
 						'heading_prefix' => array(
 							'type'        => 'text',
@@ -490,23 +490,14 @@ FLBuilder::register_module(
 								'selector' => '.theme-info-box-title',
 							),
 						),
-						'show_separator' => array(
-							'type'    => 'select',
-							'label'   => __('Separator', 'fl-builder'),
-							'default' => 'no',
-							'options' => array(
-								'no'  => __('Hide', 'fl-builder'),
-								'yes' => __('Show', 'fl-builder'),
-							),
-							'toggle'  => array(
-								'yes' => array(
-									'sections' => array('separator'),
-								),
-							),
-						),
-						'text'           => array(
+					),
+				),
+				'text'      => array(
+					'title'  => __('Description', 'fl-builder'),
+					'fields' => array(
+						'text' => array(
 							'type'          => 'editor',
-							'label'         => __('Description', 'fl-builder'),
+							'label'         => '',
 							'media_buttons' => false,
 							'rows'          => 6,
 							'connections'   => array('string', 'html'),
@@ -517,7 +508,80 @@ FLBuilder::register_module(
 						),
 					),
 				),
-				'media'       => array(
+				'separator' => array(
+					'title'     => __('Separator', 'fl-builder'),
+					'collapsed' => true,
+					'fields'    => array(
+						'show_separator'           => array(
+							'type'    => 'select',
+							'label'   => __('Separator', 'fl-builder'),
+							'default' => 'no',
+							'options' => array(
+								'no'  => __('Hide', 'fl-builder'),
+								'yes' => __('Show', 'fl-builder'),
+							),
+							'toggle'  => array(
+								'yes' => array(
+									'fields' => array('separator_style', 'separator_color', 'separator_height', 'separator_width', 'separator_align'),
+								),
+							),
+						),
+						'separator_style'          => array(
+							'type'    => 'select',
+							'label'   => __('Style', 'fl-builder'),
+							'default' => 'solid',
+							'help'    => __('Double borders must have a thickness of at least 3px to render properly.', 'fl-builder'),
+							'options' => array(
+								'solid'  => __('Solid', 'fl-builder'),
+								'dashed' => __('Dashed', 'fl-builder'),
+								'dotted' => __('Dotted', 'fl-builder'),
+								'double' => __('Double', 'fl-builder'),
+							),
+						),
+						'separator_color'          => array(
+							'type'        => 'color',
+							'label'       => __('Color', 'fl-builder'),
+							'default'     => 'e0e0e0',
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+						),
+						'separator_height'         => array(
+							'type'        => 'unit',
+							'label'       => __('Thickness', 'fl-builder'),
+							'placeholder' => '1',
+							'units'       => array('px'),
+							'slider'      => array(
+								'min'  => 0,
+								'max'  => 20,
+								'step' => 1,
+							),
+						),
+						'separator_width'          => array(
+							'type'        => 'unit',
+							'label'       => __('Width', 'fl-builder'),
+							'placeholder' => '100',
+							'units'       => array('%'),
+							'slider'      => array(
+								'min'  => 0,
+								'max'  => 100,
+								'step' => 5,
+							),
+						),
+						'separator_align'          => array(
+							'type'       => 'align',
+							'label'      => __('Alignment', 'fl-builder'),
+							'default'    => 'left',
+							'responsive' => true,
+						),
+					),
+				),
+			),
+		),
+		'imageicon'  => array(
+			'title'    => __('Image / Icon', 'fl-builder'),
+			'sections' => array(
+				'media_type'   => array(
 					'title'  => __('Image / Icon', 'fl-builder'),
 					'fields' => array(
 						'image_type' => array(
@@ -531,26 +595,153 @@ FLBuilder::register_module(
 							),
 							'toggle'  => array(
 								'icon'  => array(
-									'fields'   => array('icon'),
-									'sections' => array('media_style', 'media_icon_style'),
+									'sections' => array('icon_basic', 'icon_style', 'icon_colors'),
+									'fields'   => array('img_icon_position', 'icon_spacing'),
 								),
 								'photo' => array(
-									'sections' => array('media_photo', 'media_style', 'media_photo_style'),
+									'sections' => array('photo_basic', 'photo_style'),
+									'fields'   => array('img_icon_position', 'icon_spacing'),
 								),
 							),
 						),
-						'icon'       => array(
+					),
+				),
+				'icon_basic'   => array(
+					'title'  => __('Icon Basics', 'fl-builder'),
+					'fields' => array(
+						'icon'      => array(
 							'type'        => 'icon',
 							'label'       => __('Icon', 'fl-builder'),
 							'default'     => 'far fa-smile',
 							'show_remove' => true,
 						),
+						'icon_size' => array(
+							'type'        => 'unit',
+							'label'       => __('Size', 'fl-builder'),
+							'default'     => '30',
+							'units'       => array('px'),
+							'responsive'  => true,
+							'slider'      => array(
+								'min'  => 0,
+								'max'  => 200,
+								'step' => 1,
+							),
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-info-box-icon',
+								'property' => 'font-size',
+							),
+						),
 					),
 				),
-				'media_photo' => array(
-					'title'  => '',
+				'icon_style'   => array(
+					'title'  => __('Style', 'fl-builder'),
 					'fields' => array(
-						'photo_source' => array(
+						'icon_style'   => array(
+							'type'    => 'select',
+							'label'   => __('Icon Background Style', 'fl-builder'),
+							'default' => 'simple',
+							'options' => array(
+								'simple' => __('Simple', 'fl-builder'),
+								'circle' => __('Circle Background', 'fl-builder'),
+								'square' => __('Square Background', 'fl-builder'),
+								'custom' => __('Design your own', 'fl-builder'),
+							),
+							'toggle'  => array(
+								'circle' => array(
+									'fields' => array('icon_bg_size'),
+								),
+								'square' => array(
+									'fields' => array('icon_bg_size'),
+								),
+								'custom' => array(
+									'fields' => array('icon_bg_size', 'icon_border'),
+								),
+							),
+						),
+						'icon_bg_size' => array(
+							'type'        => 'unit',
+							'label'       => __('Background Size', 'fl-builder'),
+							'help'        => __('Spacing between the icon and the edge of its background.', 'fl-builder'),
+							'placeholder' => '30',
+							'units'       => array('px'),
+							'slider'      => array(
+								'min'  => 0,
+								'max'  => 200,
+								'step' => 1,
+							),
+						),
+						'icon_border'  => array(
+							'type'       => 'border',
+							'label'      => __('Border', 'fl-builder'),
+							'responsive' => true,
+							'preview'    => array(
+								'type'     => 'css',
+								'selector' => '.theme-info-box-icon',
+								'property' => 'border',
+							),
+						),
+					),
+				),
+				'icon_colors'  => array(
+					'title'  => __('Colors', 'fl-builder'),
+					'fields' => array(
+						'icon_color'              => array(
+							'type'        => 'color',
+							'label'       => __('Icon Color', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-info-box-icon',
+								'property' => 'color',
+							),
+						),
+						'icon_hover_color'        => array(
+							'type'        => 'color',
+							'label'       => __('Icon Hover Color', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'help'        => __('Applied while the whole info box is hovered.', 'fl-builder'),
+							'preview'     => array(
+								'type' => 'none',
+							),
+						),
+						'icon_bg_color'           => array(
+							'type'        => 'color',
+							'label'       => __('Background Color', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+						),
+						'icon_bg_hover_color'     => array(
+							'type'        => 'color',
+							'label'       => __('Background Hover Color', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type' => 'none',
+							),
+						),
+						'icon_border_hover_color' => array(
+							'type'        => 'color',
+							'label'       => __('Border Hover Color', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type' => 'none',
+							),
+						),
+					),
+				),
+				'photo_basic'  => array(
+					'title'  => __('Image Basics', 'fl-builder'),
+					'fields' => array(
+						'photo_source'   => array(
 							'type'    => 'select',
 							'label'   => __('Photo Source', 'fl-builder'),
 							'default' => 'library',
@@ -567,113 +758,156 @@ FLBuilder::register_module(
 								),
 							),
 						),
-						'photo'        => array(
+						'photo'          => array(
 							'type'        => 'photo',
 							'label'       => __('Photo', 'fl-builder'),
 							'show_remove' => true,
 							'connections' => array('photo'),
 						),
-						'photo_url'    => array(
+						'photo_url'      => array(
 							'type'        => 'text',
 							'label'       => __('Photo URL', 'fl-builder'),
 							'placeholder' => 'https://www.example.com/my-photo.jpg',
 							'connections' => array('url'),
 						),
+						'img_size'       => array(
+							'type'        => 'unit',
+							'label'       => __('Size', 'fl-builder'),
+							'placeholder' => __('Auto', 'fl-builder'),
+							'units'       => array('px'),
+							'responsive'  => true,
+							'slider'      => array(
+								'px' => array(
+									'min'  => 0,
+									'max'  => 1000,
+									'step' => 10,
+								),
+							),
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-info-box-photo',
+								'property' => 'width',
+							),
+						),
 					),
 				),
-				'cta'         => array(
-					'title'  => __('Call to Action', 'fl-builder'),
+				'photo_style'  => array(
+					'title'  => __('Style', 'fl-builder'),
 					'fields' => array(
-						'cta_type'          => array(
+						'image_style' => array(
 							'type'    => 'select',
-							'label'   => __('Type', 'fl-builder'),
-							'default' => 'none',
+							'label'   => __('Image Style', 'fl-builder'),
+							'default' => 'simple',
+							'help'    => __('Circle and Square crop the image to a 1:1 ratio.', 'fl-builder'),
 							'options' => array(
-								'none'   => __('None', 'fl-builder'),
-								'link'   => __('Text', 'fl-builder'),
-								'button' => __('Button', 'fl-builder'),
-								'box'    => __('Complete Box', 'fl-builder'),
+								'simple' => __('Simple', 'fl-builder'),
+								'circle' => __('Circle', 'fl-builder'),
+								'square' => __('Square', 'fl-builder'),
+								'custom' => __('Design your own', 'fl-builder'),
 							),
 							'toggle'  => array(
-								'link'   => array(
-									'fields'   => array('cta_text', 'link'),
-									'sections' => array('link_style'),
-								),
-								'button' => array(
-									'fields'   => array('btn_text', 'btn_icon', 'btn_icon_position', 'link'),
-									'sections' => array('button_style'),
-								),
-								'box'    => array(
-									'fields' => array('link'),
+								'custom' => array(
+									'fields' => array('img_bg_size', 'img_border'),
 								),
 							),
 						),
-						'cta_text'          => array(
-							'type'        => 'text',
-							'label'       => __('Text', 'fl-builder'),
-							'default'     => __('Read More', 'fl-builder'),
-							'connections' => array('string', 'html'),
-							'preview'     => array(
-								'type'     => 'text',
-								'selector' => '.theme-info-box-cta-link',
+						'img_bg_size' => array(
+							'type'        => 'unit',
+							'label'       => __('Background Size', 'fl-builder'),
+							'help'        => __('Spacing between the image and the edge of its background.', 'fl-builder'),
+							'placeholder' => '0',
+							'units'       => array('px'),
+							'slider'      => array(
+								'min'  => 0,
+								'max'  => 100,
+								'step' => 1,
 							),
 						),
-						'btn_text'          => array(
-							'type'        => 'text',
-							'label'       => __('Text', 'fl-builder'),
-							'default'     => __('Click Here', 'fl-builder'),
-							'connections' => array('string'),
-							'preview'     => array(
-								'type' => 'refresh',
-							),
-						),
-						'btn_icon'          => array(
-							'type'        => 'icon',
-							'label'       => __('Icon', 'fl-builder'),
-							'show_remove' => true,
-							'show'        => array(
-								'fields' => array('btn_icon_position'),
-							),
-						),
-						'btn_icon_position' => array(
-							'type'    => 'select',
-							'label'   => __('Icon Position', 'fl-builder'),
-							'default' => 'after',
-							'options' => array(
-								'before' => __('Before Text', 'fl-builder'),
-								'after'  => __('After Text', 'fl-builder'),
-							),
-						),
-						'link'              => array(
-							'type'          => 'link',
-							'label'         => __('Link', 'fl-builder'),
-							'placeholder'   => 'https://www.example.com',
-							'show_target'   => true,
-							'show_nofollow' => true,
-							'help'          => __('Used by the text link, the button and the complete box, whichever call to action type is selected above.', 'fl-builder'),
-							'connections'   => array('url'),
-							'preview'       => array(
-								'type' => 'none',
+						'img_border'  => array(
+							'type'       => 'border',
+							'label'      => __('Border', 'fl-builder'),
+							'responsive' => true,
+							'preview'    => array(
+								'type'     => 'css',
+								'selector' => '.theme-info-box-photo-wrap',
+								'property' => 'border',
 							),
 						),
 					),
 				),
 			),
 		),
-		'style' => array(
+		'style'      => array(
 			'title'    => __('Style', 'fl-builder'),
 			'sections' => array(
-				'layout'            => array(
-					'title'  => __('Layout', 'fl-builder'),
+				'structure' => array(
+					'title'  => __('Structure', 'fl-builder'),
 					'fields' => array(
-						'align'              => array(
+						'img_icon_position' => array(
+							'type'    => 'select',
+							'label'   => __('Image / Icon Position', 'fl-builder'),
+							'default' => 'above-title',
+							'options' => array(
+								'above-title' => __('Above Heading', 'fl-builder'),
+								'below-title' => __('Below Heading', 'fl-builder'),
+								'left-title'  => __('Left of Heading', 'fl-builder'),
+								'right-title' => __('Right of Heading', 'fl-builder'),
+								'left'        => __('Left of Text and Heading', 'fl-builder'),
+								'right'       => __('Right of Text and Heading', 'fl-builder'),
+							),
+							'toggle'  => array(
+								'left-title'  => array(
+									'fields' => array('align_items'),
+								),
+								'right-title' => array(
+									'fields' => array('align_items'),
+								),
+								'left'        => array(
+									'fields' => array('align_items'),
+								),
+								'right'       => array(
+									'fields' => array('align_items'),
+								),
+							),
+						),
+						'align'             => array(
 							'type'       => 'align',
 							'label'      => __('Overall Alignment', 'fl-builder'),
 							'default'    => 'left',
 							'responsive' => true,
 							'help'       => __('The alignment applied to every element inside the info box.', 'fl-builder'),
 						),
-						'min_height_switch'  => array(
+						'align_items'       => array(
+							'type'    => 'select',
+							'label'   => __('Image / Icon Vertical Alignment', 'fl-builder'),
+							'help'    => __('How the image / icon lines up against the content or heading beside it.', 'fl-builder'),
+							'default' => 'center',
+							'options' => array(
+								'center' => __('Center', 'fl-builder'),
+								'top'    => __('Top', 'fl-builder'),
+							),
+						),
+						'icon_spacing'      => array(
+							'type'        => 'unit',
+							'label'       => __('Image / Icon Spacing', 'fl-builder'),
+							'help'        => __('Space between the image / icon and the content it sits beside, above or below.', 'fl-builder'),
+							'placeholder' => '20',
+							'units'       => array('px'),
+							'slider'      => true,
+						),
+						'box_padding'       => array(
+							'type'       => 'dimension',
+							'label'      => __('Content Padding', 'fl-builder'),
+							'units'      => array('px'),
+							'slider'     => true,
+							'responsive' => true,
+							'preview'    => array(
+								'type'     => 'css',
+								'selector' => '.theme-info-box',
+								'property' => 'padding',
+							),
+						),
+						'min_height_switch' => array(
 							'type'    => 'select',
 							'label'   => __('Minimum Height', 'fl-builder'),
 							'default' => 'auto',
@@ -688,7 +922,7 @@ FLBuilder::register_module(
 								),
 							),
 						),
-						'min_height'         => array(
+						'min_height'        => array(
 							'type'       => 'unit',
 							'label'      => __('Height', 'fl-builder'),
 							'units'      => array('px'),
@@ -699,7 +933,7 @@ FLBuilder::register_module(
 								'step' => 10,
 							),
 						),
-						'vertical_align'     => array(
+						'vertical_align'    => array(
 							'type'    => 'select',
 							'label'   => __('Overall Vertical Alignment', 'fl-builder'),
 							'default' => 'center',
@@ -708,6 +942,11 @@ FLBuilder::register_module(
 								'top'    => __('Top', 'fl-builder'),
 							),
 						),
+					),
+				),
+				'box_style' => array(
+					'title'  => __('Box', 'fl-builder'),
+					'fields' => array(
 						'bg_color'           => array(
 							'type'        => 'color',
 							'label'       => __('Background Color', 'fl-builder'),
@@ -750,281 +989,12 @@ FLBuilder::register_module(
 								'type' => 'none',
 							),
 						),
-						'box_padding'        => array(
-							'type'       => 'dimension',
-							'label'      => __('Content Padding', 'fl-builder'),
-							'units'      => array('px'),
-							'slider'     => true,
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box',
-								'property' => 'padding',
-							),
-						),
 					),
 				),
-				'media_style'       => array(
-					'title'  => __('Image / Icon', 'fl-builder'),
+				'spacing'   => array(
+					'title'  => __('Spacing', 'fl-builder'),
 					'fields' => array(
-						'img_icon_position' => array(
-							'type'    => 'select',
-							'label'   => __('Image / Icon Position', 'fl-builder'),
-							'default' => 'above-title',
-							'options' => array(
-								'above-title' => __('Above Heading', 'fl-builder'),
-								'below-title' => __('Below Heading', 'fl-builder'),
-								'left-title'  => __('Left of Heading', 'fl-builder'),
-								'right-title' => __('Right of Heading', 'fl-builder'),
-								'left'        => __('Left of Text and Heading', 'fl-builder'),
-								'right'       => __('Right of Text and Heading', 'fl-builder'),
-							),
-							'toggle'  => array(
-								'left-title'  => array(
-									'fields' => array('align_items'),
-								),
-								'right-title' => array(
-									'fields' => array('align_items'),
-								),
-								'left'        => array(
-									'fields' => array('align_items'),
-								),
-								'right'       => array(
-									'fields' => array('align_items'),
-								),
-							),
-						),
-						'align_items'       => array(
-							'type'    => 'select',
-							'label'   => __('Image / Icon Vertical Alignment', 'fl-builder'),
-							'help'    => __('How the image / icon lines up against the content or heading beside it.', 'fl-builder'),
-							'default' => 'center',
-							'options' => array(
-								'center' => __('Center', 'fl-builder'),
-								'top'    => __('Top', 'fl-builder'),
-							),
-						),
-						'icon_spacing'      => array(
-							'type'        => 'unit',
-							'label'       => __('Image / Icon Spacing', 'fl-builder'),
-							'help'        => __('Space between the image / icon and the content it sits beside, above or below.', 'fl-builder'),
-							'placeholder' => '20',
-							'units'       => array('px'),
-							'slider'      => true,
-						),
-					),
-				),
-				'media_icon_style'  => array(
-					'title'  => __('Icon', 'fl-builder'),
-					'fields' => array(
-						'icon_size'               => array(
-							'type'        => 'unit',
-							'label'       => __('Size', 'fl-builder'),
-							'default'     => '30',
-							'units'       => array('px'),
-							'responsive'  => true,
-							'slider'      => array(
-								'min'  => 0,
-								'max'  => 200,
-								'step' => 1,
-							),
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-icon',
-								'property' => 'font-size',
-							),
-						),
-						'icon_style'              => array(
-							'type'    => 'select',
-							'label'   => __('Icon Background Style', 'fl-builder'),
-							'default' => 'simple',
-							'options' => array(
-								'simple' => __('Simple', 'fl-builder'),
-								'circle' => __('Circle Background', 'fl-builder'),
-								'square' => __('Square Background', 'fl-builder'),
-								'custom' => __('Design your own', 'fl-builder'),
-							),
-							'toggle'  => array(
-								'circle' => array(
-									'fields' => array('icon_bg_size'),
-								),
-								'square' => array(
-									'fields' => array('icon_bg_size'),
-								),
-								'custom' => array(
-									'fields' => array('icon_bg_size', 'icon_border'),
-								),
-							),
-						),
-						'icon_bg_size'            => array(
-							'type'        => 'unit',
-							'label'       => __('Background Size', 'fl-builder'),
-							'help'        => __('Spacing between the icon and the edge of its background.', 'fl-builder'),
-							'placeholder' => '30',
-							'units'       => array('px'),
-							'slider'      => array(
-								'min'  => 0,
-								'max'  => 200,
-								'step' => 1,
-							),
-						),
-						'icon_color'              => array(
-							'type'        => 'color',
-							'label'       => __('Icon Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-icon',
-								'property' => 'color',
-							),
-						),
-						'icon_hover_color'        => array(
-							'type'        => 'color',
-							'label'       => __('Icon Hover Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'help'        => __('Applied while the whole info box is hovered.', 'fl-builder'),
-							'preview'     => array(
-								'type' => 'none',
-							),
-						),
-						'icon_bg_color'           => array(
-							'type'        => 'color',
-							'label'       => __('Background Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-						),
-						'icon_bg_hover_color'     => array(
-							'type'        => 'color',
-							'label'       => __('Background Hover Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type' => 'none',
-							),
-						),
-						'icon_border'             => array(
-							'type'       => 'border',
-							'label'      => __('Border', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-icon',
-								'property' => 'border',
-							),
-						),
-						'icon_border_hover_color' => array(
-							'type'        => 'color',
-							'label'       => __('Border Hover Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type' => 'none',
-							),
-						),
-					),
-				),
-				'media_photo_style' => array(
-					'title'  => __('Photo', 'fl-builder'),
-					'fields' => array(
-						'img_size'    => array(
-							'type'        => 'unit',
-							'label'       => __('Size', 'fl-builder'),
-							'placeholder' => __('Auto', 'fl-builder'),
-							'units'       => array('px'),
-							'responsive'  => true,
-							'slider'      => array(
-								'px' => array(
-									'min'  => 0,
-									'max'  => 1000,
-									'step' => 10,
-								),
-							),
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-photo',
-								'property' => 'width',
-							),
-						),
-						'image_style' => array(
-							'type'    => 'select',
-							'label'   => __('Image Style', 'fl-builder'),
-							'default' => 'simple',
-							'help'    => __('Circle and Square crop the image to a 1:1 ratio.', 'fl-builder'),
-							'options' => array(
-								'simple' => __('Simple', 'fl-builder'),
-								'circle' => __('Circle', 'fl-builder'),
-								'square' => __('Square', 'fl-builder'),
-								'custom' => __('Design your own', 'fl-builder'),
-							),
-							'toggle'  => array(
-								'custom' => array(
-									'fields' => array('img_bg_size', 'img_border'),
-								),
-							),
-						),
-						'img_bg_size' => array(
-							'type'        => 'unit',
-							'label'       => __('Background Size', 'fl-builder'),
-							'help'        => __('Spacing between the image and the edge of its background.', 'fl-builder'),
-							'placeholder' => '0',
-							'units'       => array('px'),
-							'slider'      => array(
-								'min'  => 0,
-								'max'  => 100,
-								'step' => 1,
-							),
-						),
-						'img_border'  => array(
-							'type'       => 'border',
-							'label'      => __('Border', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-photo-wrap',
-								'property' => 'border',
-							),
-						),
-					),
-				),
-				'prefix_style'      => array(
-					'title'  => __('Prefix', 'fl-builder'),
-					'fields' => array(
-						'prefix_tag'     => array(
-							'type'    => 'select',
-							'label'   => __('HTML Tag', 'fl-builder'),
-							'default' => 'h3',
-							'options' => array(
-								'h1'   => 'h1',
-								'h2'   => 'h2',
-								'h3'   => 'h3',
-								'h4'   => 'h4',
-								'h5'   => 'h5',
-								'h6'   => 'h6',
-								'div'  => 'div',
-								'p'    => 'p',
-								'span' => 'span',
-							),
-						),
-						'prefix_color'   => array(
-							'type'        => 'color',
-							'label'       => __('Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-prefix',
-								'property' => 'color',
-							),
-						),
-						'prefix_spacing' => array(
+						'prefix_spacing'      => array(
 							'type'        => 'unit',
 							'label'       => __('Prefix Spacing', 'fl-builder'),
 							'help'        => __('Leave empty to use the theme default.', 'fl-builder'),
@@ -1036,39 +1006,6 @@ FLBuilder::register_module(
 								'selector' => '.theme-info-box .theme-info-box-prefix',
 								'property' => 'margin-bottom',
 								'unit'     => 'px',
-							),
-						),
-					),
-				),
-				'title_style'       => array(
-					'title'  => __('Title', 'fl-builder'),
-					'fields' => array(
-						'title_tag'            => array(
-							'type'    => 'select',
-							'label'   => __('HTML Tag', 'fl-builder'),
-							'default' => 'h2',
-							'options' => array(
-								'h1'   => 'h1',
-								'h2'   => 'h2',
-								'h3'   => 'h3',
-								'h4'   => 'h4',
-								'h5'   => 'h5',
-								'h6'   => 'h6',
-								'div'  => 'div',
-								'p'    => 'p',
-								'span' => 'span',
-							),
-						),
-						'title_color'          => array(
-							'type'        => 'color',
-							'label'       => __('Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-title',
-								'property' => 'color',
 							),
 						),
 						'title_bottom_spacing' => array(
@@ -1085,77 +1022,7 @@ FLBuilder::register_module(
 								'unit'     => 'px',
 							),
 						),
-					),
-				),
-				'separator'         => array(
-					'title'  => __('Separator', 'fl-builder'),
-					'fields' => array(
-						'separator_width'  => array(
-							'type'        => 'unit',
-							'label'       => __('Width', 'fl-builder'),
-							'placeholder' => '100',
-							'units'       => array('%'),
-							'slider'      => array(
-								'min'  => 0,
-								'max'  => 100,
-								'step' => 5,
-							),
-						),
-						'separator_align'  => array(
-							'type'       => 'align',
-							'label'      => __('Alignment', 'fl-builder'),
-							'default'    => 'left',
-							'responsive' => true,
-						),
-						'separator_color'  => array(
-							'type'        => 'color',
-							'label'       => __('Color', 'fl-builder'),
-							'default'     => 'e0e0e0',
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-						),
-						'separator_style'  => array(
-							'type'    => 'select',
-							'label'   => __('Style', 'fl-builder'),
-							'default' => 'solid',
-							'help'    => __('Double borders must have a thickness of at least 3px to render properly.', 'fl-builder'),
-							'options' => array(
-								'solid'  => __('Solid', 'fl-builder'),
-								'dashed' => __('Dashed', 'fl-builder'),
-								'dotted' => __('Dotted', 'fl-builder'),
-								'double' => __('Double', 'fl-builder'),
-							),
-						),
-						'separator_height' => array(
-							'type'        => 'unit',
-							'label'       => __('Thickness', 'fl-builder'),
-							'placeholder' => '1',
-							'units'       => array('px'),
-							'slider'      => array(
-								'min'  => 0,
-								'max'  => 20,
-								'step' => 1,
-							),
-						),
-					),
-				),
-				'description_style' => array(
-					'title'  => __('Description', 'fl-builder'),
-					'fields' => array(
-						'desc_color'          => array(
-							'type'        => 'color',
-							'label'       => __('Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-text',
-								'property' => 'color',
-							),
-						),
-						'description_spacing' => array(
+						'description_spacing'  => array(
 							'type'        => 'unit',
 							'label'       => __('Description Spacing', 'fl-builder'),
 							'help'        => __('Leave empty to use the theme default.', 'fl-builder'),
@@ -1171,10 +1038,80 @@ FLBuilder::register_module(
 						),
 					),
 				),
-				'link_style'        => array(
+			),
+		),
+		'cta'        => array(
+			'title'    => __('Link', 'fl-builder'),
+			'sections' => array(
+				'cta'          => array(
+					'title'  => __('Call to Action', 'fl-builder'),
+					'fields' => array(
+						'cta_type' => array(
+							'type'    => 'select',
+							'label'   => __('Type', 'fl-builder'),
+							'default' => 'none',
+							'options' => array(
+								'none'   => __('None', 'fl-builder'),
+								'link'   => __('Text', 'fl-builder'),
+								'button' => __('Button', 'fl-builder'),
+								'box'    => __('Complete Box', 'fl-builder'),
+							),
+							'toggle'  => array(
+								'link'   => array(
+									'fields'   => array('cta_text'),
+									'sections' => array('link', 'link_style'),
+								),
+								'button' => array(
+									'fields'   => array('btn_text'),
+									'sections' => array('link', 'button_style'),
+								),
+								'box'    => array(
+									'sections' => array('link'),
+								),
+							),
+						),
+						'cta_text' => array(
+							'type'        => 'text',
+							'label'       => __('Text', 'fl-builder'),
+							'default'     => __('Read More', 'fl-builder'),
+							'connections' => array('string', 'html'),
+							'preview'     => array(
+								'type'     => 'text',
+								'selector' => '.theme-info-box-cta-link',
+							),
+						),
+						'btn_text' => array(
+							'type'        => 'text',
+							'label'       => __('Text', 'fl-builder'),
+							'default'     => __('Click Here', 'fl-builder'),
+							'connections' => array('string'),
+							'preview'     => array(
+								'type' => 'refresh',
+							),
+						),
+					),
+				),
+				'link'         => array(
+					'title'  => __('Link', 'fl-builder'),
+					'fields' => array(
+						'link' => array(
+							'type'          => 'link',
+							'label'         => __('Link', 'fl-builder'),
+							'placeholder'   => 'https://www.example.com',
+							'show_target'   => true,
+							'show_nofollow' => true,
+							'help'          => __('Used by the text link, the button and the complete box, whichever call to action type is selected above.', 'fl-builder'),
+							'connections'   => array('url'),
+							'preview'       => array(
+								'type' => 'none',
+							),
+						),
+					),
+				),
+				'link_style'   => array(
 					'title'  => __('Text Link', 'fl-builder'),
 					'fields' => array(
-						'link_color'       => array(
+						'link_color'         => array(
 							'type'        => 'color',
 							'label'       => __('Link Color', 'fl-builder'),
 							'connections' => array('color'),
@@ -1186,7 +1123,7 @@ FLBuilder::register_module(
 								'property' => 'color',
 							),
 						),
-						'link_hover_color' => array(
+						'link_hover_color'   => array(
 							'type'        => 'color',
 							'label'       => __('Link Hover Color', 'fl-builder'),
 							'connections' => array('color'),
@@ -1198,10 +1135,10 @@ FLBuilder::register_module(
 						),
 					),
 				),
-				'button_style'      => array(
+				'button_style' => array(
 					'title'  => __('Button', 'fl-builder'),
 					'fields' => array(
-						'btn_style'        => array(
+						'btn_style'            => array(
 							'type'    => 'select',
 							'label'   => __('Style', 'fl-builder'),
 							'default' => 'primary',
@@ -1214,7 +1151,24 @@ FLBuilder::register_module(
 								'type' => 'refresh',
 							),
 						),
-						'btn_width'        => array(
+						'btn_icon'             => array(
+							'type'        => 'icon',
+							'label'       => __('Icon', 'fl-builder'),
+							'show_remove' => true,
+							'show'        => array(
+								'fields' => array('btn_icon_position'),
+							),
+						),
+						'btn_icon_position'    => array(
+							'type'    => 'select',
+							'label'   => __('Icon Position', 'fl-builder'),
+							'default' => 'after',
+							'options' => array(
+								'before' => __('Before Text', 'fl-builder'),
+								'after'  => __('After Text', 'fl-builder'),
+							),
+						),
+						'btn_width'            => array(
 							'type'    => 'select',
 							'label'   => __('Width', 'fl-builder'),
 							'default' => 'auto',
@@ -1229,7 +1183,7 @@ FLBuilder::register_module(
 								),
 							),
 						),
-						'btn_custom_width' => array(
+						'btn_custom_width'     => array(
 							'type'       => 'unit',
 							'label'      => __('Custom Width', 'fl-builder'),
 							'default'    => '200',
@@ -1239,6 +1193,95 @@ FLBuilder::register_module(
 								'min'  => 0,
 								'max'  => 1000,
 								'step' => 10,
+							),
+						),
+					),
+				),
+			),
+		),
+		'typography' => array(
+			'title'    => __('Typography', 'fl-builder'),
+			'sections' => array(
+				'prefix_typography' => array(
+					'title'  => __('Prefix', 'fl-builder'),
+					'fields' => array(
+						'prefix_tag'         => array(
+							'type'    => 'select',
+							'label'   => __('HTML Tag', 'fl-builder'),
+							'default' => 'h3',
+							'options' => array(
+								'h1'   => 'h1',
+								'h2'   => 'h2',
+								'h3'   => 'h3',
+								'h4'   => 'h4',
+								'h5'   => 'h5',
+								'h6'   => 'h6',
+								'div'  => 'div',
+								'p'    => 'p',
+								'span' => 'span',
+							),
+						),
+						'prefix_color'       => array(
+							'type'        => 'color',
+							'label'       => __('Color', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-info-box-prefix',
+								'property' => 'color',
+							),
+						),
+					),
+				),
+				'title_typography'  => array(
+					'title'  => __('Title', 'fl-builder'),
+					'fields' => array(
+						'title_tag'         => array(
+							'type'    => 'select',
+							'label'   => __('HTML Tag', 'fl-builder'),
+							'default' => 'h2',
+							'options' => array(
+								'h1'   => 'h1',
+								'h2'   => 'h2',
+								'h3'   => 'h3',
+								'h4'   => 'h4',
+								'h5'   => 'h5',
+								'h6'   => 'h6',
+								'div'  => 'div',
+								'p'    => 'p',
+								'span' => 'span',
+							),
+						),
+						'title_color'       => array(
+							'type'        => 'color',
+							'label'       => __('Color', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-info-box-title',
+								'property' => 'color',
+							),
+						),
+					),
+				),
+				'desc_typography'   => array(
+					'title'     => __('Description', 'fl-builder'),
+					'collapsed' => true,
+					'fields'    => array(
+						'desc_color'       => array(
+							'type'        => 'color',
+							'label'       => __('Color', 'fl-builder'),
+							'connections' => array('color'),
+							'show_reset'  => true,
+							'show_alpha'  => true,
+							'preview'     => array(
+								'type'     => 'css',
+								'selector' => '.theme-info-box-text',
+								'property' => 'color',
 							),
 						),
 					),
