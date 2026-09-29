@@ -33,11 +33,8 @@ $fm_icon_bg         = ( isset( $settings->icon_bg_color ) && '' !== $settings->i
 $fm_icon_bg_hover   = ( isset( $settings->icon_bg_hover_color ) && '' !== $settings->icon_bg_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->icon_bg_hover_color ) : '';
 $fm_icon_bd_hover   = ( isset( $settings->icon_border_hover_color ) && '' !== $settings->icon_border_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->icon_border_hover_color ) : '';
 $fm_prefix_color    = ( isset( $settings->prefix_color ) && '' !== $settings->prefix_color ) ? FLBuilderColor::hex_or_rgb( $settings->prefix_color ) : '';
-$fm_prefix_hover    = ( isset( $settings->prefix_hover_color ) && '' !== $settings->prefix_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->prefix_hover_color ) : '';
 $fm_title_color     = ( isset( $settings->title_color ) && '' !== $settings->title_color ) ? FLBuilderColor::hex_or_rgb( $settings->title_color ) : '';
-$fm_title_hover     = ( isset( $settings->title_hover_color ) && '' !== $settings->title_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->title_hover_color ) : '';
 $fm_desc_color      = ( isset( $settings->desc_color ) && '' !== $settings->desc_color ) ? FLBuilderColor::hex_or_rgb( $settings->desc_color ) : '';
-$fm_desc_hover      = ( isset( $settings->desc_hover_color ) && '' !== $settings->desc_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->desc_hover_color ) : '';
 $fm_link_color      = ( isset( $settings->link_color ) && '' !== $settings->link_color ) ? FLBuilderColor::hex_or_rgb( $settings->link_color ) : '';
 $fm_link_hover      = ( isset( $settings->link_hover_color ) && '' !== $settings->link_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->link_hover_color ) : '';
 $fm_sep_color       = ( isset( $settings->separator_color ) && '' !== $settings->separator_color ) ? FLBuilderColor::hex_or_rgb( $settings->separator_color ) : '';
@@ -155,26 +152,11 @@ $fm_cta_node = '.fl-builder-content ' . $fm_node;
 	color: <?php echo esc_attr( $fm_title_color ); ?>;
 }
 <?php endif; ?>
-<?php if ( '' !== $fm_prefix_hover ) : ?>
-<?php echo esc_attr( $fm_node ); ?> .theme-info-box:hover .theme-info-box-prefix {
-	color: <?php echo esc_attr( $fm_prefix_hover ); ?>;
-}
-<?php endif; ?>
-<?php if ( '' !== $fm_title_hover ) : ?>
-<?php echo esc_attr( $fm_node ); ?> .theme-info-box:hover .theme-info-box-title {
-	color: <?php echo esc_attr( $fm_title_hover ); ?>;
-}
-<?php endif; ?>
 
 /* Description. */
 <?php if ( '' !== $fm_desc_color ) : ?>
 <?php echo esc_attr( $fm_node ); ?> .theme-info-box-text {
 	color: <?php echo esc_attr( $fm_desc_color ); ?>;
-}
-<?php endif; ?>
-<?php if ( '' !== $fm_desc_hover ) : ?>
-<?php echo esc_attr( $fm_node ); ?> .theme-info-box:hover .theme-info-box-text {
-	color: <?php echo esc_attr( $fm_desc_hover ); ?>;
 }
 <?php endif; ?>
 
@@ -410,47 +392,6 @@ if ( class_exists( 'FLBuilderCSS' ) ) {
 		array(
 			'settings'     => $settings,
 			'setting_name' => 'btn_border',
-			'selector'     => "$fm_node .theme-info-box-button",
-		)
-	);
-
-	// Typography.
-	FLBuilderCSS::typography_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'prefix_typo',
-			'selector'     => "$fm_node .theme-info-box-prefix",
-		)
-	);
-
-	FLBuilderCSS::typography_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'title_typo',
-			'selector'     => "$fm_node .theme-info-box-title",
-		)
-	);
-
-	FLBuilderCSS::typography_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'desc_typo',
-			'selector'     => "$fm_node .theme-info-box-text",
-		)
-	);
-
-	FLBuilderCSS::typography_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'cta_link_typo',
-			'selector'     => "$fm_node .theme-info-box-cta-link",
-		)
-	);
-
-	FLBuilderCSS::typography_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'btn_typo',
 			'selector'     => "$fm_node .theme-info-box-button",
 		)
 	);

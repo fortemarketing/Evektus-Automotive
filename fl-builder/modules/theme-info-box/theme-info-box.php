@@ -1266,15 +1266,6 @@ FLBuilder::register_module(
 								'span' => 'span',
 							),
 						),
-						'prefix_typo'        => array(
-							'type'       => 'typography',
-							'label'      => __('Typography', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-prefix',
-							),
-						),
 						'prefix_color'       => array(
 							'type'        => 'color',
 							'label'       => __('Color', 'fl-builder'),
@@ -1285,16 +1276,6 @@ FLBuilder::register_module(
 								'type'     => 'css',
 								'selector' => '.theme-info-box-prefix',
 								'property' => 'color',
-							),
-						),
-						'prefix_hover_color' => array(
-							'type'        => 'color',
-							'label'       => __('Hover Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type' => 'none',
 							),
 						),
 					),
@@ -1318,15 +1299,6 @@ FLBuilder::register_module(
 								'span' => 'span',
 							),
 						),
-						'title_typo'        => array(
-							'type'       => 'typography',
-							'label'      => __('Typography', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-title',
-							),
-						),
 						'title_color'       => array(
 							'type'        => 'color',
 							'label'       => __('Color', 'fl-builder'),
@@ -1339,31 +1311,12 @@ FLBuilder::register_module(
 								'property' => 'color',
 							),
 						),
-						'title_hover_color' => array(
-							'type'        => 'color',
-							'label'       => __('Hover Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type' => 'none',
-							),
-						),
 					),
 				),
 				'desc_typography'   => array(
 					'title'     => __('Description', 'fl-builder'),
 					'collapsed' => true,
 					'fields'    => array(
-						'desc_typo'        => array(
-							'type'       => 'typography',
-							'label'      => __('Typography', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-text',
-							),
-						),
 						'desc_color'       => array(
 							'type'        => 'color',
 							'label'       => __('Color', 'fl-builder'),
@@ -1374,46 +1327,6 @@ FLBuilder::register_module(
 								'type'     => 'css',
 								'selector' => '.theme-info-box-text',
 								'property' => 'color',
-							),
-						),
-						'desc_hover_color' => array(
-							'type'        => 'color',
-							'label'       => __('Hover Color', 'fl-builder'),
-							'connections' => array('color'),
-							'show_reset'  => true,
-							'show_alpha'  => true,
-							'preview'     => array(
-								'type' => 'none',
-							),
-						),
-					),
-				),
-				'link_typography'   => array(
-					'title'     => __('CTA Text Link', 'fl-builder'),
-					'collapsed' => true,
-					'fields'    => array(
-						'cta_link_typo' => array(
-							'type'       => 'typography',
-							'label'      => __('Typography', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-cta-link',
-							),
-						),
-					),
-				),
-				'btn_typography'    => array(
-					'title'     => __('CTA Button', 'fl-builder'),
-					'collapsed' => true,
-					'fields'    => array(
-						'btn_typo' => array(
-							'type'       => 'typography',
-							'label'      => __('Typography', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-info-box-button',
 							),
 						),
 					),
