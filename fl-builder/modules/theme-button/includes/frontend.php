@@ -31,9 +31,6 @@ $button_classes = 'theme-button ' . $module->get_button_style();
 if ($is_lightbox) {
 	$button_classes .= ' ' . $button_node_id . ' theme-button-lightbox';
 }
-if (isset($settings->icon_animation) && 'enable' === $settings->icon_animation) {
-	$button_classes .= ' theme-button-icon-animation';
-}
 
 // Extra attributes that depend on the click action.
 $extra_attrs = '';

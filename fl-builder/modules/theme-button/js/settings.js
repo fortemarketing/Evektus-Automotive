@@ -6,13 +6,11 @@
 			var form = $( '.fl-builder-settings:visible' ),
 				customWidth = form.find( 'input[name=custom_width]' ),
 				icon = form.find( 'input[name=icon]' ),
-				iconPosition = form.find( 'select[name=icon_position]' ),
-				iconAnimation = form.find( 'select[name=icon_animation]' );
+				iconPosition = form.find( 'select[name=icon_position]' );
 
 			customWidth.on( 'input', this._previewCustomWidth );
 			icon.on( 'change', this._previewIcon );
 			iconPosition.on( 'change', this._previewIcon );
-			iconAnimation.on( 'change', this._previewIcon );
 			icon.on( 'change', this._flipSettings );
 			this._flipSettings()
 		},
@@ -51,8 +49,7 @@
 				link = node.find( '.theme-button:is(a, button)' ),
 				form = $( '.fl-builder-settings:visible' ),
 				icon = form.find( 'input[name=icon]' ).val(),
-				position = form.find( 'select[name=icon_position]' ).val(),
-				animation = form.find( 'select[name=icon_animation]' ).val();
+				position = form.find( 'select[name=icon_position]' ).val();
 
 			node.find( '.theme-button-icon' ).remove();
 			wrap.removeClass( 'theme-button-has-icon' );
@@ -64,10 +61,6 @@
 					link.prepend( '<span class="theme-button-icon theme-button-icon-before ' + icon + '" aria-hidden="true"></span>' );
 				} else if ( 'after' === position ) {
 					link.append( '<span class="theme-button-icon theme-button-icon-after ' + icon + '" aria-hidden="true"></span>' );
-				}
-
-				if ( 'enable' === animation ) {
-					link.find( '.theme-button-icon' ).hide();
 				}
 			}
 		},

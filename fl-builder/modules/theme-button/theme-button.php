@@ -191,7 +191,7 @@ FLBuilder::register_module('ThemeButtonModule', array(
 						'label'       => __('Icon', 'fl-builder'),
 						'show_remove' => true,
 						'show'        => array(
-							'fields' => array('icon_position', 'icon_animation'),
+							'fields' => array('icon_position'),
 						),
 						'preview'     => array(
 							'type' => 'none',
@@ -204,18 +204,6 @@ FLBuilder::register_module('ThemeButtonModule', array(
 						'options' => array(
 							'before' => __('Before Text', 'fl-builder'),
 							'after'  => __('After Text', 'fl-builder'),
-						),
-						'preview' => array(
-							'type' => 'none',
-						),
-					),
-					'icon_animation'       => array(
-						'type'    => 'select',
-						'label'   => __('Icon Visibility', 'fl-builder'),
-						'default' => 'disable',
-						'options' => array(
-							'disable' => __('Always Visible', 'fl-builder'),
-							'enable'  => __('Fade In On Hover', 'fl-builder'),
 						),
 						'preview' => array(
 							'type' => 'none',
