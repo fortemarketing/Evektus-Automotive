@@ -102,6 +102,10 @@ and separator are rendered in the module rather than through UABB's Image Icon
 and Separator modules, and the count runs on its own `js/frontend.js` instead
 of jQuery Waypoints. An empty circle or bar colour falls back to `--primary`.
 
+`theme-list-icon` is a copy of UABB List Icon, likewise standalone. It renders
+a real `<ul>`, stacked or in a wrapping row, with the same icon or photo leading
+every item, and shows a builder placeholder until an item is added.
+
 ## Beaver Themer
 
 The theme declares support for Themer headers, footers and parts, and

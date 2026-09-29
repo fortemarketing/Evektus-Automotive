@@ -1,0 +1,119 @@
+/* The list. Spacing between items is the list's own `gap`, so the last item
+   carries no stray margin. */
+.theme-list-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.theme-list-icon--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  row-gap: 15px;
+}
+
+.theme-list-icon--center {
+  align-items: center;
+}
+
+.theme-list-icon--horizontal.theme-list-icon--center {
+  justify-content: center;
+}
+
+.theme-list-icon--right {
+  align-items: flex-end;
+}
+
+.theme-list-icon--horizontal.theme-list-icon--right {
+  justify-content: flex-end;
+}
+
+/* An item. Right alignment puts the image / icon on the right of the text. */
+.theme-list-icon-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.theme-list-icon--right .theme-list-icon-item {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.theme-list-icon-item::before,
+.theme-list-icon-item::marker {
+  content: none;
+}
+
+.theme-list-icon-text {
+  min-width: 0;
+}
+
+.theme-list-icon-text .theme-list-icon-heading {
+  margin: 0;
+  padding: 0;
+}
+
+/* Image / icon. */
+.theme-list-icon-media {
+  display: block;
+  flex: none;
+  line-height: 0;
+}
+
+.theme-list-icon-icon {
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: 30px;
+  line-height: 1;
+  transition: all 0.2s linear;
+}
+
+.theme-list-icon-icon i {
+  width: 1em;
+  line-height: 1;
+  text-align: center;
+}
+
+.theme-list-icon-icon--circle,
+.theme-list-icon-icon--square {
+  padding: 0.5em;
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.theme-list-icon-icon--custom {
+  padding: 10px;
+}
+
+.theme-list-icon-photo-wrap {
+  display: inline-block;
+  box-sizing: border-box;
+  transition: background-color 0.2s linear, border-color 0.2s linear;
+}
+
+.theme-list-icon-photo {
+  display: block;
+  width: 50px;
+  max-width: 100%;
+  height: auto;
+}
+
+.theme-list-icon-icon--circle,
+.theme-list-icon-photo-wrap--circle,
+.theme-list-icon-photo-wrap--circle .theme-list-icon-photo {
+  border-radius: 50%;
+}
+
+.theme-list-icon-photo-wrap--circle .theme-list-icon-photo,
+.theme-list-icon-photo-wrap--square .theme-list-icon-photo {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
