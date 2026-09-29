@@ -24,7 +24,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.5rem 2rem;
-  font-size: 0.875rem;
+  font-size: 0.65625rem;
 }
 
 .site-footer__meta p {
