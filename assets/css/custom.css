@@ -1,4 +1,7 @@
 /* Module Overrides */
+.theme-info-box {
+  text-wrap: balance;
+}
 .theme-info-box-prefix {
   display: flex;
   align-items: center;
