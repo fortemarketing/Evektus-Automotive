@@ -991,10 +991,6 @@ FLBuilder::register_module(
 						),
 					),
 				),
-				// Spacing is hidden for now, leaving it all to assets/css/custom.css.
-				// To bring it back, uncomment this section and the matching rules in
-				// includes/frontend.css.php.
-				/*
 				'spacing'   => array(
 					'title'  => __('Spacing', 'fl-builder'),
 					'fields' => array(
@@ -1042,7 +1038,6 @@ FLBuilder::register_module(
 						),
 					),
 				),
-				*/
 			),
 		),
 		'cta'        => array(

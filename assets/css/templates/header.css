@@ -36,6 +36,42 @@
   .site-header__cta.theme-button {
     justify-self: end;
   }
+
+  .site-header .main-menu__top-link {
+    position: relative;
+  }
+
+  .site-header .main-menu__top-link::after {
+    content: "";
+    position: absolute;
+    right: 1rem;
+    bottom: 0.25rem;
+    left: 1rem;
+    height: 2px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition);
+  }
+
+  .site-header .main-menu__item:hover > .main-menu__top-link,
+  .site-header .main-menu__item:focus-within > .main-menu__top-link,
+  .site-header .main-menu__item.is-current > .main-menu__top-link {
+    background: none;
+    color: var(--header-fg);
+  }
+
+  .site-header .main-menu__item:hover > .main-menu__top-link::after,
+  .site-header .main-menu__item:focus-within > .main-menu__top-link::after,
+  .site-header .main-menu__item.is-current > .main-menu__top-link::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (min-width: 992px) and (prefers-reduced-motion: reduce) {
+  .site-header .main-menu__top-link::after {
+    transition: none;
+  }
 }
 
 @media (max-width: 991px) {
