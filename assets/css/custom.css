@@ -1,25 +1,25 @@
 /* Module Overrides */
-.fm-info-box-prefix {
+.theme-info-box-prefix {
   display: flex;
   align-items: center;
   gap: 15px;
 }
-.fm-info-box-prefix::after {
+.theme-info-box-prefix::after {
   content: "";
   width: 40px;
   height: 2px;
   background: currentColor;
   transform: translateY(5px);
 }
-.fm-info-box-prefix:not(:last-child) {
+.theme-info-box-prefix:not(:last-child) {
   margin-bottom: 35px;
 }
-.fm-info-box-title {
+.theme-info-box-title {
   margin-bottom: 0;
 }
-.fm-info-box-title-wrap:not(:last-child) {
+.theme-info-box-title-wrap:not(:last-child) {
   margin-bottom: 20px;
 }
-.fm-info-box-text:not(:last-child) {
+.theme-info-box-text:not(:last-child) {
   margin-bottom: 50px;
 }
