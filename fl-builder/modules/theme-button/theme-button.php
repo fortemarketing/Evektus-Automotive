@@ -351,7 +351,6 @@ FLBuilder::register_module('ThemeButtonModule', array(
 							'secondary' => __('Secondary', 'fl-builder'),
 							'tertiary'  => __('Tertiary', 'fl-builder'),
 						),
-						'help'    => __('The button styles are set in the theme, in assets/css/theme.css.', 'fl-builder'),
 						'preview' => array(
 							'type' => 'refresh',
 						),
@@ -409,62 +408,6 @@ FLBuilder::register_module('ThemeButtonModule', array(
 							'property' => 'justify-content',
 						),
 					),
-					'padding'      => array(
-						'type'       => 'dimension',
-						'label'      => __('Padding', 'fl-builder'),
-						'responsive' => true,
-						'slider'     => true,
-						'units'      => array('px'),
-						'preview'    => array(
-							'type'     => 'css',
-							'selector' => '.theme-button:is(a, button)',
-							'property' => 'padding',
-						),
-					),
-				),
-			),
-			'text'   => array(
-				'title'  => __('Text', 'fl-builder'),
-				'fields' => array(
-					'text_color'       => array(
-						'type'        => 'color',
-						'connections' => array('color'),
-						'label'       => __('Text Color', 'fl-builder'),
-						'default'     => '',
-						'show_reset'  => true,
-						'show_alpha'  => true,
-						'responsive'  => true,
-						'preview'     => array(
-							'type'      => 'css',
-							'selector'  => '.theme-button:is(a, button), .theme-button:is(a, button) *',
-							'property'  => 'color',
-							'important' => true,
-						),
-					),
-					'text_hover_color' => array(
-						'type'        => 'color',
-						'connections' => array('color'),
-						'label'       => __('Text Hover Color', 'fl-builder'),
-						'default'     => '',
-						'show_reset'  => true,
-						'show_alpha'  => true,
-						'responsive'  => true,
-						'preview'     => array(
-							'type'      => 'css',
-							'selector'  => '.theme-button:is(a, button):hover, .theme-button:is(a, button):hover *',
-							'property'  => 'color',
-							'important' => true,
-						),
-					),
-					'typography'       => array(
-						'type'       => 'typography',
-						'label'      => __('Typography', 'fl-builder'),
-						'responsive' => true,
-						'preview'    => array(
-							'type'     => 'css',
-							'selector' => '.theme-button:is(a, button)',
-						),
-					),
 				),
 			),
 			'icons'  => array(
@@ -496,62 +439,6 @@ FLBuilder::register_module('ThemeButtonModule', array(
 							'selector'  => '.theme-button-icon.fad:after',
 							'property'  => 'color',
 							'important' => true,
-						),
-					),
-				),
-			),
-			'colors' => array(
-				'title'  => __('Background', 'fl-builder'),
-				'fields' => array(
-					'bg_color'          => array(
-						'type'        => 'color',
-						'connections' => array('color'),
-						'label'       => __('Background Color', 'fl-builder'),
-						'default'     => '',
-						'show_reset'  => true,
-						'show_alpha'  => true,
-						'responsive'  => true,
-						'preview'     => array(
-							'type' => 'refresh',
-						),
-					),
-					'bg_hover_color'    => array(
-						'type'        => 'color',
-						'connections' => array('color'),
-						'label'       => __('Background Hover Color', 'fl-builder'),
-						'default'     => '',
-						'show_reset'  => true,
-						'show_alpha'  => true,
-						'responsive'  => true,
-						'preview'     => array(
-							'type' => 'none',
-						),
-					),
-				),
-			),
-			'border' => array(
-				'title'  => __('Border', 'fl-builder'),
-				'fields' => array(
-					'border'             => array(
-						'type'       => 'border',
-						'label'      => __('Border', 'fl-builder'),
-						'responsive' => true,
-						'preview'    => array(
-							'type'      => 'css',
-							'selector'  => '.theme-button:is(a, button)',
-							'important' => true,
-						),
-					),
-					'border_hover_color' => array(
-						'type'        => 'color',
-						'connections' => array('color'),
-						'label'       => __('Border Hover Color', 'fl-builder'),
-						'default'     => '',
-						'show_reset'  => true,
-						'show_alpha'  => true,
-						'responsive'  => true,
-						'preview'     => array(
-							'type' => 'none',
 						),
 					),
 				),

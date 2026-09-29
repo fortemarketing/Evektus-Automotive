@@ -38,11 +38,6 @@ $fm_desc_color      = ( isset( $settings->desc_color ) && '' !== $settings->desc
 $fm_link_color      = ( isset( $settings->link_color ) && '' !== $settings->link_color ) ? FLBuilderColor::hex_or_rgb( $settings->link_color ) : '';
 $fm_link_hover      = ( isset( $settings->link_hover_color ) && '' !== $settings->link_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->link_hover_color ) : '';
 $fm_sep_color       = ( isset( $settings->separator_color ) && '' !== $settings->separator_color ) ? FLBuilderColor::hex_or_rgb( $settings->separator_color ) : '';
-$fm_btn_text        = ( isset( $settings->btn_text_color ) && '' !== $settings->btn_text_color ) ? FLBuilderColor::hex_or_rgb( $settings->btn_text_color ) : '';
-$fm_btn_text_hover  = ( isset( $settings->btn_text_hover_color ) && '' !== $settings->btn_text_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->btn_text_hover_color ) : '';
-$fm_btn_bg          = ( isset( $settings->btn_bg_color ) && '' !== $settings->btn_bg_color ) ? FLBuilderColor::hex_or_rgb( $settings->btn_bg_color ) : '';
-$fm_btn_bg_hover    = ( isset( $settings->btn_bg_hover_color ) && '' !== $settings->btn_bg_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->btn_bg_hover_color ) : '';
-$fm_btn_bd_hover    = ( isset( $settings->btn_border_hover_color ) && '' !== $settings->btn_border_hover_color ) ? FLBuilderColor::hex_or_rgb( $settings->btn_border_hover_color ) : '';
 
 // Separator.
 $fm_sep_style  = isset( $settings->separator_style ) ? $settings->separator_style : 'solid';
@@ -187,38 +182,6 @@ $fm_cta_node = '.fl-builder-content ' . $fm_node;
 	<?php endif; ?>
 <?php endif; ?>
 
-/* Button call to action. */
-<?php if ( isset( $settings->cta_type ) && 'button' === $settings->cta_type ) : ?>
-	<?php if ( '' !== $fm_btn_text || '' !== $fm_btn_bg ) : ?>
-<?php echo esc_attr( $fm_cta_node ); ?> .theme-info-box-button {
-	<?php if ( '' !== $fm_btn_text ) : ?>
-	color: <?php echo esc_attr( $fm_btn_text ); ?>;
-	<?php endif; ?>
-	<?php if ( '' !== $fm_btn_bg ) : ?>
-	background-color: <?php echo esc_attr( $fm_btn_bg ); ?>;
-	<?php endif; ?>
-}
-	<?php endif; ?>
-	<?php if ( '' !== $fm_btn_text_hover ) : ?>
-<?php echo esc_attr( $fm_cta_node ); ?> .theme-info-box-button:hover,
-<?php echo esc_attr( $fm_cta_node ); ?> .theme-info-box-button:focus-visible {
-	color: <?php echo esc_attr( $fm_btn_text_hover ); ?>;
-}
-	<?php endif; ?>
-	<?php if ( '' !== $fm_btn_bg_hover ) : ?>
-<?php echo esc_attr( $fm_cta_node ); ?> .theme-info-box-button:hover,
-<?php echo esc_attr( $fm_cta_node ); ?> .theme-info-box-button:focus-visible {
-	background-color: <?php echo esc_attr( $fm_btn_bg_hover ); ?>;
-}
-	<?php endif; ?>
-	<?php if ( '' !== $fm_btn_bd_hover ) : ?>
-<?php echo esc_attr( $fm_cta_node ); ?> .theme-info-box-button:hover,
-<?php echo esc_attr( $fm_cta_node ); ?> .theme-info-box-button:focus-visible {
-	border-color: <?php echo esc_attr( $fm_btn_bd_hover ); ?>;
-}
-	<?php endif; ?>
-<?php endif; ?>
-
 <?php
 // Responsive and compound field rules.
 if ( class_exists( 'FLBuilderCSS' ) ) {
@@ -341,21 +304,6 @@ if ( class_exists( 'FLBuilderCSS' ) ) {
 		)
 	);
 
-	FLBuilderCSS::dimension_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'btn_padding',
-			'selector'     => "$fm_node .theme-info-box-button",
-			'unit'         => 'px',
-			'props'        => array(
-				'padding-top'    => 'btn_padding_top',
-				'padding-right'  => 'btn_padding_right',
-				'padding-bottom' => 'btn_padding_bottom',
-				'padding-left'   => 'btn_padding_left',
-			),
-		)
-	);
-
 	// Borders.
 	FLBuilderCSS::border_field_rule(
 		array(
@@ -387,12 +335,4 @@ if ( class_exists( 'FLBuilderCSS' ) ) {
 			)
 		);
 	}
-
-	FLBuilderCSS::border_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'btn_border',
-			'selector'     => "$fm_node .theme-info-box-button",
-		)
-	);
 }

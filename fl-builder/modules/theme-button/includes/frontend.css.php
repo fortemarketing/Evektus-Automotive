@@ -2,37 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-$breakpoints     = array('', 'large', 'medium', 'responsive');
 $button_selector = ".fl-builder-content .fl-node-$id .theme-button:is(a, button)";
-
-// Hover is front-end only. Inside the builder a button is content to arrange,
-// not a control to try — repainting it under the pointer on every pass makes
-// dragging and selecting feel heavy — so `body.fl-builder-edit` gates the hover
-// rules out. `:where()` scores zero, so the specificity worked out below is
-// exactly what it was.
-$live_only = ':where(body:not(.fl-builder-edit))';
-
-// Hover only — no `:focus`. A click leaves the button focused, so pairing the
-// two left the hover background and border stuck on after the pointer moved
-// away. The browser's own focus ring still marks the focused button; nothing
-// here resets `outline`.
-$hover_selector  = "$live_only .fl-builder-content .fl-node-$id .theme-button:is(a, button):hover";
-
-// Text colour needs a heavier prefix than everything else. Themes paint column
-// content with a catch-all like Astra's
-// `.fl-builder-content .fl-node-{col} *:not(span):not(input):not(textarea):not(select):not(a):not(h1)…:not(h6):not(.fl-menu-mobile-toggle)`,
-// which scores three classes and eleven elements. Our own prefix is also three
-// classes, so the tie breaks on element count and the column wins — repainting
-// the decorative icon spans, and the button itself whenever it renders as `<button>`
-// (that `:not()` list excludes `a`, not `button`).
-//
-// Repeating the node class buys a fourth class, and class count outranks element
-// count outright, so no element list can ever catch up. Keeping it to specificity
-// leaves the button overridable from Global CSS / Advanced settings, which
-// `!important` would not.
-$color_node           = ".fl-builder-content .fl-node-$id.fl-node-$id .theme-button:is(a, button)";
-$color_selector       = "$color_node, $color_node *";
-$color_hover_selector = "$live_only $color_node:hover, $live_only $color_node:hover *";
 
 // Custom Width
 FLBuilderCSS::responsive_rule(array(
@@ -59,101 +29,6 @@ FLBuilderCSS::responsive_rule(array(
 		'right'  => 'flex-end',
 	),
 ));
-
-// Padding
-FLBuilderCSS::dimension_field_rule(array(
-	'settings'     => $settings,
-	'setting_name' => 'padding',
-	'selector'     => $button_selector,
-	'unit'         => 'px',
-	'props'        => array(
-		'padding-top'    => 'padding_top',
-		'padding-right'  => 'padding_right',
-		'padding-bottom' => 'padding_bottom',
-		'padding-left'   => 'padding_left',
-	),
-));
-
-// Typography
-FLBuilderCSS::typography_field_rule(array(
-	'settings'     => $settings,
-	'setting_name' => 'typography',
-	'selector'     => $button_selector,
-));
-
-// Default the hover background to the normal background when one isn't set.
-foreach ($breakpoints as $device) {
-	$bg_color_name       = empty($device) ? 'bg_color' : "bg_color_{$device}";
-	$bg_hover_color_name = empty($device) ? 'bg_hover_color' : "bg_hover_color_{$device}";
-
-	if (! empty($settings->{$bg_color_name}) && empty($settings->{$bg_hover_color_name})) {
-		$settings->{$bg_hover_color_name} = $settings->{$bg_color_name};
-	}
-}
-
-// Border — explicit control only. The modern default is no border.
-FLBuilderCSS::border_field_rule(array(
-	'settings'     => $settings,
-	'setting_name' => 'border',
-	'selector'     => $button_selector,
-));
-
-foreach ($breakpoints as $device) {
-	// Border hover colour.
-	$setting_name = empty($device) ? 'border_hover_color' : "border_hover_color_{$device}";
-	FLBuilderCSS::rule(array(
-		'enabled'  => ! empty($settings->{$setting_name}),
-		'media'    => $device,
-		'selector' => $hover_selector,
-		'props'    => array(
-			'border-color' => FLBuilderColor::hex_or_rgb($settings->{$setting_name}),
-		),
-	));
-
-	// Background colour.
-	$setting_name = empty($device) ? 'bg_color' : "bg_color_{$device}";
-	FLBuilderCSS::rule(array(
-		'enabled'  => ! empty($settings->{$setting_name}),
-		'media'    => $device,
-		'selector' => $button_selector,
-		'props'    => array(
-			'background-color' => FLBuilderColor::hex_or_rgb($settings->{$setting_name}),
-		),
-	));
-
-	// Background hover colour.
-	$setting_name = empty($device) ? 'bg_hover_color' : "bg_hover_color_{$device}";
-	FLBuilderCSS::rule(array(
-		'enabled'  => ! empty($settings->{$setting_name}),
-		'media'    => $device,
-		'selector' => $hover_selector,
-		'props'    => array(
-			'background-color' => FLBuilderColor::hex_or_rgb($settings->{$setting_name}),
-		),
-	));
-
-	// Text colour.
-	$setting_name = empty($device) ? 'text_color' : "text_color_{$device}";
-	FLBuilderCSS::rule(array(
-		'enabled'  => ! empty($settings->{$setting_name}),
-		'media'    => $device,
-		'selector' => $color_selector,
-		'props'    => array(
-			'color' => FLBuilderColor::hex_or_rgb($settings->{$setting_name}),
-		),
-	));
-
-	// Text hover colour.
-	$setting_name = empty($device) ? 'text_hover_color' : "text_hover_color_{$device}";
-	FLBuilderCSS::rule(array(
-		'enabled'  => ! empty($settings->{$setting_name}),
-		'media'    => $device,
-		'selector' => $color_hover_selector,
-		'props'    => array(
-			'color' => FLBuilderColor::hex_or_rgb($settings->{$setting_name}),
-		),
-	));
-}
 
 // Copy-text disabled state.
 FLBuilderCSS::rule(array(

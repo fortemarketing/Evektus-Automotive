@@ -13,6 +13,7 @@
   --light: #ffffff;
   --dark: #000000;
   --grey: #858585;
+  --transparent: transparent;
   --row-background: #f5f5f5;
 
   --content-max: 1240px;
@@ -105,12 +106,12 @@ body {
 }
 
 .theme-button:is(a, button, span).secondary {
-  --button-bg: var(--dark);
+  --button-bg: var(--transparent);
   --button-fg: var(--light);
-  --button-border: var(--dark);
-  --button-bg-hover: var(--primary);
-  --button-fg-hover: var(--light);
-  --button-border-hover: var(--primary);
+  --button-border: var(--light);
+  --button-bg-hover: var(--light);
+  --button-fg-hover: var(--primary);
+  --button-border-hover: var(--light);
 }
 
 .theme-button:is(a, button, span).tertiary {

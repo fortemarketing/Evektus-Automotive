@@ -4,13 +4,11 @@
 
 		init: function() {
 			var form = $( '.fl-builder-settings:visible' ),
-				bgColor = form.find( 'input[name=bg_color]' ),
 				customWidth = form.find( 'input[name=custom_width]' ),
 				icon = form.find( 'input[name=icon]' ),
 				iconPosition = form.find( 'select[name=icon_position]' ),
 				iconAnimation = form.find( 'select[name=icon_animation]' );
 
-			bgColor.on( 'change', this._previewBackground );
 			customWidth.on( 'input', this._previewCustomWidth );
 			icon.on( 'change', this._previewIcon );
 			iconPosition.on( 'change', this._previewIcon );
@@ -46,22 +44,6 @@
 			}
 		},
 
-		_previewBackground: function( e ) {
-			var preview	= FLBuilder.preview,
-				selector = preview.classes.node + ' .theme-button:is(a, button)',
-				form = $( '.fl-builder-settings:visible' ),
-				style = form.find( 'select[name=style]' ).val(),
-				bgColor = form.find( 'input[name=bg_color]' ).val();
-
-			if ( 'flat' === style ) {
-				if ( '' !== bgColor && bgColor.indexOf( 'rgb' ) < 0 ) {
-					bgColor = '#' + bgColor;
-				}
-				preview.updateCSSRule( selector, 'background-color', bgColor );
-			} else {
-				preview.delayPreview( e );
-			}
-		},
 
 		_previewIcon: function() {
 			var node = FLBuilder.preview.elements.node,
