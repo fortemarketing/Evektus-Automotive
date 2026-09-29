@@ -29,7 +29,7 @@
 
   --border-radius: 15px;
 
-  --transition: all 0.2s linear;
+  --transition: 0.15s ease-out;
 }
 
 h1 {
@@ -69,6 +69,7 @@ body {
 
 .fm-button:is(a, button, span) {
   background-color: var(--primary);
+  transition: var(--transition);
   color: var(--light);
   border-radius: 100px;
   padding: 1.25rem 2rem;
