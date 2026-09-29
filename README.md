@@ -76,6 +76,17 @@ Beaver Builder that leaves a module with no height that cannot be selected, so
 return `evek_builder_placeholder()` from the empty case instead - it renders a
 labelled box while the builder is open and an empty string everywhere else.
 
+## Beaver Builder modules
+
+Theme-owned modules live in `fl-builder/modules/<slug>/`, one folder per module
+with its class in `<slug>.php`. `evek_load_builder_modules()` requires every
+folder on `init`, so adding one is a matter of dropping it in. They appear in
+the builder under the **Theme Modules** category.
+
+`theme-info-box` is a copy of FM Info Box from Forte Marketing Modules, renamed
+so it can sit beside the plugin version. It needs nothing from the plugin: its
+button uses the theme's own `.fm-button` from `theme.css`.
+
 ## Beaver Themer
 
 The theme declares support for Themer headers, footers and parts, and

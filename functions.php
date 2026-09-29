@@ -25,6 +25,30 @@ foreach (glob(__DIR__ . '/inc/shortcodes/*.php') ?: array() as $evek_shortcode_f
 }
 unset($evek_shortcode_file);
 
+/**
+ * Load the theme's own Beaver Builder modules.
+ *
+ * Each module lives in fl-builder/modules/<slug>/ with its class in <slug>.php,
+ * the layout Beaver Builder expects. Dropping a folder in is enough to register
+ * it. Skipped when Beaver Builder is inactive, since every module extends
+ * FLBuilderModule.
+ */
+function evek_load_builder_modules(): void
+{
+	if (! class_exists('FLBuilder')) {
+		return;
+	}
+
+	foreach (glob(__DIR__ . '/fl-builder/modules/*', GLOB_ONLYDIR) ?: array() as $module_dir) {
+		$module_file = $module_dir . '/' . basename($module_dir) . '.php';
+
+		if (is_file($module_file)) {
+			require_once $module_file;
+		}
+	}
+}
+add_action('init', 'evek_load_builder_modules');
+
 add_action(
 	'after_setup_theme',
 	static function (): void {
