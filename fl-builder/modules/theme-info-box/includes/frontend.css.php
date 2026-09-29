@@ -223,29 +223,24 @@ $fm_cta_node = '.fl-builder-content ' . $fm_node;
 // Responsive and compound field rules.
 if ( class_exists( 'FLBuilderCSS' ) ) {
 
-	// Individual bottom margins replace container gaps so
-	// each text element's spacing can be controlled independently.
+	// Individual bottom margins replace container gaps so each text element's
+	// spacing can be controlled independently. Title spacing sits on the
+	// title wrap, the element assets/css/custom.css spaces the heading with.
 	$fm_spacing_rules = array(
-		'prefix_spacing'      => '.theme-info-box-prefix',
-		'title_bottom_spacing' => '.theme-info-box-title',
+		'prefix_spacing'       => '.theme-info-box-prefix',
+		'title_bottom_spacing' => '.theme-info-box-title-wrap',
 		'description_spacing'  => '.theme-info-box-text',
 	);
 
-	// A cleared desktop field means "no space", the same as a typed 0, so
-	// the margin is always pinned rather than left to the theme. Tablet and
-	// mobile stay empty-means-inherit.
-	$fm_spacing_settings = clone $settings;
-
+	// An empty field outputs nothing, leaving the spacing to custom.css. A
+	// value is scoped one class deeper than custom.css's rules so it wins
+	// whichever stylesheet loads last.
 	foreach ( $fm_spacing_rules as $fm_setting => $fm_selector ) {
-		if ( ! isset( $fm_spacing_settings->$fm_setting ) || '' === $fm_spacing_settings->$fm_setting ) {
-			$fm_spacing_settings->$fm_setting = '0';
-		}
-
 		FLBuilderCSS::responsive_rule(
 			array(
-				'settings'     => $fm_spacing_settings,
+				'settings'     => $settings,
 				'setting_name' => $fm_setting,
-				'selector'     => "$fm_node $fm_selector",
+				'selector'     => "$fm_node .theme-info-box $fm_selector",
 				'prop'         => 'margin-bottom',
 				'unit'         => 'px',
 				'ignore'       => array( '' ),

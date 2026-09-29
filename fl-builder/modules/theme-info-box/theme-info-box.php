@@ -989,13 +989,13 @@ FLBuilder::register_module(
 						'prefix_spacing'      => array(
 							'type'        => 'unit',
 							'label'       => __('Prefix Spacing', 'fl-builder'),
-							'default'     => '0',
+							'help'        => __('Leave empty to use the theme default.', 'fl-builder'),
 							'units'       => array('px'),
 							'responsive'  => true,
 							'slider'      => true,
 							'preview'     => array(
 								'type'     => 'css',
-								'selector' => '.theme-info-box-prefix',
+								'selector' => '.theme-info-box .theme-info-box-prefix',
 								'property' => 'margin-bottom',
 								'unit'     => 'px',
 							),
@@ -1003,13 +1003,13 @@ FLBuilder::register_module(
 						'title_bottom_spacing' => array(
 							'type'        => 'unit',
 							'label'       => __('Title Spacing', 'fl-builder'),
-							'default'     => '0',
+							'help'        => __('Leave empty to use the theme default.', 'fl-builder'),
 							'units'       => array('px'),
 							'responsive'  => true,
 							'slider'      => true,
 							'preview'     => array(
 								'type'     => 'css',
-								'selector' => '.theme-info-box-title',
+								'selector' => '.theme-info-box .theme-info-box-title-wrap',
 								'property' => 'margin-bottom',
 								'unit'     => 'px',
 							),
@@ -1017,13 +1017,13 @@ FLBuilder::register_module(
 						'description_spacing'  => array(
 							'type'        => 'unit',
 							'label'       => __('Description Spacing', 'fl-builder'),
-							'default'     => '0',
+							'help'        => __('Leave empty to use the theme default.', 'fl-builder'),
 							'units'       => array('px'),
 							'responsive'  => true,
 							'slider'      => true,
 							'preview'     => array(
 								'type'     => 'css',
-								'selector' => '.theme-info-box-text',
+								'selector' => '.theme-info-box .theme-info-box-text',
 								'property' => 'margin-bottom',
 								'unit'     => 'px',
 							),
