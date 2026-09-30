@@ -60,6 +60,7 @@
   line-clamp: 8;
   overflow: hidden;
   min-height: calc(8 * 1lh);
+  margin-bottom: 15px;
 }
 .testimonials .theme-posts__date,
 .testimonials .fm-posts__date {
