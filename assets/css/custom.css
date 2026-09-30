@@ -1,48 +1,59 @@
 /* Module Overrides */
-.theme-info-box {
+.theme-info-box,
+.fm-info-box {
   text-wrap: balance;
 }
-.theme-info-box-prefix {
+.theme-info-box-prefix,
+.fm-info-box-prefix {
   display: flex;
   align-items: center;
   gap: 15px;
   color: var(--primary);
   text-transform: capitalize;
 }
-.theme-info-box-prefix::after {
+.theme-info-box-prefix::after,
+.fm-info-box-prefix::after {
   content: "";
   width: 40px;
   height: 2px;
   background: currentColor;
   transform: translateY(5px);
 }
-.theme-info-box-prefix:not(:last-child) {
+.theme-info-box-prefix:not(:last-child),
+.fm-info-box-prefix:not(:last-child) {
   margin-bottom: 35px;
 }
-.theme-info-box-title {
+.theme-info-box-title,
+.fm-info-box-title {
   margin-bottom: 0;
 }
-.theme-info-box-title-wrap:not(:last-child) {
+.theme-info-box-title-wrap:not(:last-child),
+.fm-info-box-title-wrap:not(:last-child) {
   margin-bottom: 20px;
 }
-.theme-info-box-text:not(:last-child) {
+.theme-info-box-text:not(:last-child),
+.fm-info-box-text:not(:last-child) {
   margin-bottom: 50px;
 }
 /* Testimonials */
-.testimonials .theme-posts__card {
+.testimonials .theme-posts__card,
+.testimonials .fm-posts__card {
   background: var(--light);
   padding: 35px;
   border-radius: 15px;
   color: var(--dark);
 }
-.testimonials .theme-posts__content {
+.testimonials .theme-posts__content,
+.testimonials .fm-posts__content {
   padding: 0;
 }
-.testimonials .theme-posts__title {
+.testimonials .theme-posts__title,
+.testimonials .fm-posts__title {
   color: var(--primary);
   font-weight: 400;
 }
-.testimonials .theme-posts__text {
+.testimonials .theme-posts__text,
+.testimonials .fm-posts__text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 8;
@@ -50,22 +61,21 @@
   overflow: hidden;
   min-height: calc(8 * 1lh);
 }
-.testimonials .theme-posts__date {
+.testimonials .theme-posts__date,
+.testimonials .fm-posts__date {
   color: var(--grey);
 }
-.testimonials .theme-posts__thumb {
+.testimonials .theme-posts__thumb,
+.testimonials .fm-posts__thumb {
   margin-bottom: 10px;
 }
-.testimonials .theme-posts__thumb img {
+.testimonials .theme-posts__thumb img,
+.testimonials .fm-posts__thumb img {
   width: 150px;
 }
-/* Services
-   The orange panel rests over the foot of the card showing only the title,
-   and slides up over the image on hover to reveal the description. --peek is
-   how much of it shows at rest: its top padding, two lines of title and its
-   bottom padding. The image stops 10px short of that so the panel's rounded
-   top overlaps it, as it did before the effect. */
-.services .theme-posts__card {
+/* Services */
+.services .theme-posts__card,
+.services .fm-posts__card {
   --peek: 140px;
 
   position: relative;
@@ -73,14 +83,17 @@
   border-radius: 15px;
   cursor: pointer;
 }
-.services .theme-posts__link {
+.services .theme-posts__link,
+.services .fm-posts__link {
   overflow: hidden;
   border-radius: 15px;
 }
-.services .theme-posts__thumb {
+.services .theme-posts__thumb,
+.services .fm-posts__thumb {
   margin-bottom: calc(var(--peek) - 10px);
 }
-.services .theme-posts__content {
+.services .theme-posts__content,
+.services .fm-posts__content {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -93,14 +106,17 @@
   transform: translateY(calc(100% - var(--peek)));
   transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.services .theme-posts__thumb .placeholder {
+.services .theme-posts__thumb .placeholder,
+.services .fm-posts__thumb .placeholder {
   aspect-ratio: 4 / 3;
   background: var(--grey);
 }
-.services .theme-posts__thumb img {
+.services .theme-posts__thumb img,
+.services .fm-posts__thumb img {
   aspect-ratio: 4 / 3;
 }
-.services .theme-posts__title {
+.services .theme-posts__title,
+.services .fm-posts__title {
   color: var(--light);
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -110,7 +126,8 @@
   min-height: calc(2 * 1lh);
   margin-bottom: 20px;
 }
-.services .theme-posts__text {
+.services .theme-posts__text,
+.services .fm-posts__text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
@@ -126,30 +143,64 @@
 }
 /* Hover, or keyboard focus on the card's links. Left at rest in the builder
    so the cards stay editable. */
-body:not(.fl-builder-edit) .services .theme-posts__card:hover .theme-posts__content,
-body:not(.fl-builder-edit) .services .theme-posts__card:focus-within .theme-posts__content {
+body:not(.fl-builder-edit)
+  .services
+  .theme-posts__card:hover
+  .theme-posts__content,
+.fm-posts__card:hover .fm-posts__content,
+body:not(.fl-builder-edit)
+  .services
+  .theme-posts__card:focus-within
+  .theme-posts__content,
+.fm-posts__card:focus-within .fm-posts__content {
   transform: translateY(0);
 }
-body:not(.fl-builder-edit) .services .theme-posts__card:hover .theme-posts__text,
-body:not(.fl-builder-edit) .services .theme-posts__card:focus-within .theme-posts__text {
+body:not(.fl-builder-edit)
+  .services
+  .theme-posts__card:hover
+  .theme-posts__text,
+.fm-posts__card:hover .fm-posts__text,
+body:not(.fl-builder-edit)
+  .services
+  .theme-posts__card:focus-within
+  .theme-posts__text,
+.fm-posts__card:focus-within .fm-posts__text {
   opacity: 1;
   transform: translateY(0);
 }
 /* Touch screens have no hover, so the panel stays at rest there. */
 @media (max-width: 768px) {
-  body:not(.fl-builder-edit) .services .theme-posts__card:hover .theme-posts__content,
-  body:not(.fl-builder-edit) .services .theme-posts__card:focus-within .theme-posts__content {
+  body:not(.fl-builder-edit)
+    .services
+    .theme-posts__card:hover
+    .theme-posts__content,
+  .fm-posts__card:hover .fm-posts__content,
+  body:not(.fl-builder-edit)
+    .services
+    .theme-posts__card:focus-within
+    .theme-posts__content,
+  .fm-posts__card:focus-within .fm-posts__content {
     transform: translateY(calc(100% - var(--peek)));
   }
-  body:not(.fl-builder-edit) .services .theme-posts__card:hover .theme-posts__text,
-  body:not(.fl-builder-edit) .services .theme-posts__card:focus-within .theme-posts__text {
+  body:not(.fl-builder-edit)
+    .services
+    .theme-posts__card:hover
+    .theme-posts__text,
+  .fm-posts__card:hover .fm-posts__text,
+  body:not(.fl-builder-edit)
+    .services
+    .theme-posts__card:focus-within
+    .theme-posts__text,
+  .fm-posts__card:focus-within .fm-posts__text {
     opacity: 0;
     transform: translateY(15px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .services .theme-posts__content,
-  .services .theme-posts__text {
+  .services .theme-posts__text,
+  .services .fm-posts__text,
+  .services .fm-posts__content {
     transition: none;
   }
 }

@@ -42,7 +42,6 @@
   color: var(--light);
   text-decoration: none;
   height: 100%;
-  border-radius: 100px;
 }
 
 .main-menu__item:hover > .main-menu__top-link,
@@ -60,7 +59,9 @@
 }
 
 .main-menu__item--has-mega:hover > .main-menu__top-link .main-menu__caret,
-.main-menu__item--has-mega:focus-within > .main-menu__top-link .main-menu__caret {
+.main-menu__item--has-mega:focus-within
+  > .main-menu__top-link
+  .main-menu__caret {
   transform: rotate(180deg);
 }
 
