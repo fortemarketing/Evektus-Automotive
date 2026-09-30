@@ -41,6 +41,7 @@
 .testimonials .fm-posts__title {
   color: var(--primary);
   font-weight: 400;
+  font-family: var(--font-body);
 }
 .testimonials .fm-posts__text {
   display: -webkit-box;
@@ -118,7 +119,7 @@ body:not(.fl-builder-edit) .services .fm-posts__card:focus-within {
   line-clamp: 2;
   overflow: hidden;
   min-height: calc(2 * 1lh);
-  margin-bottom: 0;
+  margin-bottom: 15px;
 }
 .services .fm-posts__text {
   display: -webkit-box;
