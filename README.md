@@ -62,6 +62,18 @@ and shortcodes load last so they can build on any component. `custom.css` loads
 last of all and can override anything above it. Every local asset uses its
 modification time as its cache version.
 
+On the page the stylesheets go out as one file, joined in that order into
+`wp-content/uploads/evek/theme-<hash>.css` the first time it is requested. The
+hash covers every file's path and modification time, so editing, adding or
+removing a stylesheet builds a new bundle; relative `url()`s are rewritten to
+point back at the theme. Old bundles are deleted after 30 days. To load the
+files separately - to see which file a rule comes from - define `SCRIPT_DEBUG`
+or return false from the `evek_bundle_css` filter.
+
+`builder-placeholder.css` is only loaded while Beaver Builder is open, since
+its placeholders never show to visitors. List other builder-only stylesheets
+in `evek_builder_only_styles()`.
+
 Template scripts are self-contained and carry no dependencies on one another.
 
 ## Shortcodes
@@ -119,14 +131,14 @@ before across: three from 768px, two below that.
 Beaver Builder rows, columns and modules can animate in as they scroll into
 view (`inc/animations.php`, with `animations.css` and `animations.js` in the
 `inc/` asset folders). A node opts in by its node ID in
-`evek_animation_nodes()`, or by one of these classes under Advanced > Class:
+`evek_animation_nodes()`, mapped to one of these effects:
 
-| Class            | Effect                                                   |
-| ---------------- | -------------------------------------------------------- |
-| `reveal-up`      | Fades in while rising a short way                        |
-| `reveal-fade`    | Fades in on the spot                                     |
-| `reveal-zoom`    | Background photo or colour settles from a slight zoom    |
-| `reveal-stagger` | Its FM Posts cards or FM List Icon items rise one by one |
+| Effect    | Result                                                   |
+| --------- | -------------------------------------------------------- |
+| `up`      | Fades in while rising a short way                        |
+| `fade`    | Fades in on the spot                                     |
+| `zoom`    | Background photo or colour settles from a slight zoom    |
+| `stagger` | Its FM Posts cards or FM List Icon items rise one by one |
 
 Nodes that arrive together are staggered in page order. Nothing is hidden in
 the builder, for visitors who prefer reduced motion, or if the script fails to

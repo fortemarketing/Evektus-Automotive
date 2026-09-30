@@ -6,14 +6,13 @@
  * A node animates in as it scrolls into view when it carries a data-reveal
  * attribute, added here server side so the hidden starting state is in the
  * HTML from the first paint and nothing flashes before the script runs. A node
- * opts in either by its node ID in evek_animation_nodes(), or by a class set in
- * the builder under Advanced > Class:
+ * opts in by its node ID in evek_animation_nodes(), with one of these effects:
  *
- *   reveal-up       fades in while rising a short way
- *   reveal-fade     fades in on the spot
- *   reveal-zoom     fades in while its background settles from a slight zoom,
- *                   for rows and columns with a background photo
- *   reveal-stagger  its cards or list items rise in one after another
+ *   up       fades in while rising a short way
+ *   fade     fades in on the spot
+ *   zoom     fades in while its background settles from a slight zoom, for
+ *            rows and columns with a background photo
+ *   stagger  its cards or list items rise in one after another
  *
  * Nodes that come into view together are staggered in page order. The motion
  * itself lives in assets/css/inc/animations.css and the observer in
@@ -32,8 +31,8 @@ function evek_animation_effects(): array
 
 /**
  * The nodes that animate, by Beaver Builder node ID. Node IDs belong to one
- * layout, so this is site content: add to it with the evek_animation_nodes
- * filter, or give a node one of the reveal- classes in the builder instead.
+ * layout, so this is site content: add to it here, or with the
+ * evek_animation_nodes filter.
  *
  * @return array<string, string> Node ID => effect.
  */
@@ -87,24 +86,15 @@ function evek_animation_nodes(): array
 }
 
 /**
- * The effect a node uses, from the node map or a reveal- class, or ''.
+ * The effect a node uses from the node map, or ''.
  *
  * @param string $node_id Beaver Builder node ID.
- * @param array  $classes The node's classes.
  */
-function evek_animation_effect(string $node_id, array $classes): string
+function evek_animation_effect(string $node_id): string
 {
-	$effects = evek_animation_effects();
-
-	foreach ($classes as $class) {
-		if (0 === strpos((string) $class, 'reveal-') && in_array(substr($class, 7), $effects, true)) {
-			return substr($class, 7);
-		}
-	}
-
 	$nodes = evek_animation_nodes();
 
-	if (isset($nodes[$node_id]) && in_array($nodes[$node_id], $effects, true)) {
+	if (isset($nodes[$node_id]) && in_array($nodes[$node_id], evek_animation_effects(), true)) {
 		return $nodes[$node_id];
 	}
 
@@ -124,8 +114,7 @@ function evek_animation_node_attributes(array $attrs, $node): array
 		return $attrs;
 	}
 
-	$classes = isset($attrs['class']) ? (array) $attrs['class'] : array();
-	$effect  = evek_animation_effect((string) $node->node, $classes);
+	$effect = evek_animation_effect((string) $node->node);
 
 	if ('' !== $effect) {
 		$attrs['data-reveal'] = esc_attr($effect);
