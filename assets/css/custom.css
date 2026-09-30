@@ -67,9 +67,7 @@
 .services .theme-posts__content {
   background: var(--primary);
   border-radius: 15px;
-}
-.services .theme-posts__thumb {
-  margin-bottom: 10px;
+  margin-top: -10px;
 }
 .services .theme-posts__thumb .placeholder {
   aspect-ratio: 1 / 1;
@@ -86,4 +84,6 @@
   line-clamp: 2;
   overflow: hidden;
   min-height: calc(2 * 1lh);
+  text-align: center;
+  font-family: var(--font-heading);
 }
