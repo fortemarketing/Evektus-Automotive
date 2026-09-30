@@ -59,22 +59,39 @@
 .testimonials .theme-posts__thumb img {
   width: 150px;
 }
-/* Services */
+/* Services
+   The orange panel rests over the foot of the card showing only the title,
+   and slides up over the image on hover to reveal the description. --peek is
+   how much of it shows at rest: its top padding, two lines of title and its
+   bottom padding. The image stops 10px short of that so the panel's rounded
+   top overlaps it, as it did before the effect. */
 .services .theme-posts__card {
-  overflow: visible;
+  --peek: 140px;
+
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
 }
 .services .theme-posts__link {
   overflow: hidden;
   border-radius: 15px;
 }
+.services .theme-posts__thumb {
+  margin-bottom: calc(var(--peek) - 10px);
+}
 .services .theme-posts__content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  width: 100%;
   background: var(--primary);
   border-radius: 15px;
-  margin-top: -10px;
-  z-index: 1;
-  position: relative;
   text-align: center;
   padding: 35px;
+  transform: translateY(calc(100% - var(--peek)));
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .services .theme-posts__thumb .placeholder {
   aspect-ratio: 4 / 3;
@@ -91,7 +108,6 @@
   line-clamp: 2;
   overflow: hidden;
   min-height: calc(2 * 1lh);
-  font-family: var(--font-heading);
   margin-bottom: 20px;
 }
 .services .theme-posts__text {
@@ -102,4 +118,38 @@
   overflow: hidden;
   min-height: calc(5 * 1lh);
   color: var(--light);
+  opacity: 0;
+  transform: translateY(15px);
+  transition:
+    opacity 0.4s ease 0.2s,
+    transform 0.4s ease 0.2s;
+}
+/* Hover, or keyboard focus on the card's links. Left at rest in the builder
+   so the cards stay editable. */
+body:not(.fl-builder-edit) .services .theme-posts__card:hover .theme-posts__content,
+body:not(.fl-builder-edit) .services .theme-posts__card:focus-within .theme-posts__content {
+  transform: translateY(0);
+}
+body:not(.fl-builder-edit) .services .theme-posts__card:hover .theme-posts__text,
+body:not(.fl-builder-edit) .services .theme-posts__card:focus-within .theme-posts__text {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Touch screens have no hover, so the panel stays at rest there. */
+@media (max-width: 768px) {
+  body:not(.fl-builder-edit) .services .theme-posts__card:hover .theme-posts__content,
+  body:not(.fl-builder-edit) .services .theme-posts__card:focus-within .theme-posts__content {
+    transform: translateY(calc(100% - var(--peek)));
+  }
+  body:not(.fl-builder-edit) .services .theme-posts__card:hover .theme-posts__text,
+  body:not(.fl-builder-edit) .services .theme-posts__card:focus-within .theme-posts__text {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .services .theme-posts__content,
+  .services .theme-posts__text {
+    transition: none;
+  }
 }

@@ -1,7 +1,7 @@
 .site-footer {
   color: var(--light);
   background: var(--dark-accent);
-  font-size: var(--text-small);
+  font-size: var(--text-paragraph);
 }
 
 .site-footer__inner {
@@ -60,15 +60,19 @@
   color: var(--primary-light);
 }
 
-/* The footer menu is one flat WordPress menu. On wider screens it fills down
-   before across, so it wraps into a new column after every five items. */
+/* The footer menu is one flat WordPress menu, flowed into balanced columns
+   that fill down before across: two on small screens, three from 768px. */
 .footer-menu {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem 1.5rem;
+  columns: 2;
+  column-gap: 1.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.footer-menu > li {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
 }
 
 .footer-menu .current-menu-item > a {
@@ -98,22 +102,14 @@
 
 @media (min-width: 768px) {
   .footer-menu {
-    grid-auto-columns: minmax(0, 1fr);
-    grid-auto-flow: column;
-    grid-template-columns: none;
-    grid-template-rows: repeat(5, auto);
+    columns: 3;
   }
 }
 
 @media (min-width: 992px) {
-  /* Five equal columns: contact, then up to four of menu. */
+  /* Four equal columns: contact, then three of menu. */
   .site-footer__top {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 4fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
     gap: 1.5rem;
-  }
-
-  .footer-menu {
-    grid-auto-columns: minmax(0, 1fr);
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }

@@ -151,8 +151,8 @@ Change the business details with the `evek_footer_contact` filter. It takes
 `address` (an array of lines), `phone`, `email` and `social` (`facebook` and
 `instagram` URLs). An empty value hides that line or icon.
 
-The Footer menu is one flat menu. From 768px it fills down before across, so it
-wraps into a new column after every five items. Below that it is two columns.
+The Footer menu is one flat menu, flowed into balanced columns that fill down
+before across: three from 768px, two below that.
 
 ## Menus
 
