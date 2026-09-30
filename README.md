@@ -76,46 +76,6 @@ Beaver Builder that leaves a module with no height that cannot be selected, so
 return `evek_builder_placeholder()` from the empty case instead - it renders a
 labelled box while the builder is open and an empty string everywhere else.
 
-## Beaver Builder modules
-
-Theme-owned modules live in `fl-builder/modules/<slug>/`, one folder per module
-with its class in `<slug>.php`. `evek_load_builder_modules()` requires every
-folder on `init`, so adding one is a matter of dropping it in. Give each one
-`'group' => __('Theme', 'fl-builder')` so it appears in the builder's **Theme**
-group.
-
-`theme-info-box` and `theme-button` are copies of FM Info Box and FM Button
-from Forte Marketing Modules, renamed so they can sit beside the plugin
-versions. They need nothing from the plugin. Both render their button with the
-theme's own `.theme-button` from `theme.css`, which holds its full look, layout
-included.
-
-Both offer a **Style** dropdown - Primary, Secondary or Tertiary - which adds
-that class to the button. Each variant in `theme.css` only sets the
-`--button-*` colour variables; the bare `.theme-button` rule is the primary
-look, so a button with no style class still renders as primary.
-
-`theme-counter` is a copy of UABB Counter from Ultimate Addons for Beaver
-Builder, with the same four styles - number only, circle, semicircle and bar -
-and mostly the same setting names. It needs nothing from the plugin: the icon / photo
-and separator are rendered in the module rather than through UABB's Image Icon
-and Separator modules, and the count runs on its own `js/frontend.js` instead
-of jQuery Waypoints. An empty circle or bar colour falls back to `--primary`.
-
-`theme-list-icon` is a copy of UABB List Icon, likewise standalone. It renders
-a real `<ul>`, stacked or in a wrapping row, with the same icon or photo leading
-every item, and shows a builder placeholder until an item is added.
-
-`theme-posts` is a copy of FM Posts: a post loop as a grid, masonry wall, list
-or carousel, with a taxonomy filter and numbered or Load More pagination. Each
-card is built from one HTML template filled in with Beaver Builder's own field
-connection shortcodes (`[wpbb post:title]`, `[wpbb-if post:featured_image]`,
-see the [syntax docs](https://docs.wpbeaverbuilder.com/beaver-themer/field-connections/syntax)),
-rendered the way core Post Grid's custom layout is, so the `post:*` properties
-need Beaver Themer. The carousel uses a copy of Swiper 11.2.10 vendored in the
-module's `swiper/` folder; the Load More button is a `.theme-button`. Cards are
-styled in the theme against the `theme-posts__` classes.
-
 ## Beaver Themer
 
 The theme declares support for Themer headers, footers and parts, and
