@@ -69,7 +69,8 @@ body {
   line-height: 1.6;
 }
 
-.theme-button:is(a, button, span) {
+.theme-button:is(a, button, span),
+.fm-button:is(a, button, span) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -100,13 +101,16 @@ body {
 }
 
 .theme-button:is(a, button, span):hover,
-.theme-button:is(a, button, span):focus-visible {
+.theme-button:is(a, button, span):focus-visible,
+.fm-button:is(a, button, span):hover,
+.fm-button:is(a, button, span):focus-visible {
   background-color: var(--button-bg-hover);
   color: var(--button-fg-hover);
   border-color: var(--button-border-hover);
 }
 
-.theme-button:is(a, button, span).secondary {
+.theme-button:is(a, button, span).secondary,
+.fm-button:is(a, button, span).secondary {
   --button-bg: var(--transparent);
   --button-fg: var(--light);
   --button-border: var(--light);
@@ -115,7 +119,8 @@ body {
   --button-border-hover: var(--light);
 }
 
-.theme-button:is(a, button, span).tertiary {
+.theme-button:is(a, button, span).tertiary,
+.fm-button:is(a, button, span).tertiary {
   --button-bg: transparent;
   --button-fg: var(--dark);
   --button-border: var(--dark);
