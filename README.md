@@ -106,6 +106,16 @@ of jQuery Waypoints. An empty circle or bar colour falls back to `--primary`.
 a real `<ul>`, stacked or in a wrapping row, with the same icon or photo leading
 every item, and shows a builder placeholder until an item is added.
 
+`theme-posts` is a copy of FM Posts: a post loop as a grid, masonry wall, list
+or carousel, with a taxonomy filter and numbered or Load More pagination. Each
+card is built from one HTML template filled in with Beaver Builder's own field
+connection shortcodes (`[wpbb post:title]`, `[wpbb-if post:featured_image]`,
+see the [syntax docs](https://docs.wpbeaverbuilder.com/beaver-themer/field-connections/syntax)),
+rendered the way core Post Grid's custom layout is, so the `post:*` properties
+need Beaver Themer. The carousel uses a copy of Swiper 11.2.10 vendored in the
+module's `swiper/` folder; the Load More button is a `.theme-button`. Cards are
+styled in the theme against the `theme-posts__` classes.
+
 ## Beaver Themer
 
 The theme declares support for Themer headers, footers and parts, and

@@ -231,24 +231,6 @@ $fm_number_selector = $fm_title_media ? "$fm_node .theme-counter-title-row" : "$
 // Responsive and compound field rules.
 if ( class_exists( 'FLBuilderCSS' ) ) {
 
-	// Typography. Scoped under .theme-counter so it outranks the theme's own
-	// heading rules for whichever tag the number uses.
-	FLBuilderCSS::typography_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'num_typo',
-			'selector'     => "$fm_node .theme-counter .theme-counter-number",
-		)
-	);
-
-	FLBuilderCSS::typography_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'ba_typo',
-			'selector'     => $fm_ba_selector,
-		)
-	);
-
 	// Separator alignment — overrides the overall alignment for the rule only.
 	FLBuilderCSS::responsive_rule(
 		array(

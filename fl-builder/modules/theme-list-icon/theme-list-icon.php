@@ -667,15 +667,6 @@ FLBuilder::register_module(
 								'span' => 'span',
 							),
 						),
-						'font_typo'                => array(
-							'type'       => 'typography',
-							'label'      => __('Typography', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-list-icon-heading',
-							),
-						),
 						'typography_color'         => array(
 							'type'        => 'color',
 							'label'       => __('Color', 'fl-builder'),

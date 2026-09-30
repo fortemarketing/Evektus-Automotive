@@ -1211,15 +1211,6 @@ FLBuilder::register_module(
 								'span' => 'span',
 							),
 						),
-						'num_typo'          => array(
-							'type'       => 'typography',
-							'label'      => __('Typography', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-counter-number',
-							),
-						),
 						'num_color'         => array(
 							'type'        => 'color',
 							'label'       => __('Color', 'fl-builder'),
@@ -1237,15 +1228,6 @@ FLBuilder::register_module(
 				'ba_text_typography' => array(
 					'title'  => __('Before - After Text', 'fl-builder'),
 					'fields' => array(
-						'ba_typo'  => array(
-							'type'       => 'typography',
-							'label'      => __('Typography', 'fl-builder'),
-							'responsive' => true,
-							'preview'    => array(
-								'type'     => 'css',
-								'selector' => '.theme-counter-before-text, .theme-counter-after-text, .theme-counter-counter-before-text, .theme-counter-counter-after-text',
-							),
-						),
 						'ba_color' => array(
 							'type'        => 'color',
 							'label'       => __('Color', 'fl-builder'),

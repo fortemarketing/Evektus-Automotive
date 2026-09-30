@@ -126,16 +126,6 @@ if ( class_exists( 'FLBuilderCSS' ) ) {
 		)
 	);
 
-	// Typography. Scoped under the text wrap so it outranks the theme's own
-	// heading rules for whichever tag the items use.
-	FLBuilderCSS::typography_field_rule(
-		array(
-			'settings'     => $settings,
-			'setting_name' => 'font_typo',
-			'selector'     => "$fm_node .theme-list-icon-text .theme-list-icon-heading",
-		)
-	);
-
 	// Icon size.
 	FLBuilderCSS::responsive_rule(
 		array(

@@ -1,0 +1,286 @@
+/**
+ * Theme Posts — starting styles.
+ *
+ * The layout mechanics (grid, masonry, carousel) plus a plain starting look
+ * for the default Post Layout. Card design belongs in the theme stylesheet,
+ * which overrides anything here. Column counts, gaps and the carousel
+ * controls come from module settings via includes/frontend.css.php, which
+ * sets the custom properties this file consumes.
+ */
+
+.theme-posts {
+	position: relative;
+}
+
+/* Items container --------------------------------------------------------- */
+
+.theme-posts__items {
+	display: grid;
+	grid-template-columns: repeat(var(--theme-posts-columns, 3), minmax(0, 1fr));
+	column-gap: var(--theme-posts-col-gap, 30px);
+	row-gap: var(--theme-posts-row-gap, 30px);
+}
+
+.theme-posts--list .theme-posts__items {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+/*
+ * Masonry positions the cards absolutely, so the container reverts to block
+ * flow and each card takes a percentage width that leaves room for the gutter.
+ * The zero-height sizer is what jQuery Masonry measures a column against.
+ */
+.theme-posts--masonry .theme-posts__items {
+	display: block;
+	position: relative;
+}
+
+.theme-posts--masonry .theme-posts__item,
+.theme-posts--masonry .theme-posts__sizer {
+	width: calc(
+		(100% - (var(--theme-posts-columns, 3) - 1) * var(--theme-posts-col-gap, 30px)) /
+		var(--theme-posts-columns, 3)
+	);
+}
+
+.theme-posts--masonry .theme-posts__sizer {
+	height: 0;
+}
+
+.theme-posts--masonry .theme-posts__item {
+	float: left;
+	margin-bottom: var(--theme-posts-row-gap, 30px);
+}
+
+/* Swiper needs its own flex row, not the grid above. */
+.theme-posts--carousel .theme-posts__items {
+	display: flex;
+	column-gap: 0;
+	row-gap: 0;
+	grid-template-columns: none;
+}
+
+.theme-posts--carousel .theme-posts__item {
+	height: auto;
+}
+
+/* Card -------------------------------------------------------------------- */
+
+.theme-posts__item {
+	min-width: 0;
+}
+
+/*
+ * The card is a flex column so that a template's content block can fill the
+ * height left under its image, and a call to action can sit at its foot.
+ */
+.theme-posts__card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	transition: background-color 0.3s ease;
+}
+
+/*
+ * The classes below are what the default Post Layout uses. Any template can
+ * use them, or ignore them and leave its own markup to the theme.
+ */
+
+/*
+ * A whole-card link, written into the template as
+ *   <a class="theme-posts__box-link" href="[wpbb post:url]" aria-label="[wpbb post:title]"></a>
+ * covers the card and sits above the background. Real links in the template
+ * need position: relative and a z-index above 2 to stay clickable over it.
+ */
+.theme-posts__box-link {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+}
+
+.theme-posts__content {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	min-width: 0;
+	padding: 20px;
+}
+
+.theme-posts__thumb {
+	position: relative;
+	overflow: hidden;
+	line-height: 0;
+}
+
+.theme-posts__thumb a {
+	display: block;
+}
+
+.theme-posts__thumb img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.theme-posts__title {
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+
+.theme-posts__title a {
+	text-decoration: none;
+	color: inherit;
+	transition: color 0.3s ease;
+}
+
+.theme-posts__meta {
+	margin-bottom: 10px;
+	font-size: 0.875em;
+	opacity: 0.8;
+}
+
+.theme-posts__text {
+	margin-bottom: 15px;
+}
+
+.theme-posts__text > :last-child {
+	margin-bottom: 0;
+}
+
+/*
+ * The call to action is pushed to the foot of the card so that, in a grid,
+ * every card's link sits on the same line regardless of title length.
+ */
+.theme-posts__cta {
+	margin-top: auto;
+}
+
+/* Filters ----------------------------------------------------------------- */
+
+.theme-posts__filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--theme-posts-filter-gap, 10px);
+	justify-content: var(--theme-posts-filter-align, center);
+}
+
+.theme-posts__filter {
+	background: none;
+	border: 0;
+	cursor: pointer;
+	font: inherit;
+	color: inherit;
+	transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.theme-posts__item[hidden] {
+	display: none;
+}
+
+/* Pagination -------------------------------------------------------------- */
+
+.theme-posts__pagination {
+	display: flex;
+	justify-content: var(--theme-posts-pag-align, center);
+}
+
+.theme-posts__pagination ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.theme-posts__pagination a,
+.theme-posts__pagination span {
+	display: inline-block;
+	text-decoration: none;
+	transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.theme-posts__load-more {
+	display: inline-block;
+	cursor: pointer;
+	text-decoration: none;
+	transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.theme-posts__load-more.is-loading {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+/* Carousel arrows --------------------------------------------------------- */
+
+.theme-posts__carousel {
+	position: relative;
+}
+
+.theme-posts__carousel-outer {
+	position: relative;
+	padding-left: var(--theme-posts-arrow-gutter, 50px);
+	padding-right: var(--theme-posts-arrow-gutter, 50px);
+}
+
+.theme-posts__arrow {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	background: none;
+	border: 0;
+	cursor: pointer;
+	line-height: 1;
+	color: var(--theme-posts-arrow-color, inherit);
+	font-size: var(--theme-posts-arrow-size, 40px);
+}
+
+.theme-posts__arrow.swiper-button-disabled {
+	opacity: 0.35;
+	cursor: default;
+}
+
+.theme-posts__swiper > .theme-posts__arrow {
+	position: absolute;
+	top: 50%;
+	z-index: 3;
+	transform: translateY(-50%);
+}
+
+.theme-posts__swiper > .theme-posts__arrow--prev {
+	left: 10px;
+}
+
+.theme-posts__swiper > .theme-posts__arrow--next {
+	right: 10px;
+}
+
+.theme-posts__carousel-outer > .theme-posts__arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.theme-posts__carousel-outer > .theme-posts__arrow--prev {
+	left: 0;
+}
+
+.theme-posts__carousel-outer > .theme-posts__arrow--next {
+	right: 0;
+}
+
+.theme-posts__arrows {
+	display: flex;
+	justify-content: center;
+	gap: var(--theme-posts-arrow-gap, 10px);
+}
+
+/* Empty state ------------------------------------------------------------- */
+
+.theme-posts__empty {
+	text-align: center;
+}
