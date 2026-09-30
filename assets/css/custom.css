@@ -83,6 +83,24 @@
   border-radius: 15px;
   cursor: pointer;
 }
+/* The card's overflow clips the focus ring of the link inside it, so the ring
+   is drawn on the card itself, which its own overflow does not clip. Same ring
+   as base.css, and likewise off in the builder. */
+.services .theme-posts__card :focus,
+.services .fm-posts__card :focus {
+  outline: none;
+}
+body:not(.fl-builder-edit) .services .theme-posts__card:focus-within,
+body:not(.fl-builder-edit) .services .fm-posts__card:focus-within {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+@media (forced-colors: active) {
+  body:not(.fl-builder-edit) .services .theme-posts__card:focus-within,
+  body:not(.fl-builder-edit) .services .fm-posts__card:focus-within {
+    outline-color: Highlight;
+  }
+}
 .services .theme-posts__link,
 .services .fm-posts__link {
   overflow: hidden;

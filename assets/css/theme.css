@@ -117,6 +117,16 @@ body {
   --button-bg-hover: var(--light);
   --button-fg-hover: var(--primary);
   --button-border-hover: var(--light);
+  /* The focus ring itself comes from base.css; only its colour changes, to
+     match the white outline style. */
+  outline-color: var(--light);
+}
+
+@media (forced-colors: active) {
+  .theme-button:is(a, button, span).secondary,
+  .fm-button:is(a, button, span).secondary {
+    outline-color: Highlight;
+  }
 }
 
 .theme-button:is(a, button, span).tertiary,
