@@ -63,7 +63,6 @@
 .services .theme-posts__card {
   overflow: hidden;
   border-radius: 15px;
-  color: var(--light);
 }
 .services .theme-posts__content {
   background: var(--primary);
@@ -72,6 +71,19 @@
 .services .theme-posts__thumb {
   margin-bottom: 10px;
 }
+.services .theme-posts__thumb .placeholder {
+  aspect-ratio: 1 / 1;
+  background: var(--grey);
+}
 .services .theme-posts__thumb img {
   aspect-ratio: 1 / 1;
+}
+.services .theme-posts__title {
+  color: var(--light);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  min-height: calc(2 * 1lh);
 }
