@@ -114,6 +114,24 @@ Change the business details with the `evek_footer_contact` filter. It takes
 The Footer menu is one flat menu, flowed into balanced columns that fill down
 before across: three from 768px, two below that.
 
+## Animations
+
+Beaver Builder rows, columns and modules can animate in as they scroll into
+view (`inc/animations.php`, with `animations.css` and `animations.js` in the
+`inc/` asset folders). A node opts in by its node ID in
+`evek_animation_nodes()`, or by one of these classes under Advanced > Class:
+
+| Class            | Effect                                                   |
+| ---------------- | -------------------------------------------------------- |
+| `reveal-up`      | Fades in while rising a short way                        |
+| `reveal-fade`    | Fades in on the spot                                     |
+| `reveal-zoom`    | Background photo or colour settles from a slight zoom    |
+| `reveal-stagger` | Its FM Posts cards or FM List Icon items rise one by one |
+
+Nodes that arrive together are staggered in page order. Nothing is hidden in
+the builder, for visitors who prefer reduced motion, or if the script fails to
+load.
+
 ## Menus
 
 Two locations, `primary` and `footer`. The primary menu renders through the

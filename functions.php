@@ -17,6 +17,7 @@ require_once __DIR__ . '/inc/branding.php';
 require_once __DIR__ . '/inc/main-menu.php';
 require_once __DIR__ . '/inc/scroll-top.php';
 require_once __DIR__ . '/inc/builder-placeholder.php';
+require_once __DIR__ . '/inc/animations.php';
 
 // Every shortcode lives in inc/shortcodes/, one file per shortcode. Dropping a
 // file in there is enough to register it; no edit to this list is needed.

@@ -1,0 +1,63 @@
+/* Scroll animations - see inc/animations.php. Every hidden state below is gated
+   on html.evek-motion, which is only set when the animations can run, so the
+   page is fully visible without them. */
+
+:root {
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --reveal-duration: 0.9s;
+  --reveal-distance: 32px;
+}
+
+/* Rise and fade. */
+.evek-motion [data-reveal="up"] {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+/* Fade on the spot. */
+.evek-motion [data-reveal="fade"] {
+  opacity: 0;
+  transition: opacity var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+/* A background photo or colour block that fades in while settling from a
+   slight zoom. The node clips its own background so the zoom never spills. */
+.evek-motion [data-reveal="zoom"] {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.evek-motion [data-reveal="zoom"] > :is(.fl-row-content-wrap, .fl-col-content) {
+  transform: scale(1.08);
+  transition: transform 1.6s var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+/* Cards and list items rising one after another. animations.js sets each
+   one's --reveal-delay. */
+.evek-motion [data-reveal="stagger"] :is(.fm-posts__item, .fm-list-icon-item) {
+  opacity: 0;
+  transform: translateY(var(--reveal-distance));
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+/* Revealed. */
+.evek-motion [data-reveal].is-revealed,
+.evek-motion [data-reveal="stagger"].is-revealed :is(.fm-posts__item, .fm-list-icon-item) {
+  opacity: 1;
+  transform: none;
+}
+
+.evek-motion [data-reveal="zoom"].is-revealed > :is(.fl-row-content-wrap, .fl-col-content) {
+  transform: none;
+}
