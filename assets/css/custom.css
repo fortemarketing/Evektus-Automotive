@@ -16,6 +16,11 @@
   background: currentColor;
   transform: translateY(5px);
 }
+@media (max-width: 768px) {
+  .fm-info-box-prefix::after {
+    transform: translateY(2px);
+  }
+}
 .fm-info-box-prefix:not(:last-child) {
   margin-bottom: 35px;
 }
@@ -61,6 +66,7 @@
 .testimonials .fm-posts__icon {
   margin-bottom: 10px;
 }
+
 /* Services */
 .services .fm-posts__card {
   --peek: 117px;
