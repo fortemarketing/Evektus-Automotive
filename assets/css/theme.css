@@ -92,6 +92,9 @@ body {
   color: var(--button-fg);
   border: 1px solid var(--button-border);
   transition: var(--transition);
+  /* Only the hover colours. Left at "all", the focus ring's colour would fade
+     in from the text colour instead of appearing at once. */
+  transition-property: background-color, color, border-color;
   border-radius: 100px;
   padding: 1.25rem 2rem;
   line-height: 1;
