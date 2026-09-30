@@ -62,14 +62,6 @@ and shortcodes load last so they can build on any component. `custom.css` loads
 last of all and can override anything above it. Every local asset uses its
 modification time as its cache version.
 
-On the page the stylesheets go out as one file, joined in that order into
-`wp-content/uploads/evek/theme-<hash>.css` the first time it is requested. The
-hash covers every file's path and modification time, so editing, adding or
-removing a stylesheet builds a new bundle; relative `url()`s are rewritten to
-point back at the theme. Old bundles are deleted after 30 days. To load the
-files separately - to see which file a rule comes from - define `SCRIPT_DEBUG`
-or return false from the `evek_bundle_css` filter.
-
 `builder-placeholder.css` is only loaded while Beaver Builder is open, since
 its placeholders never show to visitors. List other builder-only stylesheets
 in `evek_builder_only_styles()`.

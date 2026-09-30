@@ -158,179 +158,72 @@ function evek_builder_only_styles(): array
 }
 
 /**
- * Every theme stylesheet in cascade order, relative to the theme root:
+ * Load the theme assets in cascade order with cache-busting versions:
  * base -> palette -> theme stylesheet -> per-template -> custom.
- *
- * @return string[]
  */
-function evek_stylesheets(): array
+function evek_enqueue_assets(): void
 {
-	$files = array('assets/css/base.css', 'assets/css/theme.css', 'style.css');
+	$base_css   = EVEK_DIR . '/assets/css/base.css';
+	$theme_css  = EVEK_DIR . '/assets/css/theme.css';
+	$stylesheet = EVEK_DIR . '/style.css';
+	$custom_css = EVEK_DIR . '/assets/css/custom.css';
+	$custom_js  = EVEK_DIR . '/assets/js/custom.js';
+	$builder    = evek_builder_is_active();
+
+	wp_enqueue_style(
+		'evek-base',
+		EVEK_URI . '/assets/css/base.css',
+		array(),
+		(string) filemtime($base_css)
+	);
+
+	// The brand palette and type scale. Everything downstream references these
+	// custom properties rather than restating the values.
+	wp_enqueue_style(
+		'evek-palette',
+		EVEK_URI . '/assets/css/theme.css',
+		array('evek-base'),
+		(string) filemtime($theme_css)
+	);
+
+	wp_enqueue_style(
+		'evek-theme',
+		get_stylesheet_uri(),
+		array('evek-palette'),
+		(string) filemtime($stylesheet)
+	);
 
 	// Per-template styles, folder by folder in the order set by
-	// evek_template_asset_dirs().
+	// evek_template_asset_dirs(), each chained to the last so their order
+	// stays predictable no matter how many files are added.
+	$dependency = 'evek-theme';
+
 	foreach (evek_template_asset_dirs() as $dir => $prefix) {
 		foreach (evek_asset_files('css/' . $dir, 'css') as $path) {
-			$files[] = 'assets/css/' . $dir . '/' . basename($path);
+			if (! $builder && in_array('assets/css/' . $dir . '/' . basename($path), evek_builder_only_styles(), true)) {
+				continue;
+			}
+
+			$handle = $prefix . basename($path, '.css');
+
+			wp_enqueue_style(
+				$handle,
+				EVEK_URI . '/assets/css/' . $dir . '/' . basename($path),
+				array($dependency),
+				(string) filemtime($path)
+			);
+
+			$dependency = $handle;
 		}
 	}
 
 	// custom.css stays last so it can override anything above it.
-	$files[] = 'assets/css/custom.css';
-
-	if (evek_builder_is_active()) {
-		return $files;
-	}
-
-	return array_values(array_diff($files, evek_builder_only_styles()));
-}
-
-/**
- * The handle a stylesheet is enqueued under when the styles load separately.
- *
- * @param string $file Stylesheet relative to the theme root.
- */
-function evek_stylesheet_handle(string $file): string
-{
-	$fixed = array(
-		'assets/css/base.css'   => 'evek-base',
-		'assets/css/theme.css'  => 'evek-palette',
-		'style.css'             => 'evek-theme',
-		'assets/css/custom.css' => 'evek-custom',
+	wp_enqueue_style(
+		'evek-custom',
+		EVEK_URI . '/assets/css/custom.css',
+		array($dependency),
+		(string) filemtime($custom_css)
 	);
-
-	if (isset($fixed[$file])) {
-		return $fixed[$file];
-	}
-
-	$dir = substr(dirname($file), strlen('assets/css/'));
-	$map = evek_template_asset_dirs();
-
-	return (isset($map[$dir]) ? $map[$dir] : 'evek-') . basename($file, '.css');
-}
-
-/**
- * Points a stylesheet's relative url()s at the folder it came from, so they
- * still resolve once its rules are copied into the bundle.
- *
- * @param string $css      The stylesheet.
- * @param string $base_uri URI of the folder the stylesheet lives in.
- */
-function evek_css_rebase_urls(string $css, string $base_uri): string
-{
-	return (string) preg_replace_callback(
-		'/url\(\s*([\'"]?)(.*?)\1\s*\)/i',
-		static function (array $match) use ($base_uri): string {
-			if (preg_match('#^(data:|[a-z][a-z0-9+.-]*:|//|/|\#)#i', $match[2])) {
-				return $match[0];
-			}
-
-			return 'url("' . $base_uri . '/' . $match[2] . '")';
-		},
-		$css
-	);
-}
-
-/**
- * Joins the stylesheets into one file in uploads/evek/ and returns its URL,
- * or '' when it cannot be written, in which case the caller loads them
- * separately. The name is a hash of every file's path and modification time,
- * so editing, adding or removing a stylesheet produces a new bundle and the
- * browser never serves a stale one.
- *
- * Older bundles are kept for a while rather than deleted straight away, since
- * a cached page can still point at one until the page cache clears.
- *
- * @param string[] $files Stylesheets relative to the theme root.
- */
-function evek_css_bundle(array $files): string
-{
-	$upload = wp_upload_dir(null, false);
-
-	if (! empty($upload['error'])) {
-		return '';
-	}
-
-	$stamp = '';
-
-	foreach ($files as $file) {
-		$stamp .= $file . ':' . filemtime(EVEK_DIR . '/' . $file) . ';';
-	}
-
-	$dir  = trailingslashit($upload['basedir']) . 'evek';
-	$name = 'theme-' . substr(md5($stamp), 0, 12) . '.css';
-	$path = $dir . '/' . $name;
-
-	if (! is_file($path)) {
-		if (! wp_mkdir_p($dir)) {
-			return '';
-		}
-
-		$css = '';
-
-		foreach ($files as $file) {
-			$folder   = dirname($file);
-			$base_uri = EVEK_URI . ('.' === $folder ? '' : '/' . $folder);
-			$css     .= '/* ' . $file . " */\n" . evek_css_rebase_urls((string) file_get_contents(EVEK_DIR . '/' . $file), $base_uri) . "\n";
-		}
-
-		// Written to a temporary file and renamed into place, so a request
-		// arriving mid-write never gets half a stylesheet.
-		$temp = $path . '.' . uniqid('', true) . '.tmp';
-
-		if (false === file_put_contents($temp, $css) || ! rename($temp, $path)) {
-			if (is_file($temp)) {
-				unlink($temp);
-			}
-			return '';
-		}
-
-		foreach (glob($dir . '/theme-*.css') ?: array() as $old) {
-			if ($old !== $path && filemtime($old) < time() - 30 * DAY_IN_SECONDS) {
-				unlink($old);
-			}
-		}
-	}
-
-	return trailingslashit($upload['baseurl']) . 'evek/' . $name;
-}
-
-/**
- * Load the theme assets with cache-busting versions.
- *
- * The stylesheets go out as one bundled file. Turn that off with the
- * evek_bundle_css filter, or by defining SCRIPT_DEBUG, to load each file
- * separately in the same order - handy when finding which file a rule is in.
- */
-function evek_enqueue_assets(): void
-{
-	$custom_js = EVEK_DIR . '/assets/js/custom.js';
-	$files     = evek_stylesheets();
-	$bundle    = apply_filters('evek_bundle_css', ! (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG))
-		? evek_css_bundle($files)
-		: '';
-
-	if ('' !== $bundle) {
-		// The version is already in the file name.
-		wp_enqueue_style('evek-styles', $bundle, array(), null);
-	} else {
-		// Each file chained to the last so the cascade stays in order no
-		// matter how many are added.
-		$dependency = array();
-
-		foreach ($files as $file) {
-			$handle = evek_stylesheet_handle($file);
-
-			wp_enqueue_style(
-				$handle,
-				'style.css' === $file ? get_stylesheet_uri() : EVEK_URI . '/' . $file,
-				$dependency,
-				(string) filemtime(EVEK_DIR . '/' . $file)
-			);
-
-			$dependency = array($handle);
-		}
-	}
 
 	// Per-template scripts, from the same folders as the styles. Each is
 	// self-contained, so they carry no dependencies on one another.
