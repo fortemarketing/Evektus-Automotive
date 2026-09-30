@@ -40,7 +40,7 @@
 }
 .testimonials .fm-posts__title {
   color: var(--primary);
-  font-weight: 400;
+  font-weight: 500;
   font-family: var(--font-body);
 }
 .testimonials .fm-posts__text {
@@ -58,11 +58,8 @@
 .testimonials .fm-posts__date {
   color: var(--grey);
 }
-.testimonials .fm-posts__thumb {
+.testimonials .fm-posts__icon {
   margin-bottom: 10px;
-}
-.testimonials .fm-posts__thumb img {
-  width: 150px;
 }
 /* Services */
 .services .fm-posts__card {
