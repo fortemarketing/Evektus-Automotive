@@ -93,3 +93,12 @@
   font-family: var(--font-heading);
   margin: 0;
 }
+.services .theme-posts__text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  overflow: hidden;
+  min-height: calc(5 * 1lh);
+  color: var(--light);
+}
