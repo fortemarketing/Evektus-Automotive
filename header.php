@@ -47,7 +47,7 @@
 
 					if (! empty($evek_cta['url']) && ! empty($evek_cta['label'])) :
 					?>
-						<a class="theme-button primary site-header__cta" href="<?php echo esc_url($evek_cta['url']); ?>">
+						<a class="fm-button primary site-header__cta" href="<?php echo esc_url($evek_cta['url']); ?>">
 							<span><?php echo esc_html($evek_cta['label']); ?></span>
 							<svg class="site-header__cta-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
 								<path d="M4 5h16v11H9l-5 4z" />
