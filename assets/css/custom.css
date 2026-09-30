@@ -65,7 +65,7 @@
 }
 /* Services */
 .services .fm-posts__card {
-  --peek: 140px;
+  --peek: 117px;
   position: relative;
   overflow: hidden;
   border-radius: 15px;
