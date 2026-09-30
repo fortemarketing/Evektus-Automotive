@@ -31,7 +31,7 @@
 /* Testimonials */
 .testimonials .theme-posts__card {
   background: var(--light);
-  padding: 15px;
+  padding: 35px;
   border-radius: 15px;
   color: var(--dark);
 }
