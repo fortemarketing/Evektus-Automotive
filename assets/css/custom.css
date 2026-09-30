@@ -53,6 +53,25 @@
 .testimonials .theme-posts__date {
   color: var(--grey);
 }
+.testimonials .theme-posts__thumb {
+  margin-bottom: 10px;
+}
 .testimonials .theme-posts__thumb img {
   width: 150px;
+}
+/* Services */
+.services .theme-posts__card {
+  overflow: hidden;
+  border-radius: 15px;
+  color: var(--light);
+}
+.services .theme-posts__content {
+  background: var(--primary);
+  border-radius: 15px;
+}
+.services .theme-posts__thumb {
+  margin-bottom: 10px;
+}
+.services .theme-posts__thumb img {
+  aspect-ratio: 1 / 1;
 }

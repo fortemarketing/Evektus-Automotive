@@ -290,19 +290,39 @@
 /*
  * The pagination is rendered after the swiper, not inside it, so it sits in
  * normal flow below the slides. Swiper's stylesheet positions it absolutely
- * over the slider's foot; relative keeps it in flow while still anchoring the
- * progress bar's absolutely positioned fill, and inset clears Swiper's offsets.
- * The extra class outranks Swiper's rules whichever stylesheet loads last.
+ * over the slider's foot, and a dynamic bullet strip at left: 50% with a
+ * translateX(-50%). Relative keeps it in flow while still anchoring the
+ * progress bar's absolutely positioned fill; inset and transform clear
+ * Swiper's offsets. Both root classes put these rules ahead of Swiper's
+ * three-class selectors whichever stylesheet loads last.
  */
-.theme-posts .theme-posts__carousel > .swiper-pagination {
+.theme-posts.theme-posts--carousel .theme-posts__carousel > .swiper-pagination {
 	position: relative;
 	inset: auto;
 	transform: none;
 }
 
-/* Swiper gives dynamic bullets a fixed width; centre that box under the slides. */
-.theme-posts .theme-posts__carousel > .swiper-pagination-bullets-dynamic {
+/*
+ * Bullets, plain or dynamic, sit on a zero-height line so Top Spacing is the
+ * whole gap above them. Swiper does this for dynamic bullets only, which left
+ * plain bullets with the text's line height added on top.
+ */
+.theme-posts.theme-posts--carousel .theme-posts__carousel > .swiper-pagination-bullets {
+	font-size: 0;
+	line-height: 0;
+}
+
+.theme-posts.theme-posts--carousel .theme-posts__carousel > .swiper-pagination-bullets .swiper-pagination-bullet {
+	vertical-align: top;
+}
+
+/*
+ * Swiper gives a dynamic strip a fixed width and slides its bullets through it
+ * left to right. Keep them on one line and centre the strip under the slides.
+ */
+.theme-posts.theme-posts--carousel .theme-posts__carousel > .swiper-pagination-bullets-dynamic {
 	margin-inline: auto;
+	white-space: nowrap;
 }
 
 /* Scrollbar ---------------------------------------------------------------- */
