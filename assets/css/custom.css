@@ -31,7 +31,22 @@
 /* Testimonials */
 .testimonials .theme-posts__card {
   background: var(--light);
-  padding: 35px;
+  padding: 15px;
   border-radius: 15px;
   color: var(--dark);
+}
+.testimonials .theme-posts__title {
+  color: var(--primary);
+  font-weight: 400;
+}
+.testimonials .theme-posts__text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+  line-clamp: 8;
+  overflow: hidden;
+  min-height: calc(8 * 1lh);
+}
+.testimonials .theme-posts__date {
+  color: var(--grey);
 }

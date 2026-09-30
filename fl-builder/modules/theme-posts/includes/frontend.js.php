@@ -55,44 +55,57 @@ $fm_responsive = function ( $settings, $name, $fallback ) {
 	return $out;
 };
 
-$fm_columns = $fm_responsive( $settings, 'post_columns', 3 );
-$fm_scroll  = $fm_responsive( $settings, 'slides_to_scroll', 1 );
-$fm_gap     = $fm_responsive( $settings, 'column_gap', 30 );
+$fm_per_view = $fm_responsive( $settings, 'slides_per_view', 1 );
+$fm_space    = $fm_responsive( $settings, 'space_between', 20 );
+
+/**
+ * A yes / no select as a boolean, with the default the form gives it.
+ *
+ * @param string $name     Setting name.
+ * @param string $fallback 'yes' or 'no' when the setting is unset.
+ * @return bool
+ */
+$fm_yes = function ( $name, $fallback ) use ( $module ) {
+	return 'yes' === $module->get( $name, $fallback );
+};
 
 $fm_config = array(
-	'id'         => $id,
-	'layout'     => $module->get_layout(),
-	'loadMore'   => 'load_more' === $module->get( 'pagination_type', 'none' ),
-	'carousel'   => array(
-		'speed'          => is_numeric( $module->get( 'transition_speed', 500 ) ) ? (int) $module->get( 'transition_speed', 500 ) : 500,
-		'loop'           => 'yes' === $module->get( 'infinite', 'yes' ),
-		'autoplay'       => 'yes' === $module->get( 'autoplay', 'no' ),
-		'autoplayDelay'  => is_numeric( $module->get( 'autoplay_speed', 5000 ) ) ? (int) $module->get( 'autoplay_speed', 5000 ) : 5000,
-		'pauseOnHover'   => 'yes' === $module->get( 'pause_on_hover', 'yes' ),
-		'arrows'         => $module->has_arrows(),
-		'pagination'     => $module->get_pagination_type(),
-		'dynamicBullets' => 'yes' === $module->get( 'dynamic_bullets', 'no' ),
+	'id'       => $id,
+	'layout'   => $module->get_layout(),
+	'loadMore' => 'load_more' === $module->get( 'pagination_type', 'none' ),
+	'carousel' => array(
+		'speed'                => is_numeric( $module->get( 'speed', 400 ) ) ? (int) $module->get( 'speed', 400 ) : 400,
+		'loop'                 => $fm_yes( 'loop', 'yes' ),
+		'centeredSlides'       => $fm_yes( 'centered_slides', 'no' ),
+		'grabCursor'           => $fm_yes( 'grab_cursor', 'yes' ),
+		'freeMode'             => $fm_yes( 'free_mode', 'no' ),
+		'keyboard'             => $fm_yes( 'keyboard', 'no' ),
+		'mousewheel'           => $fm_yes( 'mousewheel', 'no' ),
+		'autoplay'             => $fm_yes( 'autoplay', 'yes' ),
+		'autoplayDelay'        => is_numeric( $module->get( 'autoplay_delay', 3000 ) ) ? (int) $module->get( 'autoplay_delay', 3000 ) : 3000,
+		'disableOnInteraction' => $fm_yes( 'disable_on_interaction', 'no' ),
+		'pauseOnHover'         => $fm_yes( 'pause_on_mouse_enter', 'yes' ),
+		'arrows'               => $module->has_arrows(),
+		'pagination'           => $module->get_pagination_type(),
+		'dynamicBullets'       => $fm_yes( 'dynamic_bullets', 'no' ),
+		'scrollbar'            => $fm_yes( 'scrollbar', 'no' ),
 		// Mobile-first: the phone values are the base, each wider band overrides.
-		'base'           => array(
-			'slidesPerView'  => max( 1, $fm_columns['responsive'] ),
-			'slidesPerGroup' => max( 1, $fm_scroll['responsive'] ),
-			'spaceBetween'   => $fm_gap['responsive'],
+		'base'                 => array(
+			'slidesPerView' => max( 1, $fm_per_view['responsive'] ),
+			'spaceBetween'  => $fm_space['responsive'],
 		),
-		'breakpoints'    => array(
+		'breakpoints'          => array(
 			$fm_mobile_bp + 1 => array(
-				'slidesPerView'  => max( 1, $fm_columns['medium'] ),
-				'slidesPerGroup' => max( 1, $fm_scroll['medium'] ),
-				'spaceBetween'   => $fm_gap['medium'],
+				'slidesPerView' => max( 1, $fm_per_view['medium'] ),
+				'spaceBetween'  => $fm_space['medium'],
 			),
 			$fm_medium_bp + 1 => array(
-				'slidesPerView'  => max( 1, $fm_columns['large'] ),
-				'slidesPerGroup' => max( 1, $fm_scroll['large'] ),
-				'spaceBetween'   => $fm_gap['large'],
+				'slidesPerView' => max( 1, $fm_per_view['large'] ),
+				'spaceBetween'  => $fm_space['large'],
 			),
 			$fm_large_bp + 1  => array(
-				'slidesPerView'  => max( 1, $fm_columns['default'] ),
-				'slidesPerGroup' => max( 1, $fm_scroll['default'] ),
-				'spaceBetween'   => $fm_gap['default'],
+				'slidesPerView' => max( 1, $fm_per_view['default'] ),
+				'spaceBetween'  => $fm_space['default'],
 			),
 		),
 	),

@@ -61,19 +61,32 @@
 		});
 
 		var args = {
-			speed: opts.speed || 500,
+			speed: opts.speed || 400,
 			loop: !!opts.loop && slides > perView,
+			centeredSlides: !!opts.centeredSlides,
+			grabCursor: !!opts.grabCursor,
 			slidesPerView: (opts.base && opts.base.slidesPerView) || 1,
-			slidesPerGroup: (opts.base && opts.base.slidesPerGroup) || 1,
 			spaceBetween: (opts.base && opts.base.spaceBetween) || 0,
 			breakpoints: opts.breakpoints || {},
 			watchOverflow: true
 		};
 
+		if (opts.freeMode) {
+			args.freeMode = true;
+		}
+
+		if (opts.keyboard) {
+			args.keyboard = { enabled: true };
+		}
+
+		if (opts.mousewheel) {
+			args.mousewheel = { forceToAxis: true };
+		}
+
 		if (opts.autoplay) {
 			args.autoplay = {
-				delay: opts.autoplayDelay || 5000,
-				disableOnInteraction: false,
+				delay: opts.autoplayDelay || 3000,
+				disableOnInteraction: !!opts.disableOnInteraction,
 				pauseOnMouseEnter: !!opts.pauseOnHover
 			};
 		}
@@ -91,6 +104,13 @@
 				type: opts.pagination,
 				clickable: true,
 				dynamicBullets: !!opts.dynamicBullets
+			};
+		}
+
+		if (opts.scrollbar) {
+			args.scrollbar = {
+				el: el.querySelector('.swiper-scrollbar'),
+				hide: false
 			};
 		}
 

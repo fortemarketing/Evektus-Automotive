@@ -361,6 +361,9 @@ class ThemePostsModule extends FLBuilderModule
 						$this->render_arrow('next');
 					}
 					?>
+					<?php if ('yes' === $this->get('scrollbar', 'no')) : ?>
+						<div class="swiper-scrollbar"></div>
+					<?php endif; ?>
 				</div>
 			<?php
 			if ($outside) {
@@ -771,16 +774,18 @@ FLBuilder::register_module(
 							'help'    => __('Grid keeps every card in a row the same height. Masonry lets each card keep its natural height. List stacks one card per row.', 'fl-builder'),
 							'toggle'  => array(
 								'grid'     => array(
-									'fields'   => array('post_columns'),
+									'fields'   => array('post_columns', 'column_gap', 'row_gap'),
 									'sections' => array('filters_section'),
 								),
 								'masonry'  => array(
-									'fields'   => array('post_columns'),
+									'fields'   => array('post_columns', 'column_gap', 'row_gap'),
 									'sections' => array('filters_section'),
 								),
+								'list'     => array(
+									'fields' => array('row_gap'),
+								),
 								'carousel' => array(
-									'fields' => array('post_columns'),
-									'tabs'   => array('carousel', 'navigation'),
+									'tabs' => array('carousel', 'navigation'),
 								),
 							),
 						),
@@ -933,32 +938,41 @@ FLBuilder::register_module(
 		'carousel'   => array(
 			'title'    => __('Carousel', 'fl-builder'),
 			'sections' => array(
-				'carousel_section' => array(
-					'title'  => __('Carousel', 'fl-builder'),
+				'slides_section'   => array(
+					'title'  => __('Slides', 'fl-builder'),
 					'fields' => array(
-						'slides_to_scroll' => array(
-							'type'       => 'unit',
-							'label'      => __('Cards to Scroll', 'fl-builder'),
-							'default'    => '1',
-							'responsive' => true,
-							'slider'     => array(
-								'min'  => 1,
-								'max'  => 8,
-								'step' => 1,
+						'slides_per_view' => array(
+							'type'        => 'unit',
+							'label'       => __('Slides Per View', 'fl-builder'),
+							'description' => __('slides', 'fl-builder'),
+							'responsive'  => array(
+								'default' => array(
+									'default'    => '3',
+									'large'      => '',
+									'medium'     => '2',
+									'responsive' => '1',
+								),
 							),
 						),
-						'transition_speed' => array(
-							'type'    => 'unit',
-							'label'   => __('Transition Speed', 'fl-builder'),
-							'default' => '500',
-							'units'   => array('ms'),
-							'slider'  => array(
-								'min'  => 100,
-								'max'  => 2000,
-								'step' => 50,
+						'space_between'   => array(
+							'type'        => 'unit',
+							'label'       => __('Space Between', 'fl-builder'),
+							'description' => 'px',
+							'responsive'  => array(
+								'default' => array(
+									'default'    => '20',
+									'large'      => '',
+									'medium'     => '16',
+									'responsive' => '12',
+								),
 							),
 						),
-						'infinite'         => array(
+					),
+				),
+				'behavior_section' => array(
+					'title'  => __('Behavior', 'fl-builder'),
+					'fields' => array(
+						'loop' => array(
 							'type'    => 'select',
 							'label'   => __('Loop', 'fl-builder'),
 							'default' => 'yes',
@@ -967,32 +981,95 @@ FLBuilder::register_module(
 								'no'  => __('No', 'fl-builder'),
 							),
 						),
-						'autoplay'         => array(
+						'centered_slides' => array(
 							'type'    => 'select',
-							'label'   => __('Autoplay', 'fl-builder'),
+							'label'   => __('Center Active Slide', 'fl-builder'),
 							'default' => 'no',
+							'options' => array(
+								'yes' => __('Yes', 'fl-builder'),
+								'no'  => __('No', 'fl-builder'),
+							),
+						),
+						'speed' => array(
+							'type'        => 'unit',
+							'label'       => __('Transition Speed', 'fl-builder'),
+							'default'     => '400',
+							'placeholder' => '400',
+							'description' => 'ms',
+						),
+						'grab_cursor' => array(
+							'type'    => 'select',
+							'label'   => __('Grab Cursor', 'fl-builder'),
+							'default' => 'yes',
+							'options' => array(
+								'yes' => __('Yes', 'fl-builder'),
+								'no'  => __('No', 'fl-builder'),
+							),
+						),
+						'free_mode' => array(
+							'type'    => 'select',
+							'label'   => __('Free Mode', 'fl-builder'),
+							'default' => 'no',
+							'options' => array(
+								'yes' => __('Yes', 'fl-builder'),
+								'no'  => __('No', 'fl-builder'),
+							),
+							'help'    => __('Slides move freely without snapping.', 'fl-builder'),
+						),
+						'keyboard' => array(
+							'type'    => 'select',
+							'label'   => __('Keyboard Navigation', 'fl-builder'),
+							'default' => 'no',
+							'options' => array(
+								'yes' => __('Yes', 'fl-builder'),
+								'no'  => __('No', 'fl-builder'),
+							),
+						),
+						'mousewheel' => array(
+							'type'    => 'select',
+							'label'   => __('Mousewheel Control', 'fl-builder'),
+							'default' => 'no',
+							'options' => array(
+								'yes' => __('Yes', 'fl-builder'),
+								'no'  => __('No', 'fl-builder'),
+							),
+						),
+					),
+				),
+				'autoplay_section' => array(
+					'title'  => __('Autoplay', 'fl-builder'),
+					'fields' => array(
+						'autoplay' => array(
+							'type'    => 'select',
+							'label'   => __('Enable Autoplay', 'fl-builder'),
+							'default' => 'yes',
 							'options' => array(
 								'yes' => __('Yes', 'fl-builder'),
 								'no'  => __('No', 'fl-builder'),
 							),
 							'toggle'  => array(
 								'yes' => array(
-									'fields' => array('autoplay_speed', 'pause_on_hover'),
+									'fields' => array('autoplay_delay', 'disable_on_interaction', 'pause_on_mouse_enter'),
 								),
 							),
 						),
-						'autoplay_speed'   => array(
-							'type'    => 'unit',
-							'label'   => __('Autoplay Speed', 'fl-builder'),
-							'default' => '5000',
-							'units'   => array('ms'),
-							'slider'  => array(
-								'min'  => 1000,
-								'max'  => 15000,
-								'step' => 500,
+						'autoplay_delay' => array(
+							'type'        => 'unit',
+							'label'       => __('Delay', 'fl-builder'),
+							'default'     => '3000',
+							'placeholder' => '3000',
+							'description' => 'ms',
+						),
+						'disable_on_interaction' => array(
+							'type'    => 'select',
+							'label'   => __('Disable After Interaction', 'fl-builder'),
+							'default' => 'no',
+							'options' => array(
+								'yes' => __('Yes', 'fl-builder'),
+								'no'  => __('No', 'fl-builder'),
 							),
 						),
-						'pause_on_hover'   => array(
+						'pause_on_mouse_enter' => array(
 							'type'    => 'select',
 							'label'   => __('Pause on Hover', 'fl-builder'),
 							'default' => 'yes',
@@ -1038,8 +1115,8 @@ FLBuilder::register_module(
 						),
 						'arrow_size'     => array(
 							'type'    => 'unit',
-							'label'   => __('Arrow Size', 'fl-builder'),
-							'default' => '40',
+							'label'       => __('Arrow Size', 'fl-builder'),
+							'placeholder' => '40',
 							'units'   => array('px'),
 							'slider'  => array(
 								'min'  => 8,
@@ -1066,6 +1143,7 @@ FLBuilder::register_module(
 								'outside' => __('Outside', 'fl-builder'),
 								'below'   => __('Below', 'fl-builder'),
 							),
+							'help'    => __('Overlay centers arrows over the sides. Outside reserves gutters beside the slides. Below places arrows in a block below the carousel.', 'fl-builder'),
 							'toggle'  => array(
 								'outside' => array(
 									'fields' => array('arrow_gutter'),
@@ -1077,9 +1155,10 @@ FLBuilder::register_module(
 						),
 						'arrow_gutter'   => array(
 							'type'    => 'unit',
-							'label'   => __('Gutter Width', 'fl-builder'),
-							'default' => '50',
-							'units'   => array('px'),
+							'label'       => __('Gutter Width', 'fl-builder'),
+							'default'     => '50',
+							'placeholder' => '50',
+							'description' => 'px',
 						),
 						'arrow_gap'      => array(
 							'type'    => 'unit',
@@ -1103,6 +1182,7 @@ FLBuilder::register_module(
 								'max'  => 120,
 								'step' => 1,
 							),
+							'help'       => __('Space above the arrows in the Below layout. With pagination on, the dots sit between the slides and the arrows, so this is the gap below the dots.', 'fl-builder'),
 							'preview'    => array(
 								'type'     => 'css',
 								'selector' => '.theme-posts__arrows',
@@ -1127,7 +1207,7 @@ FLBuilder::register_module(
 							),
 							'toggle'  => array(
 								'bullets'     => array(
-									'fields' => array('carousel_pagination_color', 'dots_size', 'dynamic_bullets', 'carousel_pagination_spacing'),
+									'fields' => array('carousel_pagination_color', 'dynamic_bullets', 'carousel_pagination_spacing'),
 								),
 								'fraction'    => array(
 									'fields' => array('carousel_pagination_color', 'carousel_pagination_spacing'),
@@ -1148,14 +1228,22 @@ FLBuilder::register_module(
 								'type' => 'refresh',
 							),
 						),
-						'dots_size'                   => array(
-							'type'    => 'unit',
-							'label'   => __('Dot Size', 'fl-builder'),
-							'default' => '10',
-							'units'   => array('px'),
-							'slider'  => array(
-								'min'  => 4,
-								'max'  => 30,
+						'carousel_pagination_spacing' => array(
+							'type'       => 'unit',
+							'label'      => __('Top Spacing', 'fl-builder'),
+							'default'    => '20',
+							'units'      => array('px'),
+							'responsive' => true,
+							'help'       => __('Space between the slides and the pagination.', 'fl-builder'),
+							'preview'    => array(
+								'type'     => 'css',
+								'selector' => '.swiper-pagination',
+								'property' => 'padding-top',
+								'unit'     => 'px',
+							),
+							'slider'     => array(
+								'min'  => 0,
+								'max'  => 120,
 								'step' => 1,
 							),
 						),
@@ -1167,18 +1255,19 @@ FLBuilder::register_module(
 								'yes' => __('Yes', 'fl-builder'),
 								'no'  => __('No', 'fl-builder'),
 							),
-							'help'    => __('Shows a fixed number of bullets that scroll, for a carousel with many cards.', 'fl-builder'),
 						),
-						'carousel_pagination_spacing' => array(
-							'type'       => 'unit',
-							'label'      => __('Top Spacing', 'fl-builder'),
-							'default'    => '20',
-							'units'      => array('px'),
-							'responsive' => true,
-							'slider'     => array(
-								'min'  => 0,
-								'max'  => 120,
-								'step' => 1,
+					),
+				),
+				'scrollbar_section'           => array(
+					'title'  => __('Scrollbar', 'fl-builder'),
+					'fields' => array(
+						'scrollbar' => array(
+							'type'    => 'select',
+							'label'   => __('Show Scrollbar', 'fl-builder'),
+							'default' => 'no',
+							'options' => array(
+								'yes' => __('Yes', 'fl-builder'),
+								'no'  => __('No', 'fl-builder'),
 							),
 						),
 					),

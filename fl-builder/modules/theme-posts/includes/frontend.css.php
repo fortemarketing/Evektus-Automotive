@@ -104,24 +104,14 @@ if ( $fm_carousel ) {
 		)
 	);
 
-	$fm_dot_size = isset( $settings->dots_size ) && '' !== $settings->dots_size ? (int) $settings->dots_size : 10;
-
-	FLBuilderCSS::rule(
-		array(
-			'selector' => $fm_node . ' .swiper-pagination-bullet',
-			'props'    => array(
-				'width'  => $fm_dot_size . 'px',
-				'height' => $fm_dot_size . 'px',
-			),
-		)
-	);
-
 	if ( isset( $settings->carousel_pagination_color ) && '' !== $settings->carousel_pagination_color ) {
 		$fm_pag_color = FLBuilderColor::hex_or_rgb( $settings->carousel_pagination_color );
 
+		// Every bullet takes the colour, as in FM Carousel; Swiper's own opacity
+		// is what dims the inactive ones.
 		FLBuilderCSS::rule(
 			array(
-				'selector' => $fm_node . ' .swiper-pagination-bullet-active, ' . $fm_node . ' .swiper-pagination-progressbar-fill',
+				'selector' => $fm_node . ' .swiper-pagination-bullet, ' . $fm_node . ' .swiper-pagination-progressbar-fill',
 				'props'    => array(
 					'background-color' => $fm_pag_color,
 				),

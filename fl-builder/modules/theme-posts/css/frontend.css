@@ -284,3 +284,9 @@
 .theme-posts__empty {
 	text-align: center;
 }
+
+/* Scrollbar ---------------------------------------------------------------- */
+
+.theme-posts__swiper .swiper-scrollbar-drag {
+	background: currentColor;
+}
