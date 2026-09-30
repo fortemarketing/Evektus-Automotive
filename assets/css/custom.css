@@ -70,11 +70,11 @@
   margin-top: -10px;
 }
 .services .theme-posts__thumb .placeholder {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
   background: var(--grey);
 }
 .services .theme-posts__thumb img {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3;
 }
 .services .theme-posts__title {
   color: var(--light);
@@ -86,4 +86,5 @@
   min-height: calc(2 * 1lh);
   text-align: center;
   font-family: var(--font-heading);
+  margin: 0;
 }
