@@ -60,7 +60,7 @@
   width: 150px;
 }
 /* Services */
-.services .theme-posts__card {
+.services .theme-posts__link {
   overflow: hidden;
   border-radius: 15px;
 }
@@ -68,6 +68,8 @@
   background: var(--primary);
   border-radius: 15px;
   margin-top: -10px;
+  z-index: 1;
+  position: relative;
 }
 .services .theme-posts__thumb .placeholder {
   aspect-ratio: 4 / 3;
