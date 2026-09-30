@@ -140,6 +140,20 @@ links to `/contact-us/` by default; change its `label` or `url` with the
 `evek_header_cta` filter, or return an empty `url` to hide it. It is hidden
 below 480px, where the hamburger needs the room.
 
+## Footer
+
+The fallback footer in `footer.php` is a dark band. On the left are the
+business address, phone, email and social icons; beside them is the Footer
+menu; and below is a bar with the copyright, the Privacy Policy link (when one
+is set under Settings > Privacy) and the Forte Marketing credit.
+
+Change the business details with the `evek_footer_contact` filter. It takes
+`address` (an array of lines), `phone`, `email` and `social` (`facebook` and
+`instagram` URLs). An empty value hides that line or icon.
+
+The Footer menu is one flat menu. From 768px it fills down before across, so it
+wraps into a new column after every five items. Below that it is two columns.
+
 ## Menus
 
 Two locations, `primary` and `footer`. The primary menu renders through the

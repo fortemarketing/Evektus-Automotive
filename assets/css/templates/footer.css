@@ -1,22 +1,78 @@
 .site-footer {
-  color: var(--dark);
-  background: var(--row-background);
+  color: var(--light);
+  background: var(--dark-accent);
+  font-size: var(--text-small);
 }
 
 .site-footer__inner {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding-block: 2.5rem;
+  gap: 3rem;
+  padding-block: 3rem 2rem;
 }
 
-.footer-menu {
+.site-footer a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--primary);
+}
+
+.site-footer :is(a, button):focus-visible {
+  outline: 2px solid var(--light);
+  outline-offset: 3px;
+}
+
+/* Contact details beside the menu; stacked above it on small screens. */
+.site-footer__top {
+  display: grid;
+  gap: 2rem;
+}
+
+.site-footer__contact {
+  font-style: normal;
+}
+
+.site-footer__contact p {
+  margin: 0 0 0.75rem;
+}
+
+.site-footer__social {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
+  gap: 0.75rem;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.site-footer__social a {
+  display: block;
+  line-height: 0;
+  color: var(--primary);
+}
+
+.site-footer__social a:hover,
+.site-footer__social a:focus-visible {
+  color: var(--primary-light);
+}
+
+/* The footer menu is one flat WordPress menu. On wider screens it fills down
+   before across, so it wraps into a new column after every five items. */
+.footer-menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-menu .current-menu-item > a {
+  color: var(--primary);
 }
 
 .site-footer__meta {
@@ -24,20 +80,40 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.5rem 2rem;
-  font-size: 0.65625rem;
+  color: var(--primary);
 }
 
 .site-footer__meta p {
   margin: 0;
 }
 
-.footer-menu a {
-  color: inherit;
-  text-decoration: none;
+.site-footer__meta a:hover,
+.site-footer__meta a:focus-visible {
+  color: var(--light);
 }
 
-.footer-menu a:hover,
-.footer-menu a:focus-visible,
-.footer-menu .current-menu-item > a {
-  color: var(--primary);
+.site-footer__sep {
+  margin-inline: 0.125rem;
+}
+
+@media (min-width: 768px) {
+  .footer-menu {
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-template-rows: repeat(5, auto);
+  }
+}
+
+@media (min-width: 992px) {
+  /* Five equal columns: contact, then up to four of menu. */
+  .site-footer__top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 4fr);
+    gap: 1.5rem;
+  }
+
+  .footer-menu {
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
