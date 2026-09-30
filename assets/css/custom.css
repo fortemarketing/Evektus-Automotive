@@ -60,6 +60,9 @@
   width: 150px;
 }
 /* Services */
+.services .theme-posts__card {
+  overflow: visible;
+}
 .services .theme-posts__link {
   overflow: hidden;
   border-radius: 15px;
