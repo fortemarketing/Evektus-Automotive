@@ -285,6 +285,26 @@
 	text-align: center;
 }
 
+/* Carousel pagination ------------------------------------------------------ */
+
+/*
+ * The pagination is rendered after the swiper, not inside it, so it sits in
+ * normal flow below the slides. Swiper's stylesheet positions it absolutely
+ * over the slider's foot; relative keeps it in flow while still anchoring the
+ * progress bar's absolutely positioned fill, and inset clears Swiper's offsets.
+ * The extra class outranks Swiper's rules whichever stylesheet loads last.
+ */
+.theme-posts .theme-posts__carousel > .swiper-pagination {
+	position: relative;
+	inset: auto;
+	transform: none;
+}
+
+/* Swiper gives dynamic bullets a fixed width; centre that box under the slides. */
+.theme-posts .theme-posts__carousel > .swiper-pagination-bullets-dynamic {
+	margin-inline: auto;
+}
+
 /* Scrollbar ---------------------------------------------------------------- */
 
 .theme-posts__swiper .swiper-scrollbar-drag {

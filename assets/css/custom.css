@@ -35,6 +35,9 @@
   border-radius: 15px;
   color: var(--dark);
 }
+.testimonials .theme-posts__content {
+  padding: 0;
+}
 .testimonials .theme-posts__title {
   color: var(--primary);
   font-weight: 400;
@@ -49,4 +52,7 @@
 }
 .testimonials .theme-posts__date {
   color: var(--grey);
+}
+.testimonials .theme-posts__thumb img {
+  width: 150px;
 }

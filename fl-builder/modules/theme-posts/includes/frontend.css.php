@@ -98,8 +98,8 @@ if ( $fm_carousel ) {
 		array(
 			'settings'     => $settings,
 			'setting_name' => 'carousel_pagination_spacing',
-			'selector'     => $fm_node . ' .swiper-pagination',
-			'prop'         => 'padding-top',
+			'selector'     => $fm_node . ' .theme-posts__carousel > .swiper-pagination',
+			'prop'         => 'margin-top',
 			'unit'         => 'px',
 		)
 	);

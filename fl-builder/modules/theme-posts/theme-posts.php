@@ -1237,8 +1237,8 @@ FLBuilder::register_module(
 							'help'       => __('Space between the slides and the pagination.', 'fl-builder'),
 							'preview'    => array(
 								'type'     => 'css',
-								'selector' => '.swiper-pagination',
-								'property' => 'padding-top',
+								'selector' => '.theme-posts__carousel > .swiper-pagination',
+								'property' => 'margin-top',
 								'unit'     => 'px',
 							),
 							'slider'     => array(
