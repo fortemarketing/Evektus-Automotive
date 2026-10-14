@@ -5,6 +5,7 @@
   --secondary: #161616;
   --secondary-light: #2e2e2e;
   --secondary-dark: #000000;
+  --accent: #f1f1f1;
   --light: #ffffff;
   --dark: #000000;
   --grey: #b8b8b8;
@@ -84,7 +85,7 @@ body {
   font-size: var(--text-button);
   font-weight: 500;
   line-height: normal;
-  text-transform: none;
+  text-transform: uppercase;
   padding: 1rem 2rem;
   transition: var(--transition);
 }
@@ -118,10 +119,9 @@ body {
 
 .fm-button:is(a, button, span).light:hover,
 .fm-button:is(a, button, span).light:focus {
-  background-color: var(--primary);
-  border-color: var(--primary);
-  color: var(--light);
-  outline-color: var(--light);
+  background-color: var(--accent);
+  border-color: var(--accent);
+  outline-color: var(--accent);
 }
 
 .fm-button:is(a, button, span).dark {
