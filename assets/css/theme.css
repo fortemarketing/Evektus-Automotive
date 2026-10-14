@@ -12,12 +12,12 @@
   --accordion-border: #c4c4c4;
   --transparent: transparent;
 
-  --content-max: 1240px;
+  --content-max: 1440px;
 
   --font-median: "Median", "Arial Black", "Helvetica Neue", sans-serif;
   --font-inter: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --text-h1: clamp(2.25rem, 0.9167rem + 5.9259vw, 6.25rem);
+  --text-h1: clamp(2.25rem, 0.2917rem + 8.7037vw, 8.125rem);
   --text-h1-compact: clamp(2rem, 1.6667rem + 1.4815vw, 3rem);
   --text-h2: clamp(1.75rem, 1.3958rem + 1.5741vw, 2.8125rem);
   --text-h3: clamp(1.25rem, 1.1667rem + 0.3704vw, 1.5rem);
@@ -38,7 +38,7 @@ h1 {
   font-family: var(--font-median);
   font-size: var(--text-h1);
   font-weight: 400;
-  line-height: 1.154;
+  line-height: 0.923;
   letter-spacing: normal;
 }
 

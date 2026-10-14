@@ -22,7 +22,7 @@ Colours and the type scale live in `assets/css/theme.css` as custom properties.
 
 | Style       | Element / class         | Font            | Desktop size / line height |
 | ----------- | ----------------------- | --------------- | -------------------------- |
-| Head 1      | `h1`                    | Median 400      | 100 / 115px                |
+| Head 1      | `h1`                    | Median 400      | 130 / 120px                |
 | Head 2      | `h2`                    | Median 400      | 45 / 55px                  |
 | Head 3      | `h3`                    | Median 400      | 24 / 34px                  |
 | Subhead     | `h4`, `.subhead`        | Median 400      | 22 / 32px                  |
@@ -31,7 +31,8 @@ Colours and the type scale live in `assets/css/theme.css` as custom properties.
 | Button      | `.fm-button`            | Inter 500       | 18px / auto                |
 | Navigation  | `.main-menu__top-link`  | Inter 500       | 16px / auto                |
 
-Sizes scale fluidly from a 360px viewport up to the desktop size at 1440px.
+Sizes scale fluidly from a 360px viewport up to the desktop size at 1440px,
+which is also the width of the site container (`--content-max`).
 
 ### Fonts
 
