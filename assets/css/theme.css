@@ -17,6 +17,7 @@
 
   --font-median: "Median", "Arial Black", "Helvetica Neue", sans-serif;
   --font-inter: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-resonate: "Resonate", var(--font-inter);
 
   --text-h1: clamp(2.25rem, 0.2917rem + 8.7037vw, 8.125rem);
   --text-h1-compact: clamp(2rem, 1.6667rem + 1.4815vw, 3rem);
@@ -25,7 +26,7 @@
   --text-subhead: clamp(1.125rem, 1.0417rem + 0.3704vw, 1.375rem);
   --text-lead: clamp(1.125rem, 1.0833rem + 0.1852vw, 1.25rem);
   --text-paragraph: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
-  --text-button: 1rem;
+  --text-button: 0.875rem;
   --text-nav: 1rem;
   --border-radius: 10px;
   --border-radius-full: 100px;
@@ -81,10 +82,10 @@ body {
   border: 1px solid var(--primary);
   color: var(--light);
   border-radius: var(--border-radius-full);
-  font-family: var(--font-inter);
+  font-family: var(--font-resonate);
   font-size: var(--text-button);
-  font-weight: 500;
-  line-height: normal;
+  font-weight: 600;
+  line-height: 1;
   text-transform: uppercase;
   padding: 1rem 2rem;
   transition: var(--transition);

@@ -23,12 +23,12 @@ Colours and the type scale live in `assets/css/theme.css` as custom properties.
 | Style       | Element / class         | Font            | Desktop size / line height |
 | ----------- | ----------------------- | --------------- | -------------------------- |
 | Head 1      | `h1`                    | Median 400      | 130 / 120px                |
-| Head 2      | `h2`                    | Median 400      | 45 / 55px                  |
-| Head 3      | `h3`                    | Median 400      | 24 / 34px                  |
+| Head 2      | `h2`                    | Median 400      | 55 / 65px                  |
+| Head 3      | `h3`                    | Inter 500       | 34 / 50px                  |
 | Subhead     | `h4`, `.subhead`        | Median 400      | 22 / 32px                  |
 | Paragraph 1 | `.paragraph-1`, `.text-lead` | Inter 400  | 20 / 35px                  |
 | Paragraph 2 | `body`                  | Inter 400       | 18 / 27px                  |
-| Button      | `.fm-button`            | Inter 500       | 18px / auto                |
+| Button      | `.fm-button`            | Resonate 600, uppercase | 14 / 14px          |
 | Navigation  | `.main-menu__top-link`  | Inter 500       | 16px / auto                |
 
 Sizes scale fluidly from a 360px viewport up to the desktop size at 1440px,
