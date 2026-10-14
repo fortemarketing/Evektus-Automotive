@@ -20,7 +20,7 @@
   --text-h1: clamp(2.25rem, 0.2917rem + 8.7037vw, 8.125rem);
   --text-h1-compact: clamp(2rem, 1.6667rem + 1.4815vw, 3rem);
   --text-h2: clamp(1.75rem, 1.3958rem + 1.5741vw, 2.8125rem);
-  --text-h3: clamp(1.25rem, 1.1667rem + 0.3704vw, 1.5rem);
+  --text-h3: clamp(1.5rem, 1.2917rem + 0.9259vw, 2.125rem);
   --text-subhead: clamp(1.125rem, 1.0417rem + 0.3704vw, 1.375rem);
   --text-lead: clamp(1.125rem, 1.0833rem + 0.1852vw, 1.25rem);
   --text-paragraph: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);
@@ -51,10 +51,10 @@ h2 {
 }
 
 h3 {
-  font-family: var(--font-median);
+  font-family: var(--font-inter);
   font-size: var(--text-h3);
-  font-weight: 400;
-  line-height: 1.417;
+  font-weight: 500;
+  line-height: 1.471;
   letter-spacing: normal;
 }
 
@@ -209,7 +209,7 @@ body {
 }
 .fm-info-box:not(.no-eyebrow) .fm-info-box-prefix {
   font-family: var(--font-inter);
-  font-size: var(--text-paragraph);
+  font-size: var(--text-h3);
   font-weight: 400;
   line-height: 1.5;
 }
