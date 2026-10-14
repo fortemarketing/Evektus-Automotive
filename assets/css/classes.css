@@ -176,6 +176,15 @@
   background-color: var(--row-background);
 }
 
-.row-dark {
-  background-color: var(--dark);
+/* BB Row Secondary Background */
+.row-secondary {
+  background-color: var(--secondary);
+}
+.row-secondary .fm-info-box-prefix,
+.row-secondary .fm-counter-after-text {
+  color: var(--primary);
+}
+.row-secondary .fm-info-box-title,
+.row-secondary .fm-counter-number {
+  color: var(--light);
 }
