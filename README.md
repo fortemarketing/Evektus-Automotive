@@ -22,7 +22,7 @@ Colours and the type scale live in `assets/css/theme.css` as custom properties.
 
 | Style       | Element / class         | Font            | Desktop size / line height |
 | ----------- | ----------------------- | --------------- | -------------------------- |
-| Head 1      | `h1`                    | Median 400      | 65 / 75px                  |
+| Head 1      | `h1`                    | Median 400      | 100 / 115px                |
 | Head 2      | `h2`                    | Median 400      | 45 / 55px                  |
 | Head 3      | `h3`                    | Median 400      | 24 / 34px                  |
 | Subhead     | `h4`, `.subhead`        | Median 400      | 22 / 32px                  |
