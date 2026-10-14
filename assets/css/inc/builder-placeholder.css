@@ -1,3 +1,11 @@
+/* Beaver Builder placeholders - inc/builder-placeholder.php.
+ *
+ * Only ever rendered while the builder is active, so these rules match nothing
+ * on a page a visitor sees. The dotted blue box mirrors the way the FacetWP
+ * modules mark themselves out in the builder: something is here, it has no
+ * content to show yet, and it can be selected and moved like anything else.
+ */
+
 .evek-builder-placeholder {
   display: flex;
   min-height: 60px;
@@ -9,7 +17,7 @@
   gap: 2px;
   background-color: rgba(30, 140, 190, 0.04);
   color: #333;
-  font-family: var(--font-body, system-ui, sans-serif);
+  font-family: var(--font-inter, system-ui, sans-serif);
   line-height: 1.3;
 }
 

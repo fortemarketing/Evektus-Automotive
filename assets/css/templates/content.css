@@ -1,5 +1,14 @@
+/* Post and page content - used by index.php, single.php and 404.php. */
+
 .entry + .entry {
   margin-top: 4rem;
+}
+
+/* Article titles run at the compact h1: a post is a reading page, so the
+   title sits closer to the body copy than the display h1 a landing page uses.
+   Scoped to single-post, so pages and other single post types keep var(--text-h1). */
+.single-post .entry > h1 {
+  font-size: var(--text-h1-compact);
 }
 
 .entry-meta {

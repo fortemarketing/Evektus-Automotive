@@ -4,10 +4,11 @@
  * Main menu.
  *
  * Renders a WordPress nav menu as a mega menu on desktop and a drill-down
- * off-canvas menu on mobile.
+ * off-canvas menu on mobile. Ported from the Bricks element of the same name
+ * in the Getaway Trekking theme; markup, class names and behaviour match.
  *
  * Expected menu structure:
- * - Level 0: top level items (e.g. "About")
+ * - Level 0: top level items (e.g. "About Us")
  * - Level 1: mega menu columns
  * - Level 2: group headings, or plain links when they have no children
  * - Level 3: links inside a group
@@ -31,7 +32,7 @@ function evek_main_menu_tree(string $location): array
 {
 	$locations = get_nav_menu_locations();
 	$menu_id   = isset($locations[$location]) ? (int) $locations[$location] : 0;
-	$items     = $menu_id ? wp_get_nav_menu_items($menu_id) : array();
+	$items	   = $menu_id ? wp_get_nav_menu_items($menu_id) : array();
 
 	if (empty($items)) {
 		return array();
@@ -60,8 +61,8 @@ function evek_main_menu_branch(array $by_parent, int $parent_id): array
 
 	foreach ($by_parent[$parent_id] as $item) {
 		$branch[] = array(
-			'title'    => (string) $item->title,
-			'url'      => (string) $item->url,
+			'title'	   => (string) $item->title,
+			'url'	   => (string) $item->url,
 			'current'  => is_array($item->classes) && in_array('current-menu-item', $item->classes, true),
 			'children' => evek_main_menu_branch($by_parent, (int) $item->ID),
 		);
@@ -94,23 +95,37 @@ function evek_main_menu_placeholder_tree(): array
 	};
 
 	return array(
-		$node('About', array(
+		$node('Our Services', array(
 			$column(array(
-				$group('Company', array('Our Story', 'Our Team')),
-				$link('Careers'),
-				$link('Testimonials'),
+				$group('Servicing', array(
+					'Logbook Servicing',
+					'4×4 Servicing and Repairs',
+					'EV Servicing and Repairs',
+					'Fleet Maintenance',
+				)),
 			)),
 			$column(array(
-				$group('Services', array('Service One', 'Service Two', 'Service Three')),
-				$link('Pricing'),
+				$group('Repairs', array(
+					'Mechanical Repairs',
+					'Brakes and Clutch Repairs',
+					'Steering & Suspension',
+					'Auto Electrical',
+					'Air Conditioning',
+				)),
 			)),
 			$column(array(
-				$group('Resources', array('Blog', 'Case Studies', 'Downloads', 'FAQs')),
+				$group('Specialist', array(
+					'Diagnostics',
+					'Batteries',
+					'RWC and COI',
+					'Caravans and Motorhomes',
+					'Tailored Work Vehicle Fitouts',
+				)),
 			)),
 		)),
-		$node('Services'),
-		$node('News'),
-		$node('Contact'),
+		$node('Parts & Products'),
+		$node('About Us'),
+		$node('Contact Us'),
 	);
 }
 
@@ -125,8 +140,8 @@ function evek_main_menu(array $args = array()): void
 {
 	$args = array_merge(
 		array(
-			'theme_location'         => 'primary',
-			'mega_selector'          => '',
+			'theme_location'		 => 'primary',
+			'mega_selector'			 => '',
 			'mega_selector_vertical' => '',
 		),
 		$args
@@ -332,12 +347,12 @@ function evek_main_menu_link_list(array $items): void
 	echo '</ul>';
 }
 
+
 /** Drill-down trigger used on mobile for both top level items and columns. */
 function evek_main_menu_drill_toggle(string $title): void
 {
 	printf(
 		'<button class="main-menu__drill-toggle" aria-expanded="false" aria-label="%s"><span class="main-menu__chevron" aria-hidden="true"></span></button>',
-		/* translators: %s: menu item title. */
 		esc_attr(sprintf(__('Open %s submenu', 'evek'), $title))
 	);
 }
@@ -355,73 +370,4 @@ function evek_main_menu_back_button(string $title): void
 function evek_main_menu_caret(): string
 {
 	return '<svg class="main-menu__caret" width="11" height="6" viewBox="0 0 11 6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9.925 -1.24408e-05L10.8083 0.884154L5.99417 5.69999C5.91703 5.77762 5.8253 5.83922 5.72425 5.88126C5.62321 5.9233 5.51485 5.94495 5.40542 5.94495C5.29598 5.94495 5.18762 5.9233 5.08658 5.88126C4.98554 5.83922 4.89381 5.77762 4.81667 5.69999L0 0.884154L0.883333 0.000820199L5.40417 4.52082L9.925 -1.24408e-05Z" /></svg>';
-}
-
-/**
- * Give the main menu a Customizer edit shortcut.
- *
- * The pencil buttons in the preview are selective refresh partials, and core
- * only registers those for menus it rendered itself through wp_nav_menu().
- * The main menu builds its own markup, so it gets no shortcut unless a partial
- * is registered for it by hand.
- *
- * Runs at 20 so WP_Customize_Nav_Menus (11) has registered the nav menu
- * settings this hangs off.
- */
-function evek_customize_register_main_menu_partial(WP_Customize_Manager $wp_customize): void
-{
-	// Selective refresh is what draws the shortcut; nothing to hang one on
-	// without it.
-	if (! isset($wp_customize->selective_refresh)) {
-		return;
-	}
-
-	$locations = get_nav_menu_locations();
-	$menu_id   = isset($locations['primary']) ? (int) $locations['primary'] : 0;
-	$settings  = array();
-
-	// The location setting goes first so the shortcut lands on View All
-	// Locations - core focuses the primary setting, and that is the first one
-	// listed.
-	if ($wp_customize->get_setting('nav_menu_locations[primary]')) {
-		$settings[] = 'nav_menu_locations[primary]';
-	}
-
-	// Listed too, but not first: it is what makes edits to the menu itself
-	// refresh the partial.
-	if ($menu_id && $wp_customize->get_setting('nav_menu[' . $menu_id . ']')) {
-		$settings[] = 'nav_menu[' . $menu_id . ']';
-	}
-
-	// No menu assigned yet: the header is showing the placeholder tree, and
-	// there is no setting for a shortcut to point at.
-	if (empty($settings)) {
-		return;
-	}
-
-	$wp_customize->selective_refresh->add_partial(
-		'evek_main_menu',
-		array(
-			'selector'            => '.site-header .main-menu',
-			'container_inclusive' => true,
-			'settings'            => $settings,
-			'primary_setting'     => $settings[0],
-			'render_callback'     => 'evek_render_main_menu_partial',
-		)
-	);
-}
-add_action('customize_register', 'evek_customize_register_main_menu_partial', 20);
-
-/**
- * Re-render the main menu for the partial above.
- *
- * Mirrors the call in header.php; keep the two in step or a partial refresh
- * will quietly drop whichever arguments the header passes.
- */
-function evek_render_main_menu_partial(): string
-{
-	ob_start();
-	evek_main_menu(array('theme_location' => 'primary'));
-
-	return (string) ob_get_clean();
 }

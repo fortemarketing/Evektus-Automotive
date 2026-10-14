@@ -4,16 +4,15 @@
   box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   color: var(--dark);
   background: var(--light);
+  font-family: var(--font-inter);
 }
 
 img,
@@ -40,11 +39,19 @@ h4,
 h5,
 h6 {
   margin-block: 0 0.5em;
-  font-family: var(--font-heading);
+  font-family: var(--font-median);
+  font-weight: 400;
 }
 
 p {
   margin-block: 0 1em;
+}
+
+/* Semi-bold rather than the browser's 700: the site loads Inter at 600 and
+   no heavier, so 700 would only be a faked bold. */
+b,
+strong {
+  font-weight: 600;
 }
 
 a {
@@ -66,7 +73,7 @@ a:focus {
   textarea,
   summary,
   [tabindex],
-  .evek-accordion-button
+  .fm-accordion-button
 ):focus-visible,
 :where(
   a,
@@ -76,7 +83,7 @@ a:focus {
   textarea,
   summary,
   [tabindex],
-  .evek-accordion-button
+  .fm-accordion-button
 ):focus {
   outline-style: solid;
   outline-width: 2px;
@@ -93,13 +100,14 @@ a:focus {
     textarea,
     summary,
     [tabindex],
-    .evek-accordion-button
+    .fm-accordion-button
   ):focus-visible {
     outline-color: Highlight;
     box-shadow: none;
   }
 }
 
+/* Beaver Builder editor: suppress theme focus rings while editing. */
 .fl-builder-edit
   :where(
     a,
@@ -109,7 +117,7 @@ a:focus {
     textarea,
     summary,
     [tabindex],
-    .evek-accordion-button
+    .fm-accordion-button
   ):focus-visible,
 .fl-builder-edit
   :where(
@@ -120,7 +128,7 @@ a:focus {
     textarea,
     summary,
     [tabindex],
-    .evek-accordion-button
+    .fm-accordion-button
   ):focus {
   outline: none;
 }
@@ -150,7 +158,9 @@ a:focus {
   background: var(--light);
 }
 
+/* position: relative makes this the containing block for the overlay header. */
 .site-shell {
+  position: relative;
   display: flex;
   min-height: 100vh;
   flex-direction: column;

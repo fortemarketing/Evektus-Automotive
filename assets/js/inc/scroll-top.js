@@ -35,8 +35,8 @@
   });
 
   button.addEventListener("click", function () {
-    // No behavior option: base.css sets scroll-behavior: smooth only when the
-    // reader has no reduced motion preference, so this follows it.
+    // No behavior option: html { scroll-behavior: smooth } in base.css
+    // decides, so this follows the reader's motion preference with it.
     window.scrollTo({ top: 0 });
   });
 

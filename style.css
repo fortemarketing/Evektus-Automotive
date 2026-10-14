@@ -1,9 +1,8 @@
 /*
 Theme Name: Evektus
-Theme URI: https://evektus.com/
-Author: Evektus Automotive
-Author URI: https://evektus.com/
-Description: Standalone WordPress theme for Evektus Automotive, built for Beaver Builder and Beaver Themer.
+Theme URI: https://github.com/fortemarketing/Evektus-Automotive
+Author: Forte Marketing
+Description: Standalone site theme for Evektus Automotive, based on Forte.
 Version: 1.0.0
 Requires at least: 6.6
 Requires PHP: 8.0
@@ -11,3 +10,5 @@ Text Domain: evek
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
+
+/* Evektus site styles. */

@@ -1,8 +1,13 @@
+/* Back to top - inc/scroll-top.php. */
+
 .scroll-top {
+  /* Sits above the page but under the header's mega menu and the mobile
+     off-canvas panel, which own the higher end of the stack. */
   position: fixed;
   z-index: 15;
   right: 1.5rem;
   bottom: 1.5rem;
+
   display: inline-flex;
   width: 3rem;
   height: 3rem;
@@ -14,8 +19,14 @@
   color: var(--light);
   background: var(--primary);
   cursor: pointer;
+
+  /* JS drops the hidden attribute as soon as the page is scrolled; the
+     is-visible class is what actually fades it in, so the button animates
+     rather than appearing at full opacity. */
   opacity: 0;
   transform: translateY(0.5rem);
+  /* An opacity: 0 button is still clickable, so faded out it must not take
+     the pointer even if the JS has not put the hidden attribute back yet. */
   pointer-events: none;
   transition:
     opacity 0.2s ease,

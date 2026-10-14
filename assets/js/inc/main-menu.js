@@ -1,11 +1,14 @@
 /**
  * Main menu - mega menu positioning and mobile off-canvas drill-down.
  *
- * - Positions the mega panel by measuring against target nodes: inline
- *   left/min-width from a horizontal node (data-mega-menu selector,
- *   default: document.body = full width) and inline top from a vertical
- *   node's bottom edge (data-mega-menu-vertical selector, default: the
- *   closest header).
+ * Ported from the Bricks element in the Getaway Trekking theme.
+ *
+ * - Sizes the hover bridge between the top level link and the mega panel.
+ *   The panel itself is laid out by CSS - full width, pinned below the
+ *   header - so it is already in place before this script has run.
+ * - Only when a menu names its own target nodes (data-mega-menu for the
+ *   panel's width and left edge, data-mega-menu-vertical for its top edge)
+ *   does this measure them and position the panel inline.
  * - Handles the mobile off-canvas panel with drill-down navigation,
  *   backdrop, close button and body scroll lock.
  *
@@ -51,19 +54,24 @@
 
 	function positionMega(menu) {
 		var megas = menu.querySelectorAll('.main-menu__mega');
+		var custom = menu.getAttribute('data-mega-menu') || menu.getAttribute('data-mega-menu-vertical');
 
-		// Mobile: clear inline styles so the drill-down CSS takes over
-		if (!DESKTOP.matches) {
+		// Mobile, or no custom targets: clear inline styles so the CSS layout
+		// (drill-down on mobile, full width below the header on desktop) holds
+		if (!DESKTOP.matches || !custom) {
 			megas.forEach(function (mega) {
 				mega.style.left = '';
+				mega.style.right = '';
 				mega.style.top = '';
 				mega.style.minWidth = '';
 			});
+		}
+
+		if (!DESKTOP.matches) {
 			return;
 		}
 
 		var menuRect = menu.getBoundingClientRect();
-		var refRect = getHorizontalNode(menu).getBoundingClientRect();
 		var verticalNode = getVerticalNode(menu);
 		var verticalRect = verticalNode ? verticalNode.getBoundingClientRect() : null;
 
@@ -71,15 +79,23 @@
 		var gap = verticalRect ? Math.max(0, Math.round(verticalRect.bottom - menuRect.bottom)) : 0;
 		menu.style.setProperty('--mm-pin-gap', gap + 'px');
 
-		// Panel left edge -> menu left edge (aligns the columns with the menu)
-		menu.style.setProperty('--mm-offset-left', Math.max(0, Math.round(menuRect.left - refRect.left)) + 'px');
+		if (!custom) {
+			return;
+		}
 
+		var refRect = getHorizontalNode(menu).getBoundingClientRect();
+
+		// Measured against the panel's containing block (the header on
+		// desktop), since that is what its inline left/top are relative to
 		megas.forEach(function (mega) {
-			mega.style.left = -(menuRect.left - refRect.left) + 'px';
+			var parentRect = (mega.offsetParent || document.body).getBoundingClientRect();
+
+			mega.style.left = refRect.left - parentRect.left + 'px';
+			mega.style.right = 'auto';
 			mega.style.minWidth = refRect.width + 'px';
 
 			if (verticalRect) {
-				mega.style.top = menuRect.height + (verticalRect.bottom - menuRect.bottom) + 'px';
+				mega.style.top = verticalRect.bottom - parentRect.top + 'px';
 			}
 		});
 	}
@@ -263,9 +279,9 @@
 	window.addEventListener('resize', refreshAll);
 
 	// A Customizer partial refresh swaps the whole <nav> for fresh markup with
-	// none of this bound to it (see the partial in inc/main-menu.php). Bound on
-	// load because wp.customize is only present in the preview, and only lands
-	// there once its own scripts have run.
+	// none of this bound to it (see the main menu partial in inc/customizer.php).
+	// Bound on load because wp.customize is only present in the preview, and
+	// only lands there once its own scripts have run.
 	window.addEventListener('load', function () {
 		if (window.wp && wp.customize && wp.customize.selectiveRefresh) {
 			wp.customize.selectiveRefresh.bind('partial-content-rendered', function () {

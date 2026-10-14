@@ -1,0 +1,172 @@
+/* Any classes used in the FL Builder */
+
+.box-spacing {
+  gap: 25px;
+}
+.text-width-m {
+  max-width: 20ch;
+}
+.text-lead {
+  font-size: var(--text-lead);
+  line-height: 1.75;
+}
+.text-wrap-balance,
+.text-balance {
+  text-wrap: balance;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.sticky-column {
+  position: sticky;
+  top: 60px;
+}
+.position-relative {
+  position: relative;
+}
+
+/* Clamp a heading to two lines. Opt in from the module's class field rather
+   than baking it into a card style, so a card that wants the full heading
+   simply leaves the class off instead of needing a reset to undo it.
+   min-height reserves both lines so cards in a row stay aligned whether the
+   text wraps or not; the em fallback covers browsers without the lh unit. */
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  min-height: 2.8em;
+  min-height: calc(2 * 1lh);
+}
+
+/* Hero Info Box */
+.hero-info-box {
+  text-wrap: balance;
+}
+.hero-info-box .fm-info-box-text {
+  font-size: var(--text-lead);
+}
+
+@media (max-width: 768px) {
+  .sticky-column {
+    position: static;
+    top: auto;
+  }
+}
+
+/* Home Hero */
+.home-hero .fl-row-content-wrap:after {
+  border-radius: inherit;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.fl-row.home-hero > .fl-row-content-wrap {
+  padding-top: calc(100px + var(--site-header-height, 5.55rem));
+  padding-bottom: 100px;
+  align-items: flex-end;
+}
+
+.home-hero .fm-info-box .fm-info-box-text {
+  font-size: var(--text-lead);
+}
+
+/* Gradients */
+.home-hero .fl-row-content {
+  position: relative;
+  z-index: 1;
+}
+
+.home-hero > .fl-row-content-wrap:after {
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 35%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.35) 30%, rgba(0, 0, 0, 0) 65%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 55%);
+}
+
+/* Page Hero */
+.fl-row.page-hero .fl-row-content {
+  position: relative;
+  z-index: 1;
+}
+
+.fl-row.page-hero > .fl-row-content-wrap {
+  padding-top: 180px;
+  padding-bottom: 60px;
+}
+
+.fl-row.page-hero > .fl-row-content-wrap:after {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.fl-row.page-hero .fl-row-content-wrap:after {
+  border-radius: inherit;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.fl-row.page-hero > .fl-row-content-wrap {
+  min-height: 80vh;
+}
+
+.fl-row.page-hero .fm-info-box .fm-info-box-text {
+  font-size: var(--text-lead);
+}
+
+@media (max-width: 768px) {
+  .fl-row.page-hero > .fl-row-content-wrap {
+    padding-top: 200px;
+    padding-bottom: 30px;
+  }
+}
+
+/* Overview */
+.overview .fm-info-box .fm-info-box-text {
+  padding-inline: 30px;
+}
+
+@media (max-width: 768px) {
+  .overview .fm-info-box .fm-info-box-text {
+    padding-inline: 0;
+  }
+}
+
+/* Floating Image and Text */
+.floating-image-and-text .fm-info-box {
+  box-shadow:
+    0 2px 6px color-mix(in srgb, var(--dark) 6%, transparent),
+    0 24px 48px color-mix(in srgb, var(--dark) 12%, transparent);
+}
+
+/* Floating Image and Multi-Text */
+.floating-image-and-text-2 .floating-info-box .fm-info-box {
+  box-shadow:
+    0 2px 6px color-mix(in srgb, var(--dark) 6%, transparent),
+    0 24px 48px color-mix(in srgb, var(--dark) 12%, transparent);
+}
+
+/* Hero Info Box */
+.hero-info-box .fm-info-box-title {
+  max-width: 15ch;
+}
+.hero-info-box .fm-info-box-text {
+  font-size: var(--text-lead);
+}
+
+/* BB Row Background */
+.row-bg {
+  background-color: var(--row-background);
+}

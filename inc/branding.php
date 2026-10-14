@@ -3,26 +3,48 @@
 /**
  * Site branding.
  *
- * Renders the logo set under Appearance > Customize > Site Identity, or the
- * site title as text when none is set. Size is set per context in the header
- * and footer stylesheets.
+ * Renders the logo set under Appearance > Customize > Site Identity, and a
+ * placeholder crest and wordmark when none is set. The Dark header swaps in
+ * its own logo from the second slot in that section, because a full colour
+ * mark is a different file rather than a recolour of the first.
+ *
+ * Size is set per context in the header and footer stylesheets; the
+ * placeholder SVG uses currentColor so it follows the header's foreground.
  *
  * @package Evektus
  */
 
 defined('ABSPATH') || exit;
 
-/** Render the site logo, or the site title when no logo is set. */
-function evek_site_branding(): void
+/**
+ * The attachment ID of the logo a header renders, or 0 for the placeholder.
+ *
+ * @param string $variant Header style, as returned by evek_get_header_style().
+ */
+function evek_branding_logo_id(string $variant = 'light'): int
 {
-	$logo_id = (int) get_theme_mod('custom_logo');
+	if ('dark' === $variant) {
+		$dark_logo_id = (int) get_theme_mod(EVEK_DARK_LOGO_MOD);
 
-	// A logo whose attachment has since been deleted falls through to the
-	// title rather than leaving an empty link behind.
-	$has_logo = $logo_id && wp_attachment_is_image($logo_id);
+		if ($dark_logo_id) {
+			return $dark_logo_id;
+		}
+	}
+
+	return (int) get_theme_mod('custom_logo');
+}
+
+/**
+ * Render the site logo, or a placeholder crest and wordmark.
+ *
+ * @param string $variant Header style, as returned by evek_get_header_style().
+ */
+function evek_site_branding(string $variant = 'light'): void
+{
+	$logo_id = evek_branding_logo_id($variant);
 ?>
 	<div class="site-branding">
-		<?php if ($has_logo) : ?>
+		<?php if ($logo_id) : ?>
 			<a class="custom-logo-link" href="<?php echo esc_url(home_url('/')); ?>" rel="home">
 				<?php
 				// Fall back to the site name only when the attachment carries
@@ -37,7 +59,18 @@ function evek_site_branding(): void
 				?>
 			</a>
 		<?php else : ?>
-			<a class="site-title" href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php echo esc_html(get_bloginfo('name')); ?></a>
+			<?php // Placeholder mark - swap for the Evektus logo in Site Identity.
+			?>
+			<a class="site-branding__link" href="<?php echo esc_url(home_url('/')); ?>" rel="home">
+				<svg class="site-crest" viewBox="0 0 48 60" aria-hidden="true" focusable="false">
+					<circle cx="24" cy="30" r="21.5" fill="none" stroke="currentColor" stroke-width="3" />
+					<circle cx="24" cy="30" r="9" fill="currentColor" />
+				</svg>
+				<span class="site-wordmark">
+					<span class="site-wordmark__eyebrow">Evektus</span>
+					<span class="site-wordmark__name">Automotive</span>
+				</span>
+			</a>
 		<?php endif; ?>
 	</div>
 <?php

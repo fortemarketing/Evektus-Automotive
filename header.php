@@ -3,9 +3,17 @@
 /**
  * Site header fallback, used wherever no Beaver Themer header is assigned.
  *
+ * The markup is shared by every header; which one renders is a `--{style}`
+ * modifier class, chosen per entry under Theme Options > Header and resolved
+ * by evek_get_header_style() in inc/theme-options.php.
+ *
  * @package Evektus
  */
 
+// Guarded so the site degrades to the site default header rather than
+// fatalling if this file is ever newer than the functions.php that defines
+// the resolver.
+$evek_header_style = function_exists('evek_get_header_style') ? evek_get_header_style() : 'light';
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -21,45 +29,27 @@
 	<a class="screen-reader-text" href="#main"><?php esc_html_e('Skip to content', 'evek'); ?></a>
 	<div class="site-shell">
 		<?php
-		do_action('evek_before_header');
-		evek_render_location(
+		do_action('forte_before_header');
+		forte_render_location(
 			'header',
-			static function (): void {
+			static function () use ($evek_header_style): void {
 		?>
-			<header class="site-header">
+			<header class="site-header site-header--<?php echo esc_attr($evek_header_style); ?>">
+
 				<div class="site-container site-header__inner">
-					<?php evek_site_branding(); ?>
+					<?php evek_site_branding($evek_header_style); ?>
 
-					<?php
-					// Keep these arguments in step with evek_render_main_menu_partial()
-					// in inc/main-menu.php, or a Customizer refresh will drop them.
-					evek_main_menu(array('theme_location' => 'primary'));
+					<div class="site-header__nav">
+						<?php evek_main_menu(array('theme_location' => 'primary')); ?>
 
-					// The call to action on the right. Change the label or link
-					// with the evek_header_cta filter; an empty url hides it.
-					$evek_cta = (array) apply_filters(
-						'evek_header_cta',
-						array(
-							'label' => __('Chat with us', 'evek'),
-							'url'   => home_url('/contact-us/'),
-						)
-					);
-
-					if (! empty($evek_cta['url']) && ! empty($evek_cta['label'])) :
-					?>
-						<a class="fm-button primary site-header__cta" href="<?php echo esc_url($evek_cta['url']); ?>">
-							<span><?php echo esc_html($evek_cta['label']); ?></span>
-							<svg class="site-header__cta-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-								<path d="M4 5h16v11H9l-5 4z" />
-								<path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke-width="2.5" />
-							</svg>
-						</a>
-					<?php endif; ?>
+						<?php evek_header_button(); ?>
+					</div>
 				</div>
+
 			</header>
 		<?php
 			}
 		);
-		do_action('evek_after_header');
-		do_action('evek_before_content');
+		do_action('forte_after_header');
+		do_action('forte_before_content');
 		?>

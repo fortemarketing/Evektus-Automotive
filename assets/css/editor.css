@@ -1,3 +1,23 @@
+/* Classic editor only - loaded into TinyMCE by add_editor_style() in
+ * functions.php, after theme.css and base.css.
+ *
+ * base.css removes the body margin, which is right for the front end but
+ * leaves text pressed against the edge of the editor. This puts it back, on
+ * the editor's body alone, matching the editor styles Astra ships.
+ */
+
+@font-face {
+  font-family: "Median";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url("../fonts/median/Median-Regular.woff2") format("woff2"),
+    url("../fonts/median/Median-Regular.woff") format("woff");
+}
+
 body.mce-content-body {
   margin: 20px;
+  vertical-align: baseline;
+  color: #3a3a3a;
 }

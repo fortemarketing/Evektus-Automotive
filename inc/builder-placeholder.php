@@ -3,18 +3,13 @@
 /**
  * Beaver Builder placeholders.
  *
- * A shortcode should render nothing when the data behind it is absent. On the
- * front end that is what should happen. Inside the builder it leaves a module
- * with no height, which cannot be selected, moved or deleted, so a row can end
- * up holding something invisible.
+ * The theme's shortcodes render nothing when the data behind them is absent -
+ * no post type, no listings. On the front end that is what should
+ * happen. Inside the builder it leaves a module with no height, which cannot be
+ * selected, moved or deleted, so a row can end up holding something invisible.
  *
- * evek_builder_placeholder() renders a labelled box in its place, the way the
- * FacetWP modules do, and only while the builder is active. Nothing here ever
- * reaches a visitor. Return it from a shortcode's empty case:
- *
- *   if (empty($items)) {
- *       return evek_builder_placeholder('Team Grid', 'No team members published yet.');
- *   }
+ * This renders a labelled box in its place, the way the FacetWP modules do, and
+ * only while the builder is active. Nothing here ever reaches a visitor.
  *
  * @package Evektus
  */

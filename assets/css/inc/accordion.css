@@ -1,0 +1,161 @@
+/* Accordion chrome - the item, heading, button, icon and sliding panel shared
+ * by every accordion shortcode in inc/shortcodes/. Panel contents are styled
+ * by the stylesheet named after the shortcode that renders them.
+ *
+ * Reproduces the default appearance of the fm-accordion Beaver Builder module
+ * so the shortcode and the module can sit on the same page without looking
+ * different. The module's defaults are deliberately bare: no background, no
+ * outer border, just a 1px rule under each title. The three numbers that
+ * define it - 15px title padding, 20px label gutter, 20px content padding -
+ * come from its frontend.css.php defaults and are repeated here as written.
+ */
+
+/* Room above an item scrolled to from a link - a "View
+   details" - so its heading is not pressed against the top of the window. If
+   a Beaver Themer header is ever made sticky, raise this to its height so the
+   heading is not hidden underneath it. */
+.evek-accordion-item {
+  scroll-margin-top: var(--evek-accordion-scroll-offset, 1.5rem);
+}
+
+.evek-accordion-heading {
+  /* The heading carries the tag's own typography and passes it down to the
+     label; all the visible spacing belongs to the button, as in the module. */
+  margin: 0;
+}
+
+.evek-accordion-button {
+  /* The module lays this out as a CSS table purely to centre the icon and push
+     it to the far edge. Flex gives the same box without putting display: table
+     on a button element. */
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 15px 0;
+  border: 0;
+  border-bottom: 1px solid var(--accordion-border);
+  margin: 0;
+
+  /* base.css already hands buttons font: inherit; colour and background are
+     the rest of the reset. Between them the label reads as whatever heading
+     tag the shortcode was given, the way the module's label is itself the
+     heading element. */
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 15ms linear;
+}
+
+.evek-accordion-button-label {
+  flex: 1;
+
+  /* The module's fixed gutter between the label and the toggle icon. */
+  padding-right: 20px;
+  transition: color 15ms linear;
+}
+
+/*
+ * The label states its typography rather than inheriting it.
+ *
+ * In fm-accordion the label is itself the heading element, which Beaver
+ * Builder's row and column typography deliberately exempts - those rules land
+ * as .fl-builder-content .fl-node-{id} *:not(h1)...:not(h6). Here the label is
+ * a span inside the heading, because a real button cannot contain one, so that
+ * same rule matches it and would replace an inherited font. Declaring each
+ * level explicitly keeps the label looking like its heading tag wherever it is
+ * rendered, including inside the builder.
+ */
+h2.evek-accordion-heading .evek-accordion-button-label {
+  font-family: var(--font-median);
+  font-size: var(--text-h2);
+  font-weight: 400;
+  line-height: 1.222;
+}
+
+h3.evek-accordion-heading .evek-accordion-button-label {
+  font-family: var(--font-median);
+  font-size: var(--text-h3);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+h4.evek-accordion-heading .evek-accordion-button-label,
+h5.evek-accordion-heading .evek-accordion-button-label,
+h6.evek-accordion-heading .evek-accordion-button-label {
+  font-family: var(--font-inter);
+  font-size: var(--text-paragraph);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.evek-accordion-button:hover .evek-accordion-button-label,
+.evek-accordion-item-active > .evek-accordion-heading .evek-accordion-button-label {
+  color: var(--primary);
+}
+
+/* An accordion that is both single-open and always-open has exactly one panel
+   open, and that panel cannot be closed, so its heading does not offer the
+   pointer that would invite the click. */
+.evek-accordion-always-open.evek-accordion-collapse
+  > .evek-accordion-item-active
+  > .evek-accordion-heading
+  > .evek-accordion-button {
+  cursor: default;
+}
+
+.evek-accordion-icon-wrap {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.evek-accordion-icon-wrap .fm-accordion-button-icon {
+  /* A 16px glyph in an 18px box, matching the module's icon_size + 2 rule. */
+  display: block;
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
+  font-size: 16px;
+  line-height: 18px;
+  text-align: center;
+  transition: transform 150ms linear;
+}
+
+/* The arrow points down while closed and turns to point up once open. */
+.evek-accordion-item-active > .evek-accordion-heading .fm-accordion-button-icon {
+  transform: rotate(180deg);
+}
+
+/* Closed by default, exactly as the module's display: none is. The active
+   class on the item is what opens a panel; is-animating keeps it displayed
+   while it slides shut, after the active class has already gone. */
+.evek-accordion-content {
+  display: none;
+  padding: 20px 0;
+}
+
+.evek-accordion-item-active > .evek-accordion-content,
+.evek-accordion-content.is-animating {
+  display: block;
+}
+
+/* The script animates height and vertical padding together, which is what
+   jQuery's slideUp and slideDown do in the module. */
+.evek-accordion-content.is-animating {
+  overflow: hidden;
+  transition:
+    height 400ms ease,
+    padding-top 400ms ease,
+    padding-bottom 400ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .evek-accordion-button,
+  .evek-accordion-button-label,
+  .evek-accordion-icon-wrap .fm-accordion-button-icon,
+  .evek-accordion-content.is-animating {
+    transition: none;
+  }
+}
