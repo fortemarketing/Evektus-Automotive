@@ -213,6 +213,7 @@ body {
   font-size: var(--text-h3);
   font-weight: 400;
   line-height: 1.5;
+  color: var(--primary);
 }
 .fm-info-box:not(.no-eyebrow) .fm-info-box-prefix::after {
   content: "";

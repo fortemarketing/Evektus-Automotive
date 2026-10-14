@@ -185,6 +185,7 @@
   color: var(--primary);
 }
 .row-secondary .fm-info-box-title,
-.row-secondary .fm-counter-number {
+.row-secondary .fm-counter-number,
+.row-secondary .fm-info-box-text {
   color: var(--light);
 }
