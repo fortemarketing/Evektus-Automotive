@@ -87,7 +87,7 @@ body {
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2.5rem;
   transition: var(--transition);
 }
 
@@ -206,7 +206,7 @@ body {
   text-wrap: balance;
 }
 .fm-info-box-prefix:not(:last-child) {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 .fm-info-box:not(.no-eyebrow) .fm-info-box-prefix {
   font-family: var(--font-inter);
